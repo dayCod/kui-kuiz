@@ -45,7 +45,7 @@
     <!-- End #main -->
 
     <!-- ======= Footer ======= -->
-    @include('frontside.layout.footer')
+    {{-- @include('frontside.layout.footer') --}} <!-- ======= Enable this for show the footer ======= -->
     <!-- End Footer -->
 
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i

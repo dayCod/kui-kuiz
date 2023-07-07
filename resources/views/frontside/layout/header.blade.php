@@ -1,11 +1,13 @@
 <header id="header" class="fixed-top">
-    <div class="container d-flex align-items-center justify-content-between">
+    <!-- Change to justify-content-between for shows with nav menus -->
+    <div class="container d-flex align-items-center justify-content-center">
 
-        <a href="index.html" class="logo"><img src="{{ asset('frontside/img/logo.png') }}" alt="" class="img-fluid"></a>
         <!-- Uncomment below if you prefer to use text as a logo -->
-        <!-- <h1 class="logo"><a href="index.html">Butterfly</a></h1> -->
+        <h1 class="logo">
+            <a href="index.html">kuikuiz</a>
+        </h1>
 
-        <nav id="navbar" class="navbar">
+        {{-- <nav id="navbar" class="navbar">
             <ul>
                 <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
                 <li><a class="nav-link scrollto" href="#about">About</a></li>
@@ -33,7 +35,7 @@
                 <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
-        </nav><!-- .navbar -->
+        </nav> <!-- .turn on if u want to show the header menu --> --}}
 
     </div>
 </header>
