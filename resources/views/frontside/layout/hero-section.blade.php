@@ -6,7 +6,7 @@
                 <h1>Ayo Tes Bersama KuiKuiz.</h1>
                 <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus fugit atque corrupti pariatur maiores, quasi nobis eum quisquam. Dolor unde ullam sint sit vitae voluptatem fugit nam dicta assumenda odio.</h2>
                 <div>
-                    <a href="#" class="btn-get-started">mari mulai</a>
+                    <a href="{{ route('auth.login') }}" class="btn-get-started">mari mulai</a>
                     <a href="#" class="btn-get-started bg-secondary">hubungi kami di whatsapp</a>
                 </div>
             </div>

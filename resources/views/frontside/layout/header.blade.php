@@ -4,7 +4,7 @@
 
         <!-- Uncomment below if you prefer to use text as a logo -->
         <h1 class="logo">
-            <a href="index.html">kuikuiz</a>
+            <a href="{{ route('index') }}">kuikuiz</a>
         </h1>
 
         {{-- <nav id="navbar" class="navbar">
