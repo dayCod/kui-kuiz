@@ -62,7 +62,7 @@
                                 <td class="text-center align-middle">Jane Doe</td>
                                 <td class="text-center align-middle">janedoe@mail.com</td>
                                 <td class="text-center align-middle">
-                                    <a href="" class="btn btn-primary btn-sm">Show Test History</a>
+                                    <a href="{{ route('user-information.participant.asessment-history', ['uuid' => 'df6fdea1-10c3-474c-ae62-e63def80d0b']) }}" class="btn btn-primary btn-sm">Show Test History</a>
                                 </td>
                                 <td class="text-center align-middle">
                                     <a href="" class="btn btn-success btn-sm text-white">

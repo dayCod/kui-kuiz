@@ -60,6 +60,7 @@ Route::group(['middleware' => ['guest']], function () {
             Route::get('/{uuid}/edit', 'edit')->name('edit');
             Route::put('/{uuid}/edit', 'update')->name('update');
             Route::delete('/{uuid}/destroy', 'destroy')->name('destroy');
+            Route::get('{uuid}/assessment-history', 'assessmentHistory')->name('asessment-history');
         });
 
         /*

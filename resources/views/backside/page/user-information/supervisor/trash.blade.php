@@ -6,7 +6,9 @@
         <div class="card">
             <div class="card-body">
                 <div class="d-flex align-items-center justify-content-between mb-4">
-                    <div></div>
+                    <div>
+                        <h4>Trashed Supervisors</h4>
+                    </div>
                     <div>
                         <a href="{{ route('user-information.supervisor.index') }}" class="btn btn-secondary">
                             <i class="fa fa-arrow-left"></i>

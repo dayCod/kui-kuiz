@@ -84,6 +84,17 @@ class ParticipantController extends Controller
     }
 
     /**
+     * Display a listing of the assessment history resource.
+     *
+     * @param  string  $uuid
+     * @return \Illuminate\Http\Response
+     */
+    public function assessmentHistory($uuid)
+    {
+        return view('backside.page.user-information.participants.history-assessment');
+    }
+
+    /**
      * Display a listing of the trashed resource.
      *
      * @return \Illuminate\Http\Response
