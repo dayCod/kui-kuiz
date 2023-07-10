@@ -12,6 +12,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('backside/assets/images/favicon.png') }}">
     <title>Freedash Template - The Ultimate Multipurpose admin template</title>
     <!-- Custom CSS -->
+    <link href="{{ asset('backend/assets/libs/fullcalendar/dist/fullcalendar.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('backside/assets/extra-libs/c3/c3.min.css') }}" rel="stylesheet">
     <link href="{{ asset('backside/assets/libs/chartist/dist/chartist.min.css') }}" rel="stylesheet">
     <link href="{{ asset('backside/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css') }}" rel="stylesheet" />
@@ -132,6 +133,9 @@
     <script src="{{ asset('backside/assets/extra-libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('backside/assets/extra-libs/datatables.net-bs4/js/dataTables.responsive.min.js') }}"></script>
     <script src="{{ asset('backside/dist/js/pages/datatable/datatable-basic.init.js') }}"></script>
+    <script src="{{ asset('backside/assets/libs/moment/min/moment.min.js') }}"></script>
+    <script src="{{ asset('backside/assets/libs/fullcalendar/dist/fullcalendar.min.js') }}"></script>
+    <script src="{{ asset('backside/dist/js/pages/calendar/cal-init.js') }}"></script>
 </body>
 
 </html>

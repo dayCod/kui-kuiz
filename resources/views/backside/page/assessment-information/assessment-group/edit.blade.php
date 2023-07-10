@@ -1,4 +1,4 @@
-@extends('backside.layout.app', ['breadcrumb_heading' => 'User Information', 'breadcrumb_sections' => ['User Information', 'Participants', 'Edit']])
+@extends('backside.layout.app', ['breadcrumb_heading' => 'Assessment Information', 'breadcrumb_sections' => ['Assessment Information', 'Assessment Group', 'Edit']])
 
 @section('content')
 
@@ -7,8 +7,8 @@
         <div class="card">
             <div class="card-body">
                 <div class="d-flex align-items-center justify-content-between">
-                    <h4 class="card-title">Edit Participant</h4>
-                    <a href="{{ route('user-information.participant.index') }}" class="btn btn-secondary">
+                    <h4 class="card-title">Edit Assessment Group</h4>
+                    <a href="{{ route('assessment-information.assessment-group.index') }}" class="btn btn-secondary">
                         <i class="fa fa-arrow-left"></i>
                         {{ __('Back') }}
                     </a>
@@ -17,31 +17,21 @@
                     <div class="form-body">
                         <div class="row mt-3">
                             <div class="col-md-12">
-                                <label class="form-label">Name <span class="text-danger">*</span> </label>
+                                <label class="form-label">Group Name <span class="text-danger">*</span> </label>
                                 <div class="form-group mb-3">
-                                    <input type="text" class="form-control" placeholder="Name" name="name" value="John Doe" required>
+                                    <input type="text" class="form-control" placeholder="Name" name="name" value="TKA" required>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6">
-                                <label class="form-label">Email <span class="text-danger">*</span> </label>
-                                <div class="form-group mb-3">
-                                    <input type="email" class="form-control" placeholder="Email" name="email" value="johndoe@mail.com" required>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Change Password </label>
-                                <div class="form-group mb-3">
-                                    <input type="password" class="form-control" placeholder="Password" name="password">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <label class="form-label">Change Profile Picture </label>
                             <div class="col-md-12">
+                                <label class="form-label">Certificate Config <span class="text-danger">*</span> </label>
                                 <div class="form-group mb-3">
-                                    <input type="file" class="form-control" name="user_profile_img">
+                                    <select class="form-control" name="certificate_setting_id" id="" required>
+                                        <option value="" hidden>Select The Certificate Configuration</option>
+                                        <option value="" selected>Value 1</option>
+                                        <option value="">Value 2</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>

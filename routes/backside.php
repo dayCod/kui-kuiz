@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backside\AssessmentInformation\AssessmentGroupController;
 use App\Http\Controllers\Backside\Home\DashboardController;
 use App\Http\Controllers\Backside\UserInformation\ParticipantController;
 use App\Http\Controllers\Backside\UserInformation\SupervisorController;
@@ -74,6 +75,30 @@ Route::group(['middleware' => ['guest']], function () {
             Route::post('/create', 'store')->name('store');
             Route::get('/trash', 'trash')->name('trash');
             Route::get('/{uuid}', 'show')->name('show');
+            Route::get('/{uuid}/edit', 'edit')->name('edit');
+            Route::put('/{uuid}/edit', 'update')->name('update');
+            Route::delete('/{uuid}/destroy', 'destroy')->name('destroy');
+        });
+
+    });
+
+    /*
+    |--------------------------------------------------------------------------
+    | Assessment Information
+    |--------------------------------------------------------------------------
+    */
+    Route::group(['prefix' => 'assessment-information', 'as' => 'assessment-information.'], function () {
+
+        /*
+        |--------------------------------------------------------------------------
+        | Assessment Group
+        |--------------------------------------------------------------------------
+        */
+        Route::group(['prefix' => 'assessment-group', 'as' => 'assessment-group.', 'controller' => AssessmentGroupController::class], function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/create', 'create')->name('create');
+            Route::post('/create', 'store')->name('store');
+            Route::get('/{uuid}', 'showCertificateConfig')->name('show-certificate-config');
             Route::get('/{uuid}/edit', 'edit')->name('edit');
             Route::put('/{uuid}/edit', 'update')->name('update');
             Route::delete('/{uuid}/destroy', 'destroy')->name('destroy');
