@@ -1,4 +1,4 @@
-@extends('backside.layout.app', ['breadcrumb_heading' => 'User Information', 'breadcrumb_sections' => ['Home', 'Supervisors']])
+@extends('backside.layout.app', ['breadcrumb_heading' => 'User Information', 'breadcrumb_sections' => ['User Information', 'Supervisors']])
 
 @section('content')
 <div class="row">
@@ -7,7 +7,7 @@
             <div class="card-body">
                 <div class="d-flex align-items-center justify-content-between mb-4">
                     <div>
-                        <a href="" class="btn btn-info">
+                        <a href="{{ route('user-information.supervisor.create') }}" class="btn btn-info">
                             <i class="fa fa-plus-circle"></i>
                             {{ __('Create') }}
                         </a>
@@ -43,7 +43,7 @@
                                         <i class="fa fa-eye"></i>
                                         {{ __('Detail') }}
                                     </a>
-                                    <a href="" class="btn btn-warning btn-sm text-white">
+                                    <a href="{{ route('user-information.supervisor.edit', ['uuid' => 'df6fdea1-10c3-474c-ae62-e63def80d0b']) }}" class="btn btn-warning btn-sm text-white">
                                         <i class="fa fa-edit"></i>
                                         {{ __('Edit') }}
                                     </a>

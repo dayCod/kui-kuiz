@@ -24,7 +24,7 @@ class SupervisorController extends Controller
      */
     public function create()
     {
-        //
+        return view('backside.page.user-information.supervisor.create');
     }
 
     /**
@@ -57,7 +57,7 @@ class SupervisorController extends Controller
      */
     public function edit($uuid)
     {
-        //
+        return view('backside.page.user-information.supervisor.edit');
     }
 
     /**
