@@ -46,7 +46,7 @@ class VisitorController extends Controller
      */
     public function show($uuid)
     {
-        //
+        return view('backside.page.user-information.visitors.detail');
     }
 
     /**
@@ -81,5 +81,15 @@ class VisitorController extends Controller
     public function destroy($uuid)
     {
         //
+    }
+
+    /**
+     * Display a listing of the trashed resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function trash()
+    {
+        return view('backside.page.user-information.visitors.trash');
     }
 }

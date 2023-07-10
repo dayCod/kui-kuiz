@@ -1,4 +1,4 @@
-@extends('backside.layout.app', ['breadcrumb_heading' => 'User Information', 'breadcrumb_sections' => ['User Information', 'Visitors']])
+@extends('backside.layout.app', ['breadcrumb_heading' => 'User Information', 'breadcrumb_sections' => ['User Information', 'Visitors', 'Trash']])
 
 @section('content')
 <div class="row">
@@ -7,15 +7,12 @@
             <div class="card-body">
                 <div class="d-flex align-items-center justify-content-between mb-4">
                     <div>
-                        <a href="" class="btn btn-success">
-                            <i class="fas fa-file-excel"></i>
-                            {{ __('Export') }}
-                        </a>
+                        <h4>Trashed Visitors</h4>
                     </div>
                     <div>
-                        <a href="{{ route('user-information.visitor.trash') }}" class="btn btn-secondary">
-                            <i class="fa fa-trash"></i>
-                            {{ __('Trash') }}
+                        <a href="{{ route('user-information.visitor.index') }}" class="btn btn-secondary">
+                            <i class="fa fa-arrow-left"></i>
+                            {{ __('Back') }}
                         </a>
                     </div>
                 </div>
@@ -35,13 +32,13 @@
                                 <td class="text-center align-middle">127.0.0.1</td>
                                 <td class="text-center align-middle">Lat:12376236456, Lon:-12312312367</td>
                                 <td class="text-center align-middle">
-                                    <a href="{{ route('user-information.visitor.show', ['uuid' => 'df6fdea1-10c3-474c-ae62-e63def80d0b']) }}" class="btn btn-success btn-sm text-white">
-                                        <i class="fa fa-eye"></i>
-                                        {{ __('Detail') }}
+                                    <a href="" class="btn btn-success btn-sm text-white">
+                                        <i class="fas fa-redo"></i>
+                                        {{ __('Restore') }}
                                     </a>
                                     <a href="" class="btn btn-danger btn-sm">
                                         <i class="fa fa-trash"></i>
-                                        {{ __('Delete') }}
+                                        {{ __('Delete Permanently') }}
                                     </a>
                                 </td>
                             </tr>
