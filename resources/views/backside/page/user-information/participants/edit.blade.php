@@ -1,4 +1,4 @@
-@extends('backside.layout.app', ['breadcrumb_heading' => 'User Information', 'breadcrumb_sections' => ['User Information', 'Supervisors', 'Edit']])
+@extends('backside.layout.app', ['breadcrumb_heading' => 'User Information', 'breadcrumb_sections' => ['User Information', 'Participants', 'Edit']])
 
 @section('content')
 
@@ -7,8 +7,8 @@
         <div class="card">
             <div class="card-body">
                 <div class="d-flex align-items-center justify-content-between">
-                    <h4 class="card-title">Edit Supervisor</h4>
-                    <a href="{{ route('user-information.supervisor.index') }}" class="btn btn-secondary">
+                    <h4 class="card-title">Edit Participant</h4>
+                    <a href="{{ route('user-information.participant.index') }}" class="btn btn-secondary">
                         <i class="fa fa-arrow-left"></i>
                         {{ __('Back') }}
                     </a>
