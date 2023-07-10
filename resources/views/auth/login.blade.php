@@ -8,7 +8,7 @@
         <div class="col-6">
             <div class="card border border-0 shadow p-4">
                 <h3 class="text-uppercase mb-4 text-center">kuikuiz - login</h3>
-                <form action="">
+                <form action="{{ route('dashboard.index') }}">
                     <div class="mb-3">
                         <label for="">Email</label>
                         <input type="email" class="form-control" name="email">
