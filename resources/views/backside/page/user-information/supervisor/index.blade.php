@@ -39,7 +39,7 @@
                                 <td class="text-center align-middle">John Doe</td>
                                 <td class="text-center align-middle">johndoe@mail.com</td>
                                 <td class="text-center align-middle">
-                                    <a href="" class="btn btn-success btn-sm text-white">
+                                    <a href="{{ route('user-information.supervisor.show', ['uuid' => 'df6fdea1-10c3-474c-ae62-e63def80d0b']) }}" class="btn btn-success btn-sm text-white">
                                         <i class="fa fa-eye"></i>
                                         {{ __('Detail') }}
                                     </a>

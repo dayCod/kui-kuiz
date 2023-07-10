@@ -46,7 +46,7 @@ class SupervisorController extends Controller
      */
     public function show($uuid)
     {
-        //
+        return view('backside.page.user-information.supervisor.detail');
     }
 
     /**

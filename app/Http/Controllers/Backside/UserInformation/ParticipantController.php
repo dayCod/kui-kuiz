@@ -46,7 +46,7 @@ class ParticipantController extends Controller
      */
     public function show($uuid)
     {
-        //
+        return view('backside.page.user-information.participants.detail');
     }
 
     /**
