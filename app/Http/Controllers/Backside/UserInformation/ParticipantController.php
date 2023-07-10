@@ -82,4 +82,14 @@ class ParticipantController extends Controller
     {
         //
     }
+
+    /**
+     * Display a listing of the trashed resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function trash()
+    {
+        return view('backside.page.user-information.participants.trash');
+    }
 }

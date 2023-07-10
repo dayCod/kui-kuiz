@@ -1,4 +1,4 @@
-@extends('backside.layout.app', ['breadcrumb_heading' => 'User Information', 'breadcrumb_sections' => ['User Information', 'Participants']])
+@extends('backside.layout.app', ['breadcrumb_heading' => 'User Information', 'breadcrumb_sections' => ['User Information', 'Supervisors', 'Trash']])
 
 @section('content')
 <div class="row">
@@ -6,20 +6,11 @@
         <div class="card">
             <div class="card-body">
                 <div class="d-flex align-items-center justify-content-between mb-4">
+                    <div></div>
                     <div>
-                        <a href="{{ route('user-information.participant.create') }}" class="btn btn-info">
-                            <i class="fa fa-plus-circle"></i>
-                            {{ __('Create') }}
-                        </a>
-                        <a href="" class="btn btn-success">
-                            <i class="fas fa-file-excel"></i>
-                            {{ __('Export') }}
-                        </a>
-                    </div>
-                    <div>
-                        <a href="{{ route('user-information.participant.trash') }}" class="btn btn-secondary">
-                            <i class="fa fa-trash"></i>
-                            {{ __('Trash') }}
+                        <a href="{{ route('user-information.supervisor.index') }}" class="btn btn-secondary">
+                            <i class="fa fa-arrow-left"></i>
+                            {{ __('Back') }}
                         </a>
                     </div>
                 </div>
@@ -30,7 +21,6 @@
                                 <th class="text-center align-middle">No</th>
                                 <th class="text-center align-middle">Name</th>
                                 <th class="text-center align-middle">Email</th>
-                                <th class="text-center align-middle">Show Test History</th>
                                 <th class="text-center align-middle">Action</th>
                             </tr>
                         </thead>
@@ -40,20 +30,13 @@
                                 <td class="text-center align-middle">John Doe</td>
                                 <td class="text-center align-middle">johndoe@mail.com</td>
                                 <td class="text-center align-middle">
-                                    <span class="badge bg-danger p-2">Haven't taken a test yet</span>
-                                </td>
-                                <td class="text-center align-middle">
                                     <a href="" class="btn btn-success btn-sm text-white">
-                                        <i class="fa fa-eye"></i>
-                                        {{ __('Detail') }}
-                                    </a>
-                                    <a href="{{ route('user-information.participant.edit', ['uuid' => 'df6fdea1-10c3-474c-ae62-e63def80d0b']) }}" class="btn btn-warning btn-sm text-white">
-                                        <i class="fa fa-edit"></i>
-                                        {{ __('Edit') }}
+                                        <i class="fas fa-redo"></i>
+                                        {{ __('Restore') }}
                                     </a>
                                     <a href="" class="btn btn-danger btn-sm">
                                         <i class="fa fa-trash"></i>
-                                        {{ __('Delete') }}
+                                        {{ __('Delete Permanently') }}
                                     </a>
                                 </td>
                             </tr>
@@ -62,20 +45,13 @@
                                 <td class="text-center align-middle">Jane Doe</td>
                                 <td class="text-center align-middle">janedoe@mail.com</td>
                                 <td class="text-center align-middle">
-                                    <a href="" class="btn btn-primary btn-sm">Show Test History</a>
-                                </td>
-                                <td class="text-center align-middle">
                                     <a href="" class="btn btn-success btn-sm text-white">
-                                        <i class="fa fa-eye"></i>
-                                        {{ __('Detail') }}
-                                    </a>
-                                    <a href="" class="btn btn-warning btn-sm text-white">
-                                        <i class="fa fa-edit"></i>
-                                        {{ __('Edit') }}
+                                        <i class="fas fa-redo"></i>
+                                        {{ __('Restore') }}
                                     </a>
                                     <a href="" class="btn btn-danger btn-sm">
                                         <i class="fa fa-trash"></i>
-                                        {{ __('Delete') }}
+                                        {{ __('Delete Permanently') }}
                                     </a>
                                 </td>
                             </tr>
@@ -85,7 +61,6 @@
                                 <th class="text-center align-middle">No</th>
                                 <th class="text-center align-middle">Name</th>
                                 <th class="text-center align-middle">Email</th>
-                                <th class="text-center align-middle">Show Test History</th>
                                 <th class="text-center align-middle">Action</th>
                             </tr>
                         </tfoot>

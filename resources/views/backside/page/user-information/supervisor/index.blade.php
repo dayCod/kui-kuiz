@@ -17,7 +17,7 @@
                         </a>
                     </div>
                     <div>
-                        <a href="" class="btn btn-secondary">
+                        <a href="{{ route('user-information.supervisor.trash') }}" class="btn btn-secondary">
                             <i class="fa fa-trash"></i>
                             {{ __('Trash') }}
                         </a>
