@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Backside\AssessmentInformation\AssessmentGroupController;
 use App\Http\Controllers\Backside\Home\DashboardController;
+use App\Http\Controllers\Backside\SettingInformation\ApplicationSettingController;
 use App\Http\Controllers\Backside\SettingInformation\AssessmentSettingController;
 use App\Http\Controllers\Backside\SettingInformation\CertificateSettingController;
 use App\Http\Controllers\Backside\UserInformation\ParticipantController;
@@ -141,6 +142,15 @@ Route::group(['middleware' => ['guest']], function () {
             Route::get('/{uuid}/edit', 'edit')->name('edit');
             Route::put('/{uuid}/edit', 'update')->name('update');
             Route::delete('/{uuid}/destroy', 'destroy')->name('destroy');
+        });
+
+        /*
+        |--------------------------------------------------------------------------
+        | Application Setting
+        |--------------------------------------------------------------------------
+        */
+        Route::group(['prefix' => 'application-setting', 'as' => 'application-setting.', 'controller' => ApplicationSettingController::class], function () {
+            Route::get('/', 'index')->name('index');
         });
 
     });
