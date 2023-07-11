@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="{{ asset('backside/assets/extra-libs/datatables.net-bs4/css/responsive.dataTables.min.css') }}">
     <!-- Custom CSS -->
     <link href="{{ asset('backside/dist/css/style.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('backside/dist/css/custom-style.css') }}">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -119,7 +120,7 @@
     <script src="{{ asset('backside/dist/js/app-style-switcher.js') }}"></script>
     <script src="{{ asset('backside/dist/js/feather.min.js') }}"></script>
     <script src="{{ asset('backside/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js') }}"></script>
-    <script src="{{ asset('backside/dist/js/sidebarmenu.js') }}"></script>
+    {{-- <script src="{{ asset('backside/dist/js/sidebarmenu.js') }}"></script> --}}
     <!--Custom JavaScript -->
     <script src="{{ asset('backside/dist/js/custom.min.js') }}"></script>
     <!--This page JavaScript -->

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Backside\AssessmentInformation\AssessmentGroupController;
 use App\Http\Controllers\Backside\Home\DashboardController;
+use App\Http\Controllers\Backside\SettingInformation\AssessmentSettingController;
 use App\Http\Controllers\Backside\UserInformation\ParticipantController;
 use App\Http\Controllers\Backside\UserInformation\SupervisorController;
 use App\Http\Controllers\Backside\UserInformation\VisitorController;
@@ -99,6 +100,29 @@ Route::group(['middleware' => ['guest']], function () {
             Route::get('/create', 'create')->name('create');
             Route::post('/create', 'store')->name('store');
             Route::get('/{uuid}', 'showCertificateConfig')->name('show-certificate-config');
+            Route::get('/{uuid}/edit', 'edit')->name('edit');
+            Route::put('/{uuid}/edit', 'update')->name('update');
+            Route::delete('/{uuid}/destroy', 'destroy')->name('destroy');
+        });
+
+    });
+
+    /*
+    |--------------------------------------------------------------------------
+    | Setting Information
+    |--------------------------------------------------------------------------
+    */
+    Route::group(['prefix' => 'setting-information', 'as' => 'setting-information.'], function () {
+
+        /*
+        |--------------------------------------------------------------------------
+        | Assessment Setting
+        |--------------------------------------------------------------------------
+        */
+        Route::group(['prefix' => 'assessment-setting', 'as' => 'assessment-setting.', 'controller' => AssessmentSettingController::class], function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/create', 'create')->name('create');
+            Route::post('/create', 'store')->name('store');
             Route::get('/{uuid}/edit', 'edit')->name('edit');
             Route::put('/{uuid}/edit', 'update')->name('update');
             Route::delete('/{uuid}/destroy', 'destroy')->name('destroy');
