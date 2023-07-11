@@ -1,4 +1,4 @@
-@extends('backside.layout.app', ['breadcrumb_heading' => 'Setting Information', 'breadcrumb_sections' => ['Setting Information', 'Assessment Setting', 'Create']])
+@extends('backside.layout.app', ['breadcrumb_heading' => 'Setting Information', 'breadcrumb_sections' => ['Setting Information', 'Assessment Config', 'Create']])
 
 @section('content')
 

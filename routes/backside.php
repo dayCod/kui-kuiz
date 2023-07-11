@@ -3,6 +3,7 @@
 use App\Http\Controllers\Backside\AssessmentInformation\AssessmentGroupController;
 use App\Http\Controllers\Backside\Home\DashboardController;
 use App\Http\Controllers\Backside\SettingInformation\AssessmentSettingController;
+use App\Http\Controllers\Backside\SettingInformation\CertificateSettingController;
 use App\Http\Controllers\Backside\UserInformation\ParticipantController;
 use App\Http\Controllers\Backside\UserInformation\SupervisorController;
 use App\Http\Controllers\Backside\UserInformation\VisitorController;
@@ -120,6 +121,20 @@ Route::group(['middleware' => ['guest']], function () {
         |--------------------------------------------------------------------------
         */
         Route::group(['prefix' => 'assessment-setting', 'as' => 'assessment-setting.', 'controller' => AssessmentSettingController::class], function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/create', 'create')->name('create');
+            Route::post('/create', 'store')->name('store');
+            Route::get('/{uuid}/edit', 'edit')->name('edit');
+            Route::put('/{uuid}/edit', 'update')->name('update');
+            Route::delete('/{uuid}/destroy', 'destroy')->name('destroy');
+        });
+
+        /*
+        |--------------------------------------------------------------------------
+        | Certificate Setting
+        |--------------------------------------------------------------------------
+        */
+        Route::group(['prefix' => 'certificate-setting', 'as' => 'certificate-setting.', 'controller' => CertificateSettingController::class], function () {
             Route::get('/', 'index')->name('index');
             Route::get('/create', 'create')->name('create');
             Route::post('/create', 'store')->name('store');

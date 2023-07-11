@@ -123,6 +123,7 @@
     {{-- <script src="{{ asset('backside/dist/js/sidebarmenu.js') }}"></script> --}}
     <!--Custom JavaScript -->
     <script src="{{ asset('backside/dist/js/custom.min.js') }}"></script>
+    <script src="{{ asset('backside/dist/js/custom-app.js') }}"></script>
     <!--This page JavaScript -->
     <script src="{{ asset('backside/assets/extra-libs/c3/d3.min.js') }}"></script>
     <script src="{{ asset('backside/assets/extra-libs/c3/c3.min.js') }}"></script>

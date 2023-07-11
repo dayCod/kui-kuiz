@@ -59,7 +59,7 @@
                     </span></a>
                 </li>
 
-                <li class="sidebar-item"> <a class="sidebar-link" href=""
+                <li class="sidebar-item {{ request()->routeIs('setting-information.certificate-setting.*') ? 'selected' : '' }}"> <a class="sidebar-link" href="{{ route('setting-information.certificate-setting.index') }}"
                     aria-expanded="false"><i class="fas fa-cog"></i><span
                         class="hide-menu">Certificate Config</span></a></li>
 
