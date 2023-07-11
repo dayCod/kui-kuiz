@@ -42,9 +42,9 @@
                         </span></a>
                 </li>
 
-                <li class="sidebar-item"> <a class="sidebar-link" href="authentication-register1.html"
+                <li class="sidebar-item {{ request()->routeIs('assessment-information.manage-assessment.*') ? 'selected' : '' }}"> <a class="sidebar-link" href="{{ route('assessment-information.manage-assessment.index') }}"
                         aria-expanded="false"><i class="fas fa-file"></i><span
-                            class="hide-menu">Create Assessment
+                            class="hide-menu">Manage Assessment
                         </span></a>
                 </li>
 

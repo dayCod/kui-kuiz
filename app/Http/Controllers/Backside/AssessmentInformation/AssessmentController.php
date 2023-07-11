@@ -14,7 +14,7 @@ class AssessmentController extends Controller
      */
     public function index()
     {
-        //
+        return view('backside.page.assessment-information.assessment.index');
     }
 
     /**
@@ -24,7 +24,7 @@ class AssessmentController extends Controller
      */
     public function create()
     {
-        //
+        return view('backside.page.assessment-information.assessment.create');
     }
 
     /**
@@ -57,7 +57,7 @@ class AssessmentController extends Controller
      */
     public function edit($uuid)
     {
-        //
+        return view('backside.page.assessment-information.assessment.edit');
     }
 
     /**

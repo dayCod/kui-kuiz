@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backside\AssessmentInformation\AssessmentController;
 use App\Http\Controllers\Backside\AssessmentInformation\AssessmentGroupController;
 use App\Http\Controllers\Backside\Home\DashboardController;
 use App\Http\Controllers\Backside\SettingInformation\ApplicationSettingController;
@@ -91,6 +92,20 @@ Route::group(['middleware' => ['guest']], function () {
     |--------------------------------------------------------------------------
     */
     Route::group(['prefix' => 'assessment-information', 'as' => 'assessment-information.'], function () {
+
+        /*
+        |--------------------------------------------------------------------------
+        | Manage Assessment
+        |--------------------------------------------------------------------------
+        */
+        Route::group(['prefix' => 'manage-assessment', 'as' => 'manage-assessment.', 'controller' => AssessmentController::class], function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/create', 'create')->name('create');
+            Route::post('/create', 'store')->name('store');
+            Route::get('/{uuid}/edit', 'edit')->name('edit');
+            Route::put('/{uuid}/edit', 'update')->name('update');
+            Route::delete('/{uuid}/destroy', 'destroy')->name('destroy');
+        });
 
         /*
         |--------------------------------------------------------------------------
