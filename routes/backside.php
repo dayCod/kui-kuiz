@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Backside\AssessmentInformation\AssessmentController;
 use App\Http\Controllers\Backside\AssessmentInformation\AssessmentGroupController;
+use App\Http\Controllers\Backside\AssessmentInformation\AssessmentQuestionController;
 use App\Http\Controllers\Backside\Home\DashboardController;
 use App\Http\Controllers\Backside\SettingInformation\ApplicationSettingController;
 use App\Http\Controllers\Backside\SettingInformation\AssessmentSettingController;
@@ -105,6 +106,21 @@ Route::group(['middleware' => ['guest']], function () {
             Route::get('/{uuid}/edit', 'edit')->name('edit');
             Route::put('/{uuid}/edit', 'update')->name('update');
             Route::delete('/{uuid}/destroy', 'destroy')->name('destroy');
+
+            /*
+            |--------------------------------------------------------------------------
+            | Assessment Questions
+            |--------------------------------------------------------------------------
+            */
+            Route::group(['prefix' => '{assessment_uuid}/question', 'as' => 'questions.', 'controller' => AssessmentQuestionController::class], function () {
+                Route::get('/', 'index')->name('index');
+                Route::get('/create', 'create')->name('create');
+                Route::post('/create', 'store')->name('store');
+                Route::get('/{question_uuid}/edit', 'edit')->name('edit');
+                Route::put('/{question_uuid}/edit', 'update')->name('update');
+                Route::delete('/{question_uuid}/destroy', 'destroy')->name('destroy');
+            });
+
         });
 
         /*
