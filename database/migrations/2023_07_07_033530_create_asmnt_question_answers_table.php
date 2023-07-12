@@ -19,9 +19,7 @@ return new class extends Migration
             $table->foreignId('asmnt_question_id')->constrained('asmnt_questions')
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
-            $table->foreignId('asmnt_id')->constrained('assessments')
-                ->cascadeOnUpdate()
-                ->cascadeOnDelete();
+            $table->string('alphabet');
             $table->text('answer');
             $table->boolean('is_correct')->nullable();
             $table->boolean('score')->nullable();

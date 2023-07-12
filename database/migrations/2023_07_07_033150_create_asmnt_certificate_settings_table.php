@@ -17,12 +17,9 @@ return new class extends Migration
             $table->id();
             $table->uuid();
             $table->enum('page_orientation', ['potrait', 'landscape'])->nullable();
-            $table->string('heading')->nullable();
-            $table->string('frst_sub_heading')->nullable();
-            $table->string('scnd_sub_heading')->nullable();
-            $table->text('description')->nullable();
-            $table->text('sub_description')->nullable();
-            $table->string('signature_by')->nullable();
+            $table->string('heading');
+            $table->text('description');
+            $table->string('signature_by');
             $table->text('certi_background_img')->nullable()->comment('File');
             $table->text('signature_img')->nullable()->comment('File');
             $table->timestamps();

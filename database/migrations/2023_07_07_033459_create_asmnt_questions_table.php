@@ -20,7 +20,6 @@ return new class extends Migration
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
             $table->text('question');
-            $table->boolean('spv_correction')->nullable();
             $table->timestamps();
         });
     }

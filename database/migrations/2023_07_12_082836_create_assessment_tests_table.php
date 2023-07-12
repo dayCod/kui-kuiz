@@ -13,11 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('asmnt_settings', function (Blueprint $table) {
+        Schema::create('assessment_tests', function (Blueprint $table) {
             $table->id();
             $table->uuid();
-            $table->enum('asmnt_type', ['score', 'corrections'])->comment('Assessment Type');
-            $table->enum('check_type', ['manual', 'auto'])->comment('Assessment Checking Type');
+            $table->foreignId('assessment_id')->constrained('assessments')
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
+            $table->integer('total_is_correct')->unsigned()->nullable();
+            $table->integer('total_score')->unsigned()->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('asmnt_settings');
+        Schema::dropIfExists('assessment_tests');
     }
 };

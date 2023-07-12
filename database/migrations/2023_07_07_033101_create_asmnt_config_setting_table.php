@@ -18,7 +18,7 @@ return new class extends Migration
             $table->uuid();
             $table->string('app_name')->nullable();
             $table->string('app_version')->nullable();
-            $table->string('app_database')->nullable();
+            $table->string('app_locale')->nullable();
             $table->timestamps();
         });
     }
