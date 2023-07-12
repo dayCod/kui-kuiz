@@ -37,7 +37,7 @@
                         </table>
                     </div>
                     <div class="text-end">
-                        <a href="{{ route('auth.login') }}" class="btn btn-primary text-uppercase">start the test <i class="fa fa-arrow-right"></i></a>
+                        <a href="{{ route('assessment-test.assessment-test-page') }}" class="btn btn-primary text-uppercase">start the test <i class="fa fa-arrow-right"></i></a>
                     </div>
                 </div>
             </div>

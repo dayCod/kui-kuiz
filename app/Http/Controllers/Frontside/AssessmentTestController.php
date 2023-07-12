@@ -11,4 +11,9 @@ class AssessmentTestController extends Controller
     {
         return view('frontside.pages.welcome');
     }
+
+    public function assessmentTestPage()
+    {
+        return view('frontside.pages.assessment-test-page');
+    }
 }

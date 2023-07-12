@@ -22,6 +22,7 @@ Route::group(['middleware' => ['guest']], function () {
 Route::group(['prefix' => 'assessment-test', 'as' => 'assessment-test.', 'middleware' => ['guest']], function () {
 
     Route::controller(AssessmentTestController::class)->group(function () {
+        Route::get('/', 'assessmentTestPage')->name('assessment-test-page');
         Route::get('/welcome', 'welcomePage')->name('welcome-page');
     });
 
