@@ -24,7 +24,7 @@ class AssessmentQuestionController extends Controller
      */
     public function create()
     {
-        //
+        return view('backside.page.assessment-information.questions.create');
     }
 
     /**
@@ -44,9 +44,9 @@ class AssessmentQuestionController extends Controller
      * @param  string  $uuid
      * @return \Illuminate\Http\Response
      */
-    public function show($uuid)
+    public function show($assessment_uuid, $question_uuid)
     {
-        //
+        return view('backside.page.assessment-information.questions.detail');
     }
 
     /**
@@ -55,9 +55,9 @@ class AssessmentQuestionController extends Controller
      * @param  string  $uuid
      * @return \Illuminate\Http\Response
      */
-    public function edit($uuid)
+    public function edit($assessment_uuid, $question_uuid)
     {
-        //
+        return view('backside.page.assessment-information.questions.edit');
     }
 
     /**
@@ -67,7 +67,7 @@ class AssessmentQuestionController extends Controller
      * @param  string  $uuid
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $uuid)
+    public function update(Request $request, $assessment_uuid, $question_uuid)
     {
         //
     }
@@ -78,7 +78,7 @@ class AssessmentQuestionController extends Controller
      * @param  string  $uuid
      * @return \Illuminate\Http\Response
      */
-    public function destroy($uuid)
+    public function destroy($assessment_uuid, $question_uuid)
     {
         //
     }

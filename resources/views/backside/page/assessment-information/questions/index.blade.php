@@ -7,7 +7,7 @@
             <div class="card-body">
                 <div class="d-flex align-items-center justify-content-between mb-4">
                     <div>
-                        <a href="{{ route('assessment-information.manage-assessment.create') }}" class="btn btn-info">
+                        <a href="{{ route('assessment-information.manage-assessment.questions.create', ['assessment_uuid' => 'df6fdea1-10c3-474c-ae62-e63def80d0b']) }}" class="btn btn-info">
                             <i class="fa fa-plus-circle"></i>
                             {{ __('Create') }}
                         </a>
@@ -33,11 +33,11 @@
                                 <td class="text-center align-middle">What is your hobby ?</td>
                                 <td class="text-center align-middle">5</td>
                                 <td class="text-center align-middle">
-                                    <a href="" class="btn btn-success btn-sm text-white">
+                                    <a href="{{ route('assessment-information.manage-assessment.questions.show', ['assessment_uuid' => 'df6fdea1-10c3-474c-ae62-e63def80d0b', 'question_uuid' => 'df6fdea1-10c3-474c-ae62-e63def80d0b']) }}" class="btn btn-success btn-sm text-white">
                                         <i class="fa fa-eye"></i>
                                         {{ __('Detail') }}
                                     </a>
-                                    <a href="{{ route('assessment-information.manage-assessment.edit', ['uuid' => 'df6fdea1-10c3-474c-ae62-e63def80d0b']) }}" class="btn btn-warning btn-sm text-white">
+                                    <a href="{{ route('assessment-information.manage-assessment.questions.edit', ['assessment_uuid' => 'df6fdea1-10c3-474c-ae62-e63def80d0b', 'question_uuid' => 'df6fdea1-10c3-474c-ae62-e63def80d0b']) }}" class="btn btn-warning btn-sm text-white">
                                         <i class="fa fa-edit"></i>
                                         {{ __('Edit') }}
                                     </a>

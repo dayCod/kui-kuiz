@@ -37,6 +37,72 @@ $(() => {
             })
         })
     }
+})
 
+$(document).ready(function () {
+
+    // ==============================================================
+    // This is for increase / decrease answers
+    // ==============================================================
+
+    if ( $('div.row.answer-section').length == 1 ) $('button#decrease').attr('disabled', 'disabled')
+
+    $('#btn-actions-group > .btn-actions').click(function (e) {
+        if ( $(this).attr('id') == "increase" ) {
+
+            $('button#decrease').removeAttr('disabled')
+
+            let index = $('div.row.answer-section').length
+            let alphabet = String.fromCharCode( (index + 1) + 64 )
+            let formGroupHtml = `
+            <div class="row answer-section">
+                <div class="col-md-1">
+                    <label class="form-label"># </label>
+                    <div class="form-group mb-3">
+                        <input type="text" class="form-control" placeholder="Alphabet" name="alphabet" value="${alphabet}" style="cursor: not-allowed" readonly>
+                    </div>
+                </div>
+                <div class="col-md-7">
+                    <label class="form-label">Answer <span class="text-danger">*</span> </label>
+                    <div class="form-group mb-3">
+                        <input type="text" class="form-control" placeholder="Answer" name="answer" required>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Is Correct ? <span class="text-danger">*</span> </label>
+                    <div class="form-group mb-3">
+                        <select class="form-control" name="is_correct" required>
+                            <option value="" selected hidden>Select The Corrections</option>
+                            <option value="">Yes, Correct Answer!</option>
+                            <option value="">No, It's Not Correct!</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            `
+
+            $(formGroupHtml).insertBefore('#answer-section-divider')
+
+            if (alphabet == "Y") $('button#increase').attr('disabled', 'disabled')
+
+        } else if ( $(this).attr('id') == "decrease" ) {
+
+            $('button#decrease').removeAttr('disabled')
+
+            let index = $("div.row.answer-section").length;
+            if( (index - 1) == 1 ) {
+                $('button#decrease').attr('disabled', 'disabled')
+            } else if ( index == 25 ) {
+                $('button#increase').removeAttr('disabled')
+            }
+            console.log(index)
+            $("div.row.answer-section").last().remove()
+
+        }
+    })
 
 })
+
+
+
+

@@ -116,6 +116,7 @@ Route::group(['middleware' => ['guest']], function () {
                 Route::get('/', 'index')->name('index');
                 Route::get('/create', 'create')->name('create');
                 Route::post('/create', 'store')->name('store');
+                Route::get('/{question_uuid}', 'show')->name('show');
                 Route::get('/{question_uuid}/edit', 'edit')->name('edit');
                 Route::put('/{question_uuid}/edit', 'update')->name('update');
                 Route::delete('/{question_uuid}/destroy', 'destroy')->name('destroy');
