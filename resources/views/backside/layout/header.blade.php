@@ -56,8 +56,13 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-bs-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
+                        @if (is_null(auth()->user()->profile_picture))
                         <img src="{{ asset('backside/assets/images/users/1.jpg') }}" alt="user" class="rounded-circle"
                             width="40">
+                        @else
+                        <img src="{{ auth()->user()->profile_picture }}" alt="user" class="rounded-circle"
+                            width="40">
+                        @endif
                         <span class="ms-2 d-none d-lg-inline-block"><span>Hello,</span> <span
                                 class="text-dark">{{ auth()->user()->name  }}</span> <i data-feather="chevron-down"
                                 class="svg-icon"></i></span>

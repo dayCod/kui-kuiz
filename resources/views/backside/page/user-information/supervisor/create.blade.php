@@ -13,7 +13,8 @@
                         {{ __('Back') }}
                     </a>
                 </div>
-                <form action="#">
+                <form action="{{ route('user-information.supervisor.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
                     <div class="form-body">
                         <div class="row mt-3">
                             <div class="col-md-12">
@@ -41,7 +42,7 @@
                             <label class="form-label">Upload Profile Picture </label>
                             <div class="col-md-12">
                                 <div class="form-group mb-3">
-                                    <input type="file" class="form-control" name="user_profile_img">
+                                    <input type="file" class="form-control" name="profile_picture">
                                 </div>
                             </div>
                         </div>

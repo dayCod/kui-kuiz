@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers\Backside\UserInformation;
 
-use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\User\UserStoreRequest;
+use App\Http\Requests\User\UserUpdateRequest;
+use App\Models\User;
 
 class SupervisorController extends Controller
 {
@@ -14,7 +19,9 @@ class SupervisorController extends Controller
      */
     public function index()
     {
-        return view('backside.page.user-information.supervisor.index');
+        $supervisors = User::where('role', 'supervisor')->latest()->get();
+
+        return view('backside.page.user-information.supervisor.index', compact('supervisors'));
     }
 
     /**
@@ -33,9 +40,18 @@ class SupervisorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserStoreRequest $request)
     {
-        //
+        $process = app('CreateUser')->execute([
+            'uuid' => Str::uuid(),
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'role' => 'supervisor',
+            'profile_picture' => $request->profile_picture,
+        ]);
+
+        return redirect()->route('user-information.supervisor.index')->with('success', $process['message']);
     }
 
     /**
@@ -46,7 +62,9 @@ class SupervisorController extends Controller
      */
     public function show($uuid)
     {
-        return view('backside.page.user-information.supervisor.detail');
+        $supervisor = User::where('role', 'supervisor')->where('uuid', $uuid)->latest()->first();
+
+        return view('backside.page.user-information.supervisor.detail', compact('supervisor'));
     }
 
     /**
@@ -67,7 +85,7 @@ class SupervisorController extends Controller
      * @param  string  $uuid
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $uuid)
+    public function update(UserUpdateRequest $request, $uuid)
     {
         //
     }

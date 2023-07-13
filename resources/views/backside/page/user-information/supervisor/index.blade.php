@@ -34,16 +34,17 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @forelse($supervisors as $supervisor)
                             <tr>
-                                <td class="text-center align-middle">1</td>
-                                <td class="text-center align-middle">John Doe</td>
-                                <td class="text-center align-middle">johndoe@mail.com</td>
+                                <td class="text-center align-middle">{{ $loop->iteration }}</td>
+                                <td class="text-center align-middle">{{ $supervisor->name }}</td>
+                                <td class="text-center align-middle">{{ $supervisor->email }}</td>
                                 <td class="text-center align-middle">
-                                    <a href="{{ route('user-information.supervisor.show', ['uuid' => 'df6fdea1-10c3-474c-ae62-e63def80d0b']) }}" class="btn btn-success btn-sm text-white">
+                                    <a href="{{ route('user-information.supervisor.show', ['uuid' => $supervisor->uuid]) }}" class="btn btn-success btn-sm text-white">
                                         <i class="fa fa-eye"></i>
                                         {{ __('Detail') }}
                                     </a>
-                                    <a href="{{ route('user-information.supervisor.edit', ['uuid' => 'df6fdea1-10c3-474c-ae62-e63def80d0b']) }}" class="btn btn-warning btn-sm text-white">
+                                    <a href="{{ route('user-information.supervisor.edit', ['uuid' => $supervisor->uuid]) }}" class="btn btn-warning btn-sm text-white">
                                         <i class="fa fa-edit"></i>
                                         {{ __('Edit') }}
                                     </a>
@@ -53,25 +54,11 @@
                                     </a>
                                 </td>
                             </tr>
+                            @empty
                             <tr>
-                                <td class="text-center align-middle">2</td>
-                                <td class="text-center align-middle">Jane Doe</td>
-                                <td class="text-center align-middle">janedoe@mail.com</td>
-                                <td class="text-center align-middle">
-                                    <a href="" class="btn btn-success btn-sm text-white">
-                                        <i class="fa fa-eye"></i>
-                                        {{ __('Detail') }}
-                                    </a>
-                                    <a href="" class="btn btn-warning btn-sm text-white">
-                                        <i class="fa fa-edit"></i>
-                                        {{ __('Edit') }}
-                                    </a>
-                                    <a href="" class="btn btn-danger btn-sm">
-                                        <i class="fa fa-trash"></i>
-                                        {{ __('Delete') }}
-                                    </a>
-                                </td>
+                                <td colspan="4" class="text-center">{{ __('Empty') }}</td>
                             </tr>
+                            @endforelse
                         </tbody>
                         <tfoot>
                             <tr>
