@@ -21,6 +21,7 @@
     <!-- Custom CSS -->
     <link href="{{ asset('backside/dist/css/style.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('backside/dist/css/custom-style.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontside/vendor/iziToast/dist/css/iziToast.min.css') }}">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -138,6 +139,8 @@
     <script src="{{ asset('backside/assets/libs/moment/min/moment.min.js') }}"></script>
     <script src="{{ asset('backside/assets/libs/fullcalendar/dist/fullcalendar.min.js') }}"></script>
     <script src="{{ asset('backside/dist/js/pages/calendar/cal-init.js') }}"></script>
+    <script src="{{ asset('frontside/vendor/iziToast/dist/js/iziToast.min.js') }}"></script>
+    @include('util.toast')
 </body>
 
 </html>

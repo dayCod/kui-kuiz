@@ -8,7 +8,17 @@
         <div class="col-6">
             <div class="card border border-0 shadow p-4">
                 <h3 class="text-uppercase mb-4 text-center">kuikuiz - login</h3>
-                <form action="{{ route('dashboard.index') }}">
+                @if(session()->has('errors'))
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
+                <form action="{{ route('auth.authenticate') }}" method="POST">
+                    @csrf
                     <div class="mb-3">
                         <label for="">Email</label>
                         <input type="email" class="form-control" name="email">

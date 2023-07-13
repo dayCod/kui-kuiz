@@ -24,6 +24,7 @@
     <link href="{{ asset('frontside/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
     <link href="{{ asset('frontside/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
     <link href="{{ asset('frontside/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('frontside/vendor/iziToast/dist/css/iziToast.min.css') }}">
 
     <!-- Template Main CSS File -->
     <link href="{{ asset('frontside/css/style.css') }}" rel="stylesheet">
@@ -58,6 +59,8 @@
     <script src="{{ asset('frontside/vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
     <script src="{{ asset('frontside/vendor/swiper/swiper-bundle.min.js') }}"></script>
     <script src="{{ asset('frontside/vendor/php-email-form/validate.js') }}"></script>
+    <script src="{{ asset('frontside/vendor/iziToast/dist/js/iziToast.min.js') }}"></script>
+    @include('util.toast')
 
     <!-- Template Main JS File -->
     <script src="{{ asset('frontside/js/main.js') }}"></script>
