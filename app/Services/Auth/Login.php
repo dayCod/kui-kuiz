@@ -4,6 +4,7 @@ namespace App\Services\Auth;
 
 use App\Base\BaseImplement;
 use App\Base\BaseInterface;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class Login extends BaseImplement implements BaseInterface
@@ -11,6 +12,9 @@ class Login extends BaseImplement implements BaseInterface
     public function process($dto)
     {
         if ( Auth::attempt( [ 'email' => $dto['email'], 'password' => $dto['password'] ] ) ) {
+
+            User::where('email', $dto['email'])->update(['is_login' => true]);
+
             $this->results['response_code'] = 200;
             $this->results['success'] = true;
             $this->results['message'] = "Successfully Login";

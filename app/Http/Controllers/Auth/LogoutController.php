@@ -10,12 +10,19 @@ class LogoutController extends Controller
 {
     public function logout(Request $request)
     {
-        Auth::logout();
+        $process = app('Logout')->execute([
+            'user_id' => Auth::id(),
+        ]);
 
-        $request->session()->invalidate();
+        if ($process['success']) {
+            $request->session()->invalidate();
 
-        $request->session()->regenerateToken();
+            $request->session()->regenerateToken();
 
-        return redirect()->route('auth.login')->with('success', 'Successfully Logout');
+            return redirect()->route('auth.login')->with('success', $process['message']);
+        } else {
+            return redirect()->back()->with('fail', $process['message']);
+        }
+
     }
 }

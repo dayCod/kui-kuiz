@@ -23,6 +23,7 @@ return new class extends Migration
             $table->rememberToken();
             $table->boolean('is_login')->default(false);
             $table->enum('role', ['admin', 'supervisor', 'participant']);
+            $table->text('profile_picture')->nullable()->comment('File');
             $table->timestamps();
             $table->softDeletes();
         });

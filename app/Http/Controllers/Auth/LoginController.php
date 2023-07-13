@@ -18,6 +18,7 @@ class LoginController extends Controller
         $process = app('Login')->execute([
             'email' => $request->email,
             'password' => $request->password,
+            'is_login' => true,
         ]);
 
         if ($process['success']) {
