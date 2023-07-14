@@ -48,7 +48,7 @@ class SupervisorController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'role' => 'supervisor',
-            'profile_picture' => $request->profile_picture,
+            'profile_picture' => $request->file('profile_picture'),
         ]);
 
         return redirect()->route('user-information.supervisor.index')->with('success', $process['message']);
@@ -75,7 +75,11 @@ class SupervisorController extends Controller
      */
     public function edit($uuid)
     {
-        return view('backside.page.user-information.supervisor.edit');
+        $process = app('FindUser')->execute(['user_uuid' => $uuid]);
+
+        return view('backside.page.user-information.supervisor.edit', [
+            'user' => $process['data'],
+        ]);
     }
 
     /**
@@ -87,7 +91,15 @@ class SupervisorController extends Controller
      */
     public function update(UserUpdateRequest $request, $uuid)
     {
-        //
+        $process = app('UpdateUser')->execute([
+            'user_uuid' => $uuid,
+            'name' => $request->name,
+            'email' => $request->email,
+            'change_password' => $request->change_password,
+            'profile_picture' => $request->file('profile_picture'),
+        ]);
+
+        return redirect()->route('user-information.supervisor.index')->with('success', $process['message']);
     }
 
     /**

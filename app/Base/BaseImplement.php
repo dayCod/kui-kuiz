@@ -13,7 +13,7 @@ abstract class BaseImplement implements BaseInterface
         $this->results = ['response_code' => null, 'success' => false, 'message' => null, 'data' => null];
     }
 
-    abstract protected function process( $data );
+    abstract protected function process( $dto );
 
     public function execute( $input_data )
     {
