@@ -110,7 +110,9 @@ class SupervisorController extends Controller
      */
     public function destroy($uuid)
     {
-        //
+        $process = app('DeleteUser')->execute(['user_uuid' => $uuid]);
+
+        return response()->json(['success' => $process['message']], 200);
     }
 
     /**
@@ -120,7 +122,37 @@ class SupervisorController extends Controller
      */
     public function trash()
     {
-        return view('backside.page.user-information.supervisor.trash');
+        $process = app('GetTrashedUser')->execute(['role' => 'supervisor']);
+
+        return view('backside.page.user-information.supervisor.trash', [
+            'users' => $process['data'],
+        ]);
+    }
+
+    /**
+     * Restore a soft-deleted model instance.
+     *
+     * @param string $uuid
+     * @return bool
+     */
+    public function restore($uuid)
+    {
+        $process = app('RestoreUser')->execute(['user_uuid' => $uuid]);
+
+        return redirect()->back()->with('success', $process['message']);
+    }
+
+    /**
+     * Force a hard delete on a soft deleted model.
+     *
+     * @param string $uuid
+     * @return bool|null
+     */
+    public function forceDelete($uuid)
+    {
+        $process = app('ForceDelete')->execute(['user_uuid' => $uuid]);
+
+        return response()->json(['success' => $process['message']], 200);
     }
 
 }

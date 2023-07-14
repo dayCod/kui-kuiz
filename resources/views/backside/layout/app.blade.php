@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('backside/assets/images/favicon.png') }}">
     <title>Freedash Template - The Ultimate Multipurpose admin template</title>
@@ -140,7 +141,9 @@
     <script src="{{ asset('backside/assets/libs/fullcalendar/dist/fullcalendar.min.js') }}"></script>
     <script src="{{ asset('backside/dist/js/pages/calendar/cal-init.js') }}"></script>
     <script src="{{ asset('frontside/vendor/iziToast/dist/js/iziToast.min.js') }}"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     @include('util.toast')
+    @include('util.sweet-alert-delete')
 </body>
 
 </html>

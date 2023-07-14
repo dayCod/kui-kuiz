@@ -48,7 +48,7 @@
                                         <i class="fa fa-edit"></i>
                                         {{ __('Edit') }}
                                     </a>
-                                    <a href="" class="btn btn-danger btn-sm">
+                                    <a href="{{ route('user-information.supervisor.destroy', ['uuid' => $supervisor->uuid]) }}" class="btn btn-danger btn-sm btn-delete">
                                         <i class="fa fa-trash"></i>
                                         {{ __('Delete') }}
                                     </a>
