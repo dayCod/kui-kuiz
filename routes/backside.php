@@ -69,6 +69,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
             Route::put('/{uuid}/edit', 'update')->name('update');
             Route::delete('/{uuid}/destroy', 'destroy')->name('destroy');
             Route::get('{uuid}/assessment-history', 'assessmentHistory')->name('asessment-history');
+            Route::get('/{uuid}/restore', 'restore')->name('restore');
+            Route::delete('/{uuid}/force-delete', 'forceDelete')->name('force-delete');
         });
 
         /*

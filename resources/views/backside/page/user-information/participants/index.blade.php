@@ -35,19 +35,20 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @forelse($participants as $participant)
                             <tr>
-                                <td class="text-center align-middle">1</td>
-                                <td class="text-center align-middle">John Doe</td>
-                                <td class="text-center align-middle">johndoe@mail.com</td>
+                                <td class="text-center align-middle">{{ $loop->iteration }}</td>
+                                <td class="text-center align-middle">{{ $participant->name }}</td>
+                                <td class="text-center align-middle">{{ $participant->email }}</td>
                                 <td class="text-center align-middle">
                                     <span class="badge bg-danger p-2">Haven't taken a test yet</span>
                                 </td>
                                 <td class="text-center align-middle">
-                                    <a href="{{ route('user-information.participant.show', ['uuid' => 'df6fdea1-10c3-474c-ae62-e63def80d0b']) }}" class="btn btn-success btn-sm text-white">
+                                    <a href="{{ route('user-information.participant.show', ['uuid' => $participant->uuid]) }}" class="btn btn-success btn-sm text-white">
                                         <i class="fa fa-eye"></i>
                                         {{ __('Detail') }}
                                     </a>
-                                    <a href="{{ route('user-information.participant.edit', ['uuid' => 'df6fdea1-10c3-474c-ae62-e63def80d0b']) }}" class="btn btn-warning btn-sm text-white">
+                                    <a href="{{ route('user-information.participant.edit', ['uuid' => $participant->uuid]) }}" class="btn btn-warning btn-sm text-white">
                                         <i class="fa fa-edit"></i>
                                         {{ __('Edit') }}
                                     </a>
@@ -57,28 +58,11 @@
                                     </a>
                                 </td>
                             </tr>
+                            @empty
                             <tr>
-                                <td class="text-center align-middle">2</td>
-                                <td class="text-center align-middle">Jane Doe</td>
-                                <td class="text-center align-middle">janedoe@mail.com</td>
-                                <td class="text-center align-middle">
-                                    <a href="{{ route('user-information.participant.asessment-history', ['uuid' => 'df6fdea1-10c3-474c-ae62-e63def80d0b']) }}" class="btn btn-primary btn-sm">Show Test History</a>
-                                </td>
-                                <td class="text-center align-middle">
-                                    <a href="" class="btn btn-success btn-sm text-white">
-                                        <i class="fa fa-eye"></i>
-                                        {{ __('Detail') }}
-                                    </a>
-                                    <a href="" class="btn btn-warning btn-sm text-white">
-                                        <i class="fa fa-edit"></i>
-                                        {{ __('Edit') }}
-                                    </a>
-                                    <a href="" class="btn btn-danger btn-sm">
-                                        <i class="fa fa-trash"></i>
-                                        {{ __('Delete') }}
-                                    </a>
-                                </td>
+                                <td class="text-center" colspan="5">{{ __('Empty') }}</td>
                             </tr>
+                            @endforelse
                         </tbody>
                         <tfoot>
                             <tr>

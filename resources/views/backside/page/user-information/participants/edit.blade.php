@@ -41,7 +41,7 @@
                             <label class="form-label">Change Profile Picture </label>
                             <div class="col-md-12">
                                 <div class="form-group mb-3">
-                                    <input type="file" class="form-control" name="user_profile_img">
+                                    <input type="file" class="form-control" name="profile_picture">
                                 </div>
                             </div>
                         </div>

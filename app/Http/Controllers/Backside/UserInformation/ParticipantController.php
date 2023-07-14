@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers\Backside\UserInformation;
 
-use App\Http\Controllers\Controller;
+use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\User\UserStoreRequest;
 
 class ParticipantController extends Controller
 {
@@ -14,7 +18,9 @@ class ParticipantController extends Controller
      */
     public function index()
     {
-        return view('backside.page.user-information.participants.index');
+        $participants = User::where('role', 'participant')->latest()->get();
+
+        return view('backside.page.user-information.participants.index', compact('participants'));
     }
 
     /**
@@ -33,9 +39,18 @@ class ParticipantController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserStoreRequest $request)
     {
-        //
+        $process = app('CreateUser')->execute([
+            'uuid' => Str::uuid(),
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'role' => 'participant',
+            'profile_picture' => $request->file('profile_picture'),
+        ]);
+
+        return redirect()->route('user-information.participant.index')->with('success', $process['message']);
     }
 
     /**
@@ -46,7 +61,9 @@ class ParticipantController extends Controller
      */
     public function show($uuid)
     {
-        return view('backside.page.user-information.participants.detail');
+        $participant = User::where('role', 'participant')->where('uuid', $uuid)->latest()->first();
+
+        return view('backside.page.user-information.participants.detail', compact('participant'));
     }
 
     /**
@@ -101,6 +118,36 @@ class ParticipantController extends Controller
      */
     public function trash()
     {
-        return view('backside.page.user-information.participants.trash');
+        $process = app('GetTrashedUser')->execute(['role' => 'participant']);
+
+        return view('backside.page.user-information.participants.trash', [
+            'users' => $process['data'],
+        ]);
+    }
+
+    /**
+     * Restore a soft-deleted model instance.
+     *
+     * @param string $uuid
+     * @return bool
+     */
+    public function restore($uuid)
+    {
+        $process = app('RestoreUser')->execute(['user_uuid' => $uuid]);
+
+        return redirect()->back()->with('success', $process['message']);
+    }
+
+    /**
+     * Force a hard delete on a soft deleted model.
+     *
+     * @param string $uuid
+     * @return bool|null
+     */
+    public function forceDelete($uuid)
+    {
+        $process = app('ForceDelete')->execute(['user_uuid' => $uuid]);
+
+        return response()->json(['success' => $process['message']], 200);
     }
 }
