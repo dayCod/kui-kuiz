@@ -27,36 +27,27 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @forelse($users as $user)
                             <tr>
-                                <td class="text-center align-middle">1</td>
-                                <td class="text-center align-middle">John Doe</td>
-                                <td class="text-center align-middle">johndoe@mail.com</td>
+                                <td class="text-center align-middle">{{ $loop->iteration }}</td>
+                                <td class="text-center align-middle">{{ $user['name'] }}</td>
+                                <td class="text-center align-middle">{{ $user['email'] }}</td>
                                 <td class="text-center align-middle">
-                                    <a href="" class="btn btn-success btn-sm text-white">
+                                    <a href="{{ route('user-information.supervisor.restore', ['uuid' => $user['uuid']]) }}" class="btn btn-success btn-sm text-white">
                                         <i class="fas fa-redo"></i>
                                         {{ __('Restore') }}
                                     </a>
-                                    <a href="" class="btn btn-danger btn-sm">
+                                    <a href="{{ route('user-information.supervisor.force-delete', ['uuid' => $user['uuid']]) }}" class="btn btn-danger btn-sm btn-delete">
                                         <i class="fa fa-trash"></i>
                                         {{ __('Delete Permanently') }}
                                     </a>
                                 </td>
                             </tr>
+                            @empty
                             <tr>
-                                <td class="text-center align-middle">2</td>
-                                <td class="text-center align-middle">Jane Doe</td>
-                                <td class="text-center align-middle">janedoe@mail.com</td>
-                                <td class="text-center align-middle">
-                                    <a href="" class="btn btn-success btn-sm text-white">
-                                        <i class="fas fa-redo"></i>
-                                        {{ __('Restore') }}
-                                    </a>
-                                    <a href="" class="btn btn-danger btn-sm">
-                                        <i class="fa fa-trash"></i>
-                                        {{ __('Delete Permanently') }}
-                                    </a>
-                                </td>
+                                <td colspan="4" class="text-center">{{ __('Empty') }}</td>
                             </tr>
+                            @endforelse
                         </tbody>
                         <tfoot>
                             <tr>

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\User\UserStoreRequest;
+use App\Http\Requests\User\UserUpdateRequest;
 
 class ParticipantController extends Controller
 {
@@ -74,7 +75,11 @@ class ParticipantController extends Controller
      */
     public function edit($uuid)
     {
-        return view('backside.page.user-information.participants.edit');
+        $process = app('FindUser')->execute(['user_uuid' => $uuid]);
+
+        return view('backside.page.user-information.participants.edit', [
+            'user' => $process['data'],
+        ]);
     }
 
     /**
@@ -84,9 +89,17 @@ class ParticipantController extends Controller
      * @param  string  $uuid
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $uuid)
+    public function update(UserUpdateRequest $request, $uuid)
     {
-        //
+        $process = app('UpdateUser')->execute([
+            'user_uuid' => $uuid,
+            'name' => $request->name,
+            'email' => $request->email,
+            'change_password' => $request->change_password,
+            'profile_picture' => $request->file('profile_picture'),
+        ]);
+
+        return redirect()->route('user-information.participant.index')->with('success', $process['message']);
     }
 
     /**
@@ -97,7 +110,9 @@ class ParticipantController extends Controller
      */
     public function destroy($uuid)
     {
-        //
+        $process = app('DeleteUser')->execute(['user_uuid' => $uuid]);
+
+        return response()->json(['success' => $process['message']], 200);
     }
 
     /**

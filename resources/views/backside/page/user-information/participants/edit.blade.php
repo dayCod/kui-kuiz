@@ -13,13 +13,15 @@
                         {{ __('Back') }}
                     </a>
                 </div>
-                <form action="#">
+                <form action="{{ route('user-information.participant.update', ['uuid' => $user['uuid']]) }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
                     <div class="form-body">
                         <div class="row mt-3">
                             <div class="col-md-12">
                                 <label class="form-label">Name <span class="text-danger">*</span> </label>
                                 <div class="form-group mb-3">
-                                    <input type="text" class="form-control" placeholder="Name" name="name" value="John Doe" required>
+                                    <input type="text" class="form-control" placeholder="Name" name="name" value="{{ old('name', $user['name']) }}" required>
                                 </div>
                             </div>
                         </div>
@@ -27,13 +29,13 @@
                             <div class="col-md-6">
                                 <label class="form-label">Email <span class="text-danger">*</span> </label>
                                 <div class="form-group mb-3">
-                                    <input type="email" class="form-control" placeholder="Email" name="email" value="johndoe@mail.com" required>
+                                    <input type="email" class="form-control" placeholder="Email" name="email" value="{{ old('email', $user['email']) }}" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Change Password </label>
                                 <div class="form-group mb-3">
-                                    <input type="password" class="form-control" placeholder="Password" name="password">
+                                    <input type="password" class="form-control" placeholder="Password" name="change_password">
                                 </div>
                             </div>
                         </div>

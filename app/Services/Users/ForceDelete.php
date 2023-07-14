@@ -15,7 +15,9 @@ class ForceDelete extends BaseImplement implements BaseInterface
 
         if (!empty($find_user)) {
 
-            Storage::delete('/public/profile-img/'.getFileName($find_user->profile_picture));
+            if (Storage::exists('/public/profile-img/'.getFileName($find_user->profile_picture))) {
+                Storage::delete('/public/profile-img/'.getFileName($find_user->profile_picture));
+            }
 
             $find_user->forceDelete();
 
