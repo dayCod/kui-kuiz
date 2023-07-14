@@ -7,6 +7,7 @@ use App\Base\BaseInterface;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image as ImageIntervention;
 
 class CreateUser extends BaseImplement implements BaseInterface
 {
@@ -25,7 +26,12 @@ class CreateUser extends BaseImplement implements BaseInterface
 
             $user['profile_picture'] = url("storage/profile-img/$profile_picture_file");
 
-            Storage::disk(config('filesystems.default'))->put("/public/profile-img/$profile_picture_file", file_get_contents($dto['profile_picture']->getRealPath()));
+            if (!file_exists(storage_path('app/public/profile-img/'))) {
+                mkdir(storage_path('app/public/profile-img/'), 0775, true);
+            }
+
+            ImageIntervention::make($dto['profile_picture'])->resize(600, 600)->save(storage_path('app/public/profile-img/'.$profile_picture_file));
+
         }
 
         $user->save();
