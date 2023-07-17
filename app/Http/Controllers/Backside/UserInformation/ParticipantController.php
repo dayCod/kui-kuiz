@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Backside\UserInformation;
 
+use App\Exports\UserExport;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -164,5 +166,17 @@ class ParticipantController extends Controller
         $process = app('ForceDelete')->execute(['user_uuid' => $uuid]);
 
         return response()->json(['success' => $process['message']], 200);
+    }
+
+    /**
+     * Download the formatted excel collection
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function export()
+    {
+        $export_name = 'participant-users-export-'.time().config('excel.exports.default_format');
+
+        return Excel::download(new UserExport(User::where('role', 'participant')->latest()->get()), $export_name);
     }
 }

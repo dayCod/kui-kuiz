@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Backside\UserInformation;
 
+use App\Exports\UserExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -153,6 +155,18 @@ class SupervisorController extends Controller
         $process = app('ForceDelete')->execute(['user_uuid' => $uuid]);
 
         return response()->json(['success' => $process['message']], 200);
+    }
+
+    /**
+     * Download the formatted excel collection
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function export()
+    {
+        $export_name = 'supervisor-users-export-'.time().config('excel.exports.default_format');
+
+        return Excel::download(new UserExport(User::where('role', 'supervisor')->latest()->get()), $export_name);
     }
 
 }
