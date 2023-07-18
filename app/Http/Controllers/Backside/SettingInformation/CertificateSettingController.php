@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Backside\SettingInformation;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Setting\Certificate\CertificateStoreRequest;
+use App\Http\Requests\Setting\Certificate\CertificateUpdateRequest;
+use App\Models\AsmntCertificateSetting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class CertificateSettingController extends Controller
 {
@@ -14,7 +18,9 @@ class CertificateSettingController extends Controller
      */
     public function index()
     {
-        return view('backside.page.setting-information.certificate-config.index');
+        $certificates = AsmntCertificateSetting::latest()->get();
+
+        return view('backside.page.setting-information.certificate-config.index', compact('certificates'));
     }
 
     /**
@@ -33,9 +39,19 @@ class CertificateSettingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CertificateStoreRequest $request)
     {
-        //
+        $process = app('CreateCertificate')->execute([
+            'uuid' => Str::uuid(),
+            'page_orientation' => $request->page_orientation,
+            'heading' => ucfirst($request->heading),
+            'description' => $request->description,
+            'signatured_by' => $request->signatured_by,
+            'certi_background_img' => $request->file('certi_background_img'),
+            'signature_img' => $request->file('signature_img'),
+        ]);
+
+        return redirect()->route('setting-information.certificate-setting.index')->with('success', $process['message']);
     }
 
     /**
@@ -56,7 +72,7 @@ class CertificateSettingController extends Controller
      * @param  string  $uuid
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $uuid)
+    public function update(CertificateUpdateRequest $request, $uuid)
     {
         //
     }

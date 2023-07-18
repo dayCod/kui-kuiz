@@ -26,12 +26,13 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @forelse($certificates as $certificate)
                             <tr>
-                                <td class="text-center align-middle">1</td>
-                                <td class="text-center align-middle">Potrait</td>
-                                <td class="text-center align-middle">Certificate Header</td>
-                                <td class="text-center align-middle word-limiter">Lorem, ipsum dolor sit amet </td>
-                                <td class="text-center align-middle">John Doe .Org</td>
+                                <td class="text-center align-middle">{{ $loop->iteration }}</td>
+                                <td class="text-center align-middle">{{ ucfirst($certificate->page_orientation) }}</td>
+                                <td class="text-center align-middle">{{ $certificate->heading }}</td>
+                                <td class="text-center align-middle word-limiter">{{ $certificate->description }}</td>
+                                <td class="text-center align-middle">{{ $certificate->signatured_by }}</td>
                                 <td class="text-center align-middle">
                                     <a href="{{ route('setting-information.certificate-setting.edit', ['uuid' => 'df6fdea1-10c3-474c-ae62-e63def80d0b']) }}" class="btn btn-warning btn-sm text-white">
                                         <i class="fa fa-edit"></i>
@@ -43,6 +44,11 @@
                                     </a>
                                 </td>
                             </tr>
+                            @empty
+                            <tr>
+                                <td class="text-center" colspan="6">{{ __('Empty') }}</td>
+                            </tr>
+                            @endforelse
                         </tbody>
                         <tfoot>
                             <tr>

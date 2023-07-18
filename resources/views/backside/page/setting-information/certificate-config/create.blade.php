@@ -13,16 +13,26 @@
                         {{ __('Back') }}
                     </a>
                 </div>
-                <form action="#">
+                @if(session()->has('errors'))
+                <div class="alert alert-danger mt-3">
+                    <ul>
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
+                <form action="{{ route('setting-information.certificate-setting.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
                     <div class="form-body">
                         <div class="row mt-3">
                             <div class="col-md-12">
                                 <label class="form-label">Page Orientation <span class="text-danger">*</span> </label>
                                 <div class="form-group mb-3">
-                                    <select name="asmnt_type" id="" class="form-control" required>
+                                    <select name="page_orientation" id="" class="form-control" required>
                                         <option value="" selected hidden>Select Page Orientation</option>
-                                        <option value="">Landscape</option>
-                                        <option value="">Potrait</option>
+                                        <option value="landscape">Landscape</option>
+                                        <option value="potrait">Potrait</option>
                                     </select>
                                 </div>
                             </div>
@@ -55,15 +65,15 @@
                             <div class="col-md-12">
                                 <label class="form-label">Certificate Background Image <span class="text-danger">*</span> </label>
                                 <div class="form-group mb-3">
-                                    <input type="file" class="form-control" name="certi_background_image" required>
+                                    <input type="file" class="form-control" name="certi_background_img" accept="image/png, image/jpeg" required>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <label class="form-label">Siganture Image <span class="text-danger">*</span> </label>
+                                <label class="form-label">Signature Image <span class="text-danger">*</span> </label>
                                 <div class="form-group mb-3">
-                                    <input type="file" class="form-control" name="signature_img" required>
+                                    <input type="file" class="form-control" name="signature_img" accept="image/png, image/jpeg" required>
                                 </div>
                             </div>
                         </div>

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->enum('page_orientation', ['potrait', 'landscape'])->nullable();
             $table->string('heading');
             $table->text('description');
-            $table->string('signature_by');
+            $table->string('signatured_by');
             $table->text('certi_background_img')->nullable()->comment('File');
             $table->text('signature_img')->nullable()->comment('File');
             $table->timestamps();

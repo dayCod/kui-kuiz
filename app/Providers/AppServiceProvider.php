@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Facades\Images\Image;
 use App\Services\Auth\Login;
 use App\Services\Auth\Logout;
+use App\Services\CertificateConfig\CreateCertificate;
 use App\Services\Users\CreateUser;
 use App\Services\Users\DeleteUser;
 use App\Services\Users\FindUser;
@@ -32,6 +34,8 @@ class AppServiceProvider extends ServiceProvider
         $this->registerService('GetTrashedUser', GetTrashedUser::class);
         $this->registerService('RestoreUser', RestoreUser::class);
         $this->registerService('ForceDelete', ForceDelete::class);
+
+        $this->registerService('CreateCertificate', CreateCertificate::class);
     }
 
     /**
@@ -44,6 +48,11 @@ class AppServiceProvider extends ServiceProvider
         //
     }
 
+    /**
+     * Function for registering the exists services.
+     *
+     * @return void
+     */
     private function registerService($serviceName, $className) {
         $this->app->singleton($serviceName, function() use ($className) {
             return new $className;

@@ -30,7 +30,9 @@ class UpdateUser extends BaseImplement implements BaseInterface
 
                 $init_model_attribute['profile_picture'] = url("storage/profile-img/$profile_picture_file");
 
-                Storage::delete('/public/profile-img/'.getFileName($find_user['data']['profile_picture']));
+                if (Storage::exists('/public/profile-img/'.getFileName($find_user['data']['profile_picture']))) {
+                    Storage::delete('/public/profile-img/'.getFileName($find_user['data']['profile_picture']));
+                }
 
                 ImageIntervention::make($dto['profile_picture'])->resize(600, 600)->save(storage_path('app/public/profile-img/'.$profile_picture_file));
 

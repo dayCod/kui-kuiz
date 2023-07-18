@@ -13,6 +13,15 @@
                         {{ __('Back') }}
                     </a>
                 </div>
+                @if(session()->has('errors'))
+                <div class="alert alert-danger mt-3">
+                    <ul>
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
                 <form action="{{ route('user-information.participant.update', ['uuid' => $user['uuid']]) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')

@@ -55,7 +55,7 @@
                             <div class="col-md-12">
                                 <label class="form-label">Certificate Background Image <span class="text-danger">*</span> </label>
                                 <div class="form-group mb-3">
-                                    <input type="file" class="form-control" name="certi_background_image" required>
+                                    <input type="file" class="form-control" name="certi_background_img" required>
                                 </div>
                             </div>
                         </div>
