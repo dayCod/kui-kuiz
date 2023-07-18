@@ -1,4 +1,4 @@
-$(() => {
+$(document).ready(function () {
     // ==============================================================
     // This is for Show more show less word
     // ==============================================================
@@ -40,11 +40,9 @@ $(() => {
 })
 
 $(document).ready(function () {
-
     // ==============================================================
     // This is for increase / decrease answers
     // ==============================================================
-
     if ( $('div.row.answer-section').length == 1 ) $('button#decrease').attr('disabled', 'disabled')
 
     $('#btn-actions-group > .btn-actions').click(function (e) {
@@ -99,6 +97,26 @@ $(document).ready(function () {
             $("div.row.answer-section").last().remove()
 
         }
+    })
+
+})
+
+
+$(document).ready(function () {
+    // ==============================================================
+    // This is for Show Image Input type file
+    // ==============================================================
+
+    $('input[type="file"].input-image-type').change(function (e) {
+        let reader = new FileReader()
+        reader.onload = function (e) {
+            $('#show-image-from-input').css({
+                'width':'233.33px',
+                'height':'233.33px'
+            }).attr('src', e.target.result)
+        }
+
+        reader.readAsDataURL(e.target.files[0])
     })
 
 })

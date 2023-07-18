@@ -40,9 +40,14 @@
                         </div>
                         <div class="row">
                             <label class="form-label">Upload Profile Picture </label>
+                            <div class="col-md-3">
+                                <div class="form-group mb-3">
+                                    <img src="{{ asset('backside/assets/images/users/1.jpg') }}" class="img-fluid show-image-from-input" alt="" id="show-image-from-input">
+                                </div>
+                            </div>
                             <div class="col-md-12">
                                 <div class="form-group mb-3">
-                                    <input type="file" class="form-control" name="profile_picture">
+                                    <input type="file" class="form-control input-image-type" name="profile_picture" accept="image/png, image/jpeg">
                                 </div>
                             </div>
                         </div>
