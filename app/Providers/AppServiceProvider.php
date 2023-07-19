@@ -6,6 +6,8 @@ use App\Facades\Images\Image;
 use App\Services\Auth\Login;
 use App\Services\Auth\Logout;
 use App\Services\CertificateConfig\CreateCertificate;
+use App\Services\CertificateConfig\FindCertificate;
+use App\Services\CertificateConfig\UpdateCertificate;
 use App\Services\Users\CreateUser;
 use App\Services\Users\DeleteUser;
 use App\Services\Users\FindUser;
@@ -36,6 +38,8 @@ class AppServiceProvider extends ServiceProvider
         $this->registerService('ForceDelete', ForceDelete::class);
 
         $this->registerService('CreateCertificate', CreateCertificate::class);
+        $this->registerService('FindCertificate', FindCertificate::class);
+        $this->registerService('UpdateCertificate', UpdateCertificate::class);
     }
 
     /**

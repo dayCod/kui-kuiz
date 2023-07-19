@@ -34,7 +34,7 @@
                                 <td class="text-center align-middle word-limiter">{{ $certificate->description }}</td>
                                 <td class="text-center align-middle">{{ $certificate->signatured_by }}</td>
                                 <td class="text-center align-middle">
-                                    <a href="{{ route('setting-information.certificate-setting.edit', ['uuid' => 'df6fdea1-10c3-474c-ae62-e63def80d0b']) }}" class="btn btn-warning btn-sm text-white">
+                                    <a href="{{ route('setting-information.certificate-setting.edit', ['uuid' => $certificate->uuid]) }}" class="btn btn-warning btn-sm text-white">
                                         <i class="fa fa-edit"></i>
                                         {{ __('Edit') }}
                                     </a>

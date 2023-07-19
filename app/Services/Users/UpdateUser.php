@@ -40,6 +40,11 @@ class UpdateUser extends BaseImplement implements BaseInterface
 
             $init_model_attribute->save();
 
+            $this->results['response_code'] = 200;
+            $this->results['success'] = true;
+            $this->results['message'] = 'User Successfully Updated';
+            $this->results['data'] = $init_model_attribute->toArray();
+
         } else {
             $this->results['response_code'] = 404;
             $this->results['success'] = false;

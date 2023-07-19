@@ -62,7 +62,11 @@ class CertificateSettingController extends Controller
      */
     public function edit($uuid)
     {
-        return view('backside.page.setting-information.certificate-config.edit');
+        $process = app('FindCertificate')->execute(['certificate_uuid' => $uuid]);
+
+        return view('backside.page.setting-information.certificate-config.edit', [
+            'certificate' => $process['data'],
+        ]);
     }
 
     /**
@@ -74,7 +78,17 @@ class CertificateSettingController extends Controller
      */
     public function update(CertificateUpdateRequest $request, $uuid)
     {
-        //
+        $process = app('UpdateCertificate')->execute([
+            'certificate_uuid' => $uuid,
+            'page_orientation' => $request->page_orientation,
+            'heading' => $request->heading,
+            'description' => $request->description,
+            'signatured_by' => $request->signatured_by,
+            'certi_background_img' => $request->file('certi_background_img'),
+            'signature_img' => $request->file('signature_img'),
+        ]);
+
+        return redirect()->route('setting-information.certificate-setting.index')->with('success', $process['message']);
     }
 
     /**

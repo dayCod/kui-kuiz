@@ -67,6 +67,6 @@ class Images
 
         ImageIntervention::make($new_image_file)->resize($this->width, $this->height)->save(storage_path("app/public/$this->path/".$formatted_picture));
 
-        return url("storage/.'$this->path'./$formatted_picture");
+        return url("storage/$this->path/$formatted_picture");
     }
 }

@@ -28,8 +28,8 @@ class CertificateUpdateRequest extends FormRequest
             'heading' => ['required', 'string', 'max:35'],
             'description' => ['required', 'string', 'max:80'],
             'signatured_by' => ['required', 'string', 'max:30'],
-            'certi_background_img' => ['required', 'mimes:png,jpeg'],
-            'signature_img' => ['required', 'mimes:png,jpeg'],
+            'certi_background_img' => ['mimes:png,jpeg'],
+            'signature_img' => ['mimes:png,jpeg'],
         ];
     }
 }
