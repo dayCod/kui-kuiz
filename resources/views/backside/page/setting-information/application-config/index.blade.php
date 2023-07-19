@@ -15,7 +15,7 @@
                             <div class="col-md-12">
                                 <label class="form-label">Application Name </label>
                                 <div class="form-group mb-3">
-                                    <input type="text" class="form-control" value="KUIKUIZ" disabled>
+                                    <input type="text" class="form-control" value="{{ $application_name }}" disabled>
                                 </div>
                             </div>
                         </div>
@@ -23,7 +23,7 @@
                             <div class="col-md-12">
                                 <label class="form-label">Application Version </label>
                                 <div class="form-group mb-3">
-                                    <input type="text" class="form-control" value="v1.0.0" disabled>
+                                    <input type="text" class="form-control" value="{{ $application_version }}" disabled>
                                 </div>
                             </div>
                         </div>
@@ -46,10 +46,6 @@
                                 <i class="fas fa-save"></i>
                                 {{ __('Save Changes') }}
                             </button>
-                            <a href="#" class="btn btn-secondary">
-                                <i class="fas fa-download"></i>
-                                {{ __('Migrate Sample / Dummy Data') }}
-                            </a>
                         </div>
                     </div>
                 </form>

@@ -33,7 +33,8 @@
                                 <td class="text-center align-middle">1</td>
                                 <td class="text-center align-middle">TKA</td>
                                 <td class="text-center align-middle">
-                                    <a href="{{ route('assessment-information.assessment-group.show-certificate-config', ['uuid' => 'df6fdea1-10c3-474c-ae62-e63def80d0b']) }}" class="btn btn-primary btn-sm">Show Assessment Setting</a>
+                                    {{-- <a href="{{ route('assessment-information.assessment-group.show-certificate-config', ['certificate_setting_uuid' => 'df6fdea1-10c3-474c-ae62-e63def80d0b']) }}" class="btn btn-primary btn-sm">Show Assessment Setting</a> --}}
+                                    -
                                 </td>
                                 <td class="text-center align-middle">ASMNT/001/010/VII/1454/2023</td>
                                 <td class="text-center align-middle">Basic Logic</td>

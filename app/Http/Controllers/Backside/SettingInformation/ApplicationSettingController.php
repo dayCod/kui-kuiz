@@ -14,6 +14,9 @@ class ApplicationSettingController extends Controller
      */
     public function index()
     {
-        return view('backside.page.setting-information.application-config.index');
+        return view('backside.page.setting-information.application-config.index', [
+            'application_name' => config('app.name'),
+            'application_version' => config('app.version'),
+        ]);
     }
 }
