@@ -23,10 +23,7 @@
                                 <th class="text-center align-middle">No</th>
                                 <th class="text-center align-middle">Page Orientation</th>
                                 <th class="text-center align-middle">Heading</th>
-                                <th class="text-center align-middle">Sub Heading 1</th>
-                                <th class="text-center align-middle">Sub Heading 2</th>
                                 <th class="text-center align-middle">Description</th>
-                                <th class="text-center align-middle">Sub Description</th>
                                 <th class="text-center align-middle">Signature By</th>
                                 <th class="text-center align-middle">Certificate Background Image</th>
                                 <th class="text-center align-middle">Signature Image</th>
@@ -35,13 +32,10 @@
                         <tbody>
                             <tr>
                                 <td class="text-center align-middle">1</td>
-                                <td class="text-center align-middle">A4</td>
-                                <td class="text-center align-middle">Heading</td>
-                                <td class="text-center align-middle">Sub Heading</td>
-                                <td class="text-center align-middle">Sub Heading 2</td>
-                                <td class="text-center align-middle">Description</td>
-                                <td class="text-center align-middle">-</td>
-                                <td class="text-center align-middle">John Doe</td>
+                                <td class="text-center align-middle">{{ $certificate['page_orientation'] }}</td>
+                                <td class="text-center align-middle">{{ $certificate['heading'] }}</td>
+                                <td class="text-center align-middle word-limiter">{{ $certificate['description'] }}</td>
+                                <td class="text-center align-middle">{{ ucfirst($certificate['signatured_by']) }}</td>
                                 <td class="text-center align-middle">
                                     <button type="button" class="btn btn-primary" data-bs-target="#primary-certi-modal" data-bs-toggle="modal">Show Background</button>
                                     <div id="primary-certi-modal" class="modal fade" tabindex="-1" role="dialog"
@@ -55,7 +49,7 @@
                                                         aria-hidden="true"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <img src="{{ asset('backside/assets/images/background/socialbg.jpg') }}" class="img-fluid img-thumbnail p-3" alt="">
+                                                    <img src="{{ $certificate['certi_background_img'] }}" class="img-fluid img-thumbnail p-3" alt="">
                                                 </div>
                                             </div><!-- /.modal-content -->
                                         </div><!-- /.modal-dialog -->
@@ -74,7 +68,7 @@
                                                         aria-hidden="true"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <img src="{{ asset('backside/assets/images/docs/signature-example.png') }}" class="img-fluid img-thumbnail p-3" style="width:466px; height:223px;" alt="">
+                                                    <img src="{{ $certificate['signature_img'] }}" class="img-fluid img-thumbnail p-3" style="width:466px; height:223px;" alt="">
                                                 </div>
                                             </div><!-- /.modal-content -->
                                         </div><!-- /.modal-dialog -->
@@ -87,10 +81,7 @@
                                 <th class="text-center align-middle">No</th>
                                 <th class="text-center align-middle">Page Orientation</th>
                                 <th class="text-center align-middle">Heading</th>
-                                <th class="text-center align-middle">Sub Heading 1</th>
-                                <th class="text-center align-middle">Sub Heading 2</th>
                                 <th class="text-center align-middle">Description</th>
-                                <th class="text-center align-middle">Sub Description</th>
                                 <th class="text-center align-middle">Signature By</th>
                                 <th class="text-center align-middle">Certificate Background Image</th>
                                 <th class="text-center align-middle">Signature Image</th>

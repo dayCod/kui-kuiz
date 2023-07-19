@@ -24,23 +24,29 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @forelse($assessment_groups as $assessment_group)
                             <tr>
-                                <td class="text-center align-middle">1</td>
-                                <td class="text-center align-middle">TKA</td>
+                                <td class="text-center align-middle">{{ $loop->iteration }}</td>
+                                <td class="text-center align-middle">{{ $assessment_group->name }}</td>
                                 <td class="text-center align-middle">
-                                    <a href="{{ route('assessment-information.assessment-group.show-certificate-config', ['uuid' => 'df6fdea1-10c3-474c-ae62-e63def80d0b']) }}" class="btn btn-primary btn-sm">Show Certificate Config</a>
+                                    <a href="{{ route('assessment-information.assessment-group.show-certificate-config', ['certificate_setting_uuid' => $assessment_group->certificateSetting->uuid]) }}" class="btn btn-primary btn-sm">Show Certificate Config</a>
                                 </td>
                                 <td class="text-center align-middle">
-                                    <a href="{{ route('assessment-information.assessment-group.edit', ['uuid' => 'df6fdea1-10c3-474c-ae62-e63def80d0b']) }}" class="btn btn-warning btn-sm text-white">
+                                    <a href="{{ route('assessment-information.assessment-group.edit', ['uuid' => $assessment_group->uuid]) }}" class="btn btn-warning btn-sm text-white">
                                         <i class="fa fa-edit"></i>
                                         {{ __('Edit') }}
                                     </a>
-                                    <a href="" class="btn btn-danger btn-sm">
+                                    <a href="{{ route('assessment-information.assessment-group.destroy', ['uuid' => $assessment_group->uuid]) }}" class="btn btn-danger btn-sm btn-delete">
                                         <i class="fa fa-trash"></i>
                                         {{ __('Delete') }}
                                     </a>
                                 </td>
                             </tr>
+                            @empty
+                            <tr>
+                                <td class="text-center" colspan="4">{{ __('Empty') }}</td>
+                            </tr>
+                            @endforelse
                         </tbody>
                         <tfoot>
                             <tr>

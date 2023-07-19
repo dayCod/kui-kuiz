@@ -13,13 +13,24 @@
                         {{ __('Back') }}
                     </a>
                 </div>
-                <form action="#">
+                @if(session()->has('errors'))
+                <div class="alert alert-danger mt-3">
+                    <ul>
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
+                <form action="{{ route('assessment-information.assessment-group.update', $asmnt_group->uuid) }}" method="POST">
+                    @csrf
+                    @method('PUT')
                     <div class="form-body">
                         <div class="row mt-3">
                             <div class="col-md-12">
                                 <label class="form-label">Group Name <span class="text-danger">*</span> </label>
                                 <div class="form-group mb-3">
-                                    <input type="text" class="form-control" placeholder="Name" name="name" value="TKA" required>
+                                    <input type="text" class="form-control" placeholder="Name" name="name" value="{{ $asmnt_group->name }}" required>
                                 </div>
                             </div>
                         </div>
@@ -29,8 +40,9 @@
                                 <div class="form-group mb-3">
                                     <select class="form-control" name="certificate_setting_id" id="" required>
                                         <option value="" hidden>Select The Certificate Configuration</option>
-                                        <option value="" selected>Value 1</option>
-                                        <option value="">Value 2</option>
+                                        @foreach($certificates as $certificate)
+                                        <option value="{{ $certificate->id }}" @selected($asmnt_group->certificate_setting_id == $certificate->id)>{{ ucfirst($certificate->page_orientation).' - '.$certificate->heading }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>

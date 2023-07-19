@@ -3,6 +3,9 @@
 namespace App\Providers;
 
 use App\Facades\Images\Image;
+use App\Services\AsmntGroup\CreateAsmntGroup;
+use App\Services\AsmntGroup\DeleteAsmntGroup;
+use App\Services\AsmntGroup\UpdateAsmntGroup;
 use App\Services\Auth\Login;
 use App\Services\Auth\Logout;
 use App\Services\CertificateConfig\CreateCertificate;
@@ -42,6 +45,10 @@ class AppServiceProvider extends ServiceProvider
         $this->registerService('FindCertificate', FindCertificate::class);
         $this->registerService('UpdateCertificate', UpdateCertificate::class);
         $this->registerService('DeleteCertificate', DeleteCertificate::class);
+
+        $this->registerService('CreateAsmntGroup', CreateAsmntGroup::class);
+        $this->registerService('UpdateAsmntGroup', UpdateAsmntGroup::class);
+        $this->registerService('DeleteAsmntGroup', DeleteAsmntGroup::class);
     }
 
     /**
