@@ -1,8 +1,17 @@
 <?php
 
-function getFileName(string $file_url)
-{
-    $split_string = explode('/', $file_url);
+/*
+|--------------------------------------------------------------------------
+| Get File Name From Formatted Image URL
+|--------------------------------------------------------------------------
+*/
+if (!function_exists('getFileName')) {
 
-    return $split_string[(count($split_string) - 1)];
+    function getFileName(string $file_url)
+    {
+        $split_string = explode('/', $file_url);
+
+        return $split_string[(count($split_string) - 1)];
+    }
+
 }
