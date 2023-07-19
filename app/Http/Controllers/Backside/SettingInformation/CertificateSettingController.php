@@ -55,6 +55,21 @@ class CertificateSettingController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param  string  $uuid
+     * @return \Illuminate\Http\Response
+     */
+    public function show($uuid)
+    {
+        $process = app('FindCertificate')->execute(['certificate_uuid' => $uuid]);
+
+        return view('backside.page.setting-information.certificate-config.detail', [
+            'certificate' => $process['data'],
+        ]);
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  string  $uuid

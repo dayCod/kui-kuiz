@@ -72,7 +72,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <label class="form-label">Siganture Image </label>
+                                <label class="form-label">Signature Image </label>
                                 <div class="form-group mb-3">
                                     <input type="file" class="form-control" name="signature_img">
                                 </div>

@@ -172,6 +172,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
             Route::get('/', 'index')->name('index');
             Route::get('/create', 'create')->name('create');
             Route::post('/create', 'store')->name('store');
+            Route::get('/{uuid}', 'show')->name('show');
             Route::get('/{uuid}/edit', 'edit')->name('edit');
             Route::put('/{uuid}/edit', 'update')->name('update');
             Route::delete('/{uuid}/destroy', 'destroy')->name('destroy');
