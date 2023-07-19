@@ -12,14 +12,12 @@
                         <div>
                             <div class="d-inline-flex align-items-center">
                                 <h2 class="text-dark mb-1 font-weight-medium">236</h2>
-                                <span
-                                    class="badge bg-primary font-12 text-white font-weight-medium rounded-pill ms-2 d-lg-block d-md-none">+18.33%</span>
                             </div>
                             <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Participants Total
                             </h6>
                         </div>
                         <div class="ms-auto mt-md-3 mt-lg-0">
-                            <span class="opacity-7 text-muted"><i data-feather="user-plus"></i></span>
+                            <span class="opacity-7 text-muted"><i data-feather="users"></i></span>
                         </div>
                     </div>
                 </div>
@@ -30,13 +28,12 @@
                 <div class="card-body">
                     <div class="d-flex align-items-center">
                         <div>
-                            <h2 class="text-dark mb-1 w-100 text-truncate font-weight-medium"><sup
-                                    class="set-doller">$</sup>18,306</h2>
+                            <h2 class="text-dark mb-1 w-100 text-truncate font-weight-medium">18,306</h2>
                             <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Visitors Total
                             </h6>
                         </div>
                         <div class="ms-auto mt-md-3 mt-lg-0">
-                            <span class="opacity-7 text-muted"><i data-feather="dollar-sign"></i></span>
+                            <span class="opacity-7 text-muted"><i data-feather="users"></i></span>
                         </div>
                     </div>
                 </div>
@@ -49,14 +46,12 @@
                         <div>
                             <div class="d-inline-flex align-items-center">
                                 <h2 class="text-dark mb-1 font-weight-medium">1538</h2>
-                                <span
-                                    class="badge bg-danger font-12 text-white font-weight-medium rounded-pill ms-2 d-md-none d-lg-block">-18.33%</span>
                             </div>
                             <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Assessment Group Total
                             </h6>
                         </div>
                         <div class="ms-auto mt-md-3 mt-lg-0">
-                            <span class="opacity-7 text-muted"><i data-feather="file-plus"></i></span>
+                            <span class="opacity-7 text-muted"><i data-feather="users"></i></span>
                         </div>
                     </div>
                 </div>
@@ -103,31 +98,17 @@
                 <div class="card-body">
                     <h4 class="card-title">Recent Activity</h4>
                     <div class="mt-4 activity">
-                        <div class="d-flex align-items-start border-left-line pb-3">
+                        <div class="d-flex align-items-start border-left-line">
                             <div>
-                                <a href="javascript:void(0)" class="btn btn-info btn-circle mb-2 btn-item">
-                                    <i data-feather="shopping-cart"></i>
+                                <a href="javascript:void(0)" class="btn btn-cyan btn-circle mb-2 btn-item">
+                                    <i data-feather="bell"></i>
                                 </a>
                             </div>
                             <div class="ms-3 mt-2">
-                                <h5 class="text-dark font-weight-medium mb-2">New Product Sold!</h5>
-                                <p class="font-14 mb-2 text-muted">John Musa just purchased <br> Cannon 5M
-                                    Camera.
-                                </p>
-                                <span class="font-weight-light font-14 text-muted">10 Minutes Ago</span>
-                            </div>
-                        </div>
-                        <div class="d-flex align-items-start border-left-line pb-3">
-                            <div>
-                                <a href="javascript:void(0)" class="btn btn-danger btn-circle mb-2 btn-item">
-                                    <i data-feather="message-square"></i>
-                                </a>
-                            </div>
-                            <div class="ms-3 mt-2">
-                                <h5 class="text-dark font-weight-medium mb-2">New Support Ticket</h5>
-                                <p class="font-14 mb-2 text-muted">Richardson just create support <br>
-                                    ticket</p>
-                                <span class="font-weight-light font-14 text-muted">25 Minutes Ago</span>
+                                <h5 class="text-dark font-weight-medium mb-2">Notification
+                                </h5>
+                                <p class="font-14 mb-2 text-muted">Create Assessment Group from {John Schaap Doe}</p>
+                                <span class="font-weight-light font-14 mb-1 d-block text-muted">{Now.}</span>
                             </div>
                         </div>
                         <div class="d-flex align-items-start border-left-line">
@@ -137,15 +118,29 @@
                                 </a>
                             </div>
                             <div class="ms-3 mt-2">
-                                <h5 class="text-dark font-weight-medium mb-2">Notification Pending Order!
+                                <h5 class="text-dark font-weight-medium mb-2">Notification
                                 </h5>
-                                <p class="font-14 mb-2 text-muted">One Pending order from Ryne <br> Doe</p>
-                                <span class="font-weight-light font-14 mb-1 d-block text-muted">2 Hours
-                                    Ago</span>
-                                <a href="javascript:void(0)" class="font-14 border-bottom pb-1 border-info">Load More</a>
+                                <p class="font-14 mb-2 text-muted">Create Assessment Group from {John Schaap Doe}</p>
+                                <span class="font-weight-light font-14 mb-1 d-block text-muted">{3 Minutes Ago.}</span>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-start border-left-line">
+                            <div>
+                                <a href="javascript:void(0)" class="btn btn-cyan btn-circle mb-2 btn-item">
+                                    <i data-feather="bell"></i>
+                                </a>
+                            </div>
+                            <div class="ms-3 mt-2">
+                                <h5 class="text-dark font-weight-medium mb-2">Notification
+                                </h5>
+                                <p class="font-14 mb-2 text-muted">Create Assessment Group from {John Schaap Doe}</p>
+                                <span class="font-weight-light font-14 mb-1 d-block text-muted">{5 Minutes Ago.}</span>
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="card-footer text-center">
+                    <a href="#">{{ __('Load More') }}</a>
                 </div>
             </div>
         </div>
