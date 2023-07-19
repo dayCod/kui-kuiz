@@ -4,10 +4,9 @@ namespace App\Services\Users;
 
 use App\Base\BaseImplement;
 use App\Base\BaseInterface;
+use App\Functions\Images;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
-use Intervention\Image\Facades\Image as ImageIntervention;
 
 class UpdateUser extends BaseImplement implements BaseInterface
 {
@@ -24,19 +23,7 @@ class UpdateUser extends BaseImplement implements BaseInterface
 
             if (!is_null($dto['change_password'])) $init_model_attribute['password'] = Hash::make($dto['change_password']);
 
-            if (!is_null($dto['profile_picture'])) {
-
-                $profile_picture_file = 'profile-'.time().'.'.$dto['profile_picture']->getClientOriginalExtension();
-
-                $init_model_attribute['profile_picture'] = url("storage/profile-img/$profile_picture_file");
-
-                if (Storage::exists('/public/profile-img/'.getFileName($find_user['data']['profile_picture']))) {
-                    Storage::delete('/public/profile-img/'.getFileName($find_user['data']['profile_picture']));
-                }
-
-                ImageIntervention::make($dto['profile_picture'])->resize(600, 600)->save(storage_path('app/public/profile-img/'.$profile_picture_file));
-
-            }
+            if (!is_null($dto['profile_picture'])) $init_model_attribute['profile_picture'] = (new Images('profile', 'profile-img', 600, 600))->storeToStorage($dto['profile_picture'], $find_user['data']['profile_picture']);
 
             $init_model_attribute->save();
 
