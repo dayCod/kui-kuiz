@@ -33,7 +33,6 @@ Password: password
 | PHP Version      | ^8.0.2 |
 |------------------|--------|
 | Database         | MySQL  |   
-|------------------|--------|
 | Laravel Version  | 9      |
 
 ## Contributing
