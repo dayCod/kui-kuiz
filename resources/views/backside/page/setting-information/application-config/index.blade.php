@@ -34,7 +34,7 @@
                                     <select class="form-control">
                                         <option value="" selected hidden>Select Application Locale</option>
                                         <option value="">id-ID</option>
-                                        <option value="">en-EN</option>
+                                        <option value="" selected>en-EN</option>
                                     </select>
                                 </div>
                             </div>
