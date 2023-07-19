@@ -114,6 +114,8 @@ class CertificateSettingController extends Controller
      */
     public function destroy($uuid)
     {
-        //
+        $process = app('DeleteCertificate')->execute(['certificate_uuid' => $uuid]);
+
+        return response()->json(['success' => $process['message']], 200);
     }
 }
