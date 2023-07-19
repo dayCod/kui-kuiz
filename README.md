@@ -31,7 +31,6 @@ Password: password
 
 ## System That Used On this Project
 | PHP Version      | ^8.0.2 |
-|------------------|--------|
 | Database         | MySQL  |   
 | Laravel Version  | 9      |
 
