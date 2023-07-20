@@ -6,6 +6,9 @@ use App\Facades\Images\Image;
 use App\Services\AsmntGroup\CreateAsmntGroup;
 use App\Services\AsmntGroup\DeleteAsmntGroup;
 use App\Services\AsmntGroup\UpdateAsmntGroup;
+use App\Services\Assessment\CreateAssessment;
+use App\Services\Assessment\DeleteAssessment;
+use App\Services\Assessment\UpdateAssessment;
 use App\Services\Auth\Login;
 use App\Services\Auth\Logout;
 use App\Services\CertificateConfig\CreateCertificate;
@@ -49,6 +52,10 @@ class AppServiceProvider extends ServiceProvider
         $this->registerService('CreateAsmntGroup', CreateAsmntGroup::class);
         $this->registerService('UpdateAsmntGroup', UpdateAsmntGroup::class);
         $this->registerService('DeleteAsmntGroup', DeleteAsmntGroup::class);
+
+        $this->registerService('CreateAssessment', CreateAssessment::class);
+        $this->registerService('UpdateAssessment', UpdateAssessment::class);
+        $this->registerService('DeleteAssessment', DeleteAssessment::class);
     }
 
     /**

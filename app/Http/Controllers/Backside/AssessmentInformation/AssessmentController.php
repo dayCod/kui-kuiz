@@ -3,7 +3,13 @@
 namespace App\Http\Controllers\Backside\AssessmentInformation;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Assessment\AssessmentStoreRequest;
+use App\Http\Requests\Assessment\AssessmentUpdateRequest;
+use App\Models\AsmntGroup;
+use App\Models\AsmntSetting;
+use App\Models\Assessment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class AssessmentController extends Controller
 {
@@ -14,7 +20,9 @@ class AssessmentController extends Controller
      */
     public function index()
     {
-        return view('backside.page.assessment-information.assessment.index');
+        $assessments = Assessment::latest()->get();
+
+        return view('backside.page.assessment-information.assessment.index', compact('assessments'));
     }
 
     /**
@@ -24,7 +32,10 @@ class AssessmentController extends Controller
      */
     public function create()
     {
-        return view('backside.page.assessment-information.assessment.create');
+        $asmnt_groups = AsmntGroup::latest()->get();
+        $asmnt_settings = AsmntSetting::latest()->get();
+
+        return view('backside.page.assessment-information.assessment.create', compact('asmnt_groups', 'asmnt_settings'));
     }
 
     /**
@@ -33,9 +44,20 @@ class AssessmentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AssessmentStoreRequest $request)
     {
-        //
+        $process = app('CreateAssessment')->execute([
+            'uuid' => Str::uuid(),
+            'asmnt_group_id' => $request->asmnt_group_id,
+            'asmnt_setting_id' => $request->asmnt_setting_id,
+            'asmnt_serial_number' => 'ASMNT/001/010/VII/1454/2023',
+            'asmnt_name' => $request->asmnt_name,
+            'time_open' => $request->time_open,
+            'time_close' => $request->time_close,
+            'asmnt_time_test' => $request->asmnt_time_test,
+        ]);
+
+        return redirect()->route('assessment-information.manage-assessment.index')->with('success', $process['message']);
     }
 
     /**
@@ -57,7 +79,9 @@ class AssessmentController extends Controller
      */
     public function edit($uuid)
     {
-        return view('backside.page.assessment-information.assessment.edit');
+        $assessment = Assessment::where('uuid', $uuid)->first();
+
+        return view('backside.page.assessment-information.assessment.edit', compact('assessment'));
     }
 
     /**
@@ -67,9 +91,19 @@ class AssessmentController extends Controller
      * @param  string  $uuid
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $uuid)
+    public function update(AssessmentUpdateRequest $request, $uuid)
     {
-        //
+        $process = app('UpdateAssessment')->execute([
+            'assessment_uuid' => $uuid,
+            'asmnt_group_id' => $request->asmnt_group_id,
+            'asmnt_setting_id' => $request->asmnt_setting_id,
+            'asmnt_name' => $request->asmnt_name,
+            'time_open' => $request->time_open,
+            'time_close' => $request->time_close,
+            'asmnt_time_test' => $request->asmnt_time_test,
+        ]);
+
+        return redirect()->route('assessment-information.manage-assessment.index')->with('success', $process['message']);
     }
 
     /**
@@ -80,6 +114,8 @@ class AssessmentController extends Controller
      */
     public function destroy($uuid)
     {
-        //
+        $process = app('DeleteAssessment')->execute(['assessment_uuid' => $uuid]);
+
+        return response()->json(['success' => $process['message']], 200);
     }
 }

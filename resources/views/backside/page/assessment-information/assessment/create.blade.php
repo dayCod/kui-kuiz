@@ -13,7 +13,17 @@
                         {{ __('Back') }}
                     </a>
                 </div>
-                <form action="#">
+                @if(session()->has('errors'))
+                <div class="alert alert-danger mt-3">
+                    <ul>
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
+                <form action="{{ route('assessment-information.manage-assessment.store') }}" method="POST">
+                    @csrf
                     <div class="form-body">
                         <div class="row mt-3">
                             <div class="col-md-12">
@@ -21,8 +31,9 @@
                                 <div class="form-group mb-3">
                                     <select class="form-control" name="asmnt_group_id" id="" required>
                                         <option value="" selected hidden>Select The Assessment Group</option>
-                                        <option value="">Value 1</option>
-                                        <option value="">Value 2</option>
+                                        @foreach($asmnt_groups as $asmnt_group)
+                                        <option value="{{ $asmnt_group->id }}">{{ $asmnt_group->name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -33,8 +44,9 @@
                                 <div class="form-group mb-3">
                                     <select class="form-control" name="asmnt_setting_id" id="" required>
                                         <option value="" selected hidden>Select The Assessment Setting</option>
-                                        <option value="">Value 1</option>
-                                        <option value="">Value 2</option>
+                                        @foreach($asmnt_settings as $asmnt_setting)
+                                        <option value="{{ $asmnt_setting->id }}">{{ ucfirst($asmnt_setting->asmnt_type).' - '.ucfirst($asmnt_setting->check_type) }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>

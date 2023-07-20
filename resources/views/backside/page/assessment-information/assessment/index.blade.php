@@ -29,16 +29,16 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @forelse($assessments as $assessment)
                             <tr>
-                                <td class="text-center align-middle">1</td>
-                                <td class="text-center align-middle">TKA</td>
+                                <td class="text-center align-middle">{{ $loop->iteration }}</td>
+                                <td class="text-center align-middle">{{ $assessment->asmntGroup->name }}</td>
                                 <td class="text-center align-middle">
-                                    {{-- <a href="{{ route('assessment-information.assessment-group.show-certificate-config', ['certificate_setting_uuid' => 'df6fdea1-10c3-474c-ae62-e63def80d0b']) }}" class="btn btn-primary btn-sm">Show Assessment Setting</a> --}}
-                                    -
+                                    {{ ucfirst($assessment->asmntSetting->asmnt_type).' - '.ucfirst($assessment->asmntSetting->check_type) }}
                                 </td>
-                                <td class="text-center align-middle">ASMNT/001/010/VII/1454/2023</td>
-                                <td class="text-center align-middle">Basic Logic</td>
-                                <td class="text-center align-middle">90 (Minutes)</td>
+                                <td class="text-center align-middle">{{ $assessment->asmnt_serial_number }}</td>
+                                <td class="text-center align-middle">{{ $assessment->asmnt_name }}</td>
+                                <td class="text-center align-middle">{{ $assessment->asmnt_time_test }}</td>
                                 <td class="text-center align-middle">2023-07-10 10:14:55</td>
                                 <td class="text-center align-middle">2023-07-10 11:14:55</td>
                                 <td class="text-center align-middle">
@@ -56,6 +56,11 @@
                                     </a>
                                 </td>
                             </tr>
+                            @empty
+                            <tr>
+                                <td class="text-center" colspan="9">{{ __('Empty') }}</td>
+                            </tr>
+                            @endforelse
                         </tbody>
                         <tfoot>
                             <tr>
