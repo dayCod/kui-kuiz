@@ -77,7 +77,7 @@ class SampleDataSeeder extends Seeder
         if (AsmntSetting::count() > 0) AsmntSetting::delete();
 
         $insert = AsmntSetting::insert([
-            ['uuid' => Str::uuid(), 'asmnt_type' => 'score', 'check_type' => 'manual'],
+            ['uuid' => Str::uuid(), 'asmnt_type' => 'score', 'check_type' => 'auto'],
             ['uuid' => Str::uuid(), 'asmnt_type' => 'corrections', 'check_type' => 'auto'],
         ]);
 
