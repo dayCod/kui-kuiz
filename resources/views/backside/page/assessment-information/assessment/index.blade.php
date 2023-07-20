@@ -46,11 +46,11 @@
                                         <i class="fas fa-file"></i>
                                         {{ __('Add Question') }}
                                     </a>
-                                    <a href="{{ route('assessment-information.manage-assessment.edit', ['uuid' => 'df6fdea1-10c3-474c-ae62-e63def80d0b']) }}" class="btn btn-warning btn-sm text-white">
+                                    <a href="{{ route('assessment-information.manage-assessment.edit', ['uuid' => $assessment->uuid]) }}" class="btn btn-warning btn-sm text-white">
                                         <i class="fa fa-edit"></i>
                                         {{ __('Edit') }}
                                     </a>
-                                    <a href="" class="btn btn-danger btn-sm">
+                                    <a href="{{ route('assessment-information.manage-assessment.destroy', ['uuid' => $assessment->uuid]) }}" class="btn btn-danger btn-sm btn-delete">
                                         <i class="fa fa-trash"></i>
                                         {{ __('Delete') }}
                                     </a>

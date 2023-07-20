@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('assessments', function (Blueprint $table) {
             $table->id();
             $table->uuid();
-            $table->foreignId('asmt_group_id')->constrained('asmnt_groups')
+            $table->foreignId('asmnt_group_id')->constrained('asmnt_groups')
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
             $table->foreignId('asmnt_setting_id')->constrained('asmnt_settings')

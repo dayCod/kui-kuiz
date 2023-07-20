@@ -5,6 +5,7 @@ namespace App\Services\Assessment;
 use App\Base\BaseImplement;
 use App\Base\BaseInterface;
 use App\Models\Assessment;
+use Carbon\Carbon;
 
 class CreateAssessment extends BaseImplement implements BaseInterface
 {
@@ -16,8 +17,8 @@ class CreateAssessment extends BaseImplement implements BaseInterface
             'asmnt_setting_id' => $dto['asmnt_setting_id'],
             'asmnt_serial_number' => $dto['asmnt_serial_number'],
             'asmnt_name' => $dto['asmnt_name'],
-            'time_open' => $dto['time_open'],
-            'time_close' => $dto['time_close'],
+            'time_open' => Carbon::parse($dto['time_open'])->format('Y-m-d H:i:s'),
+            'time_close' => Carbon::parse($dto['time_close'])->format('Y-m-d H:i:s'),
             'asmnt_time_test' => $dto['asmnt_time_test'],
         ]);
 

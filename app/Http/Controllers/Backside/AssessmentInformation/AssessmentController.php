@@ -8,6 +8,7 @@ use App\Http\Requests\Assessment\AssessmentUpdateRequest;
 use App\Models\AsmntGroup;
 use App\Models\AsmntSetting;
 use App\Models\Assessment;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -79,9 +80,11 @@ class AssessmentController extends Controller
      */
     public function edit($uuid)
     {
+        $asmnt_groups = AsmntGroup::latest()->get();
+        $asmnt_settings = AsmntSetting::latest()->get();
         $assessment = Assessment::where('uuid', $uuid)->first();
 
-        return view('backside.page.assessment-information.assessment.edit', compact('assessment'));
+        return view('backside.page.assessment-information.assessment.edit', compact('assessment', 'asmnt_groups', 'asmnt_settings'));
     }
 
     /**

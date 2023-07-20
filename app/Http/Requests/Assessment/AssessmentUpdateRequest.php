@@ -27,8 +27,8 @@ class AssessmentUpdateRequest extends FormRequest
             'asmnt_group_id' => ['required'],
             'asmnt_setting_id' => ['required'],
             'asmnt_name' => ['required', 'string', 'max:255'],
-            'time_open' => ['required'],
-            'time_close' => ['required'],
+            'time_open' => ['required', 'date_format:Y-m-d\TH:i'],
+            'time_close' => ['required', 'date_format:Y-m-d\TH:i', 'after:time_open'],
             'asmnt_time_test' => ['required', 'integer', 'min:1'],
         ];
     }
