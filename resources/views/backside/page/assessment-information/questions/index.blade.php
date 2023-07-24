@@ -28,10 +28,11 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @forelse($assessment_questions as $asmnt_question)
                             <tr>
-                                <td class="text-center align-middle">1</td>
-                                <td class="text-center align-middle">What is your hobby ?</td>
-                                <td class="text-center align-middle">5</td>
+                                <td class="text-center align-middle">{{ $loop->iteration }}</td>
+                                <td class="text-center align-middle">{{ $asmnt_question->question }}</td>
+                                <td class="text-center align-middle">{{ $asmnt_question->has_answers_count }}</td>
                                 <td class="text-center align-middle">
                                     <a href="{{ route('assessment-information.manage-assessment.questions.show', ['assessment_uuid' => 'df6fdea1-10c3-474c-ae62-e63def80d0b', 'question_uuid' => 'df6fdea1-10c3-474c-ae62-e63def80d0b']) }}" class="btn btn-success btn-sm text-white">
                                         <i class="fa fa-eye"></i>
@@ -47,6 +48,11 @@
                                     </a>
                                 </td>
                             </tr>
+                            @empty
+                            <tr>
+                                <td class="text-center" colspan="4">{{ __('Empty') }}</td>
+                            </tr>
+                            @endforelse
                         </tbody>
                         <tfoot>
                             <tr>

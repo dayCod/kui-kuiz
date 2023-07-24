@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backside\AssessmentInformation;
 
 use App\Http\Controllers\Controller;
+use App\Models\AsmntQuestion;
 use App\Models\Assessment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -18,7 +19,9 @@ class AssessmentQuestionController extends Controller
      */
     public function index($assessment_uuid)
     {
-        return view('backside.page.assessment-information.questions.index', compact('assessment_uuid'));
+        $assessment_questions = AsmntQuestion::withCount('hasAnswers')->latest()->get();
+
+        return view('backside.page.assessment-information.questions.index', compact('assessment_uuid', 'assessment_questions'));
     }
 
     /**
