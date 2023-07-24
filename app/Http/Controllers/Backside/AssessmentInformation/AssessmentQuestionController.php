@@ -19,7 +19,7 @@ class AssessmentQuestionController extends Controller
      */
     public function index($assessment_uuid)
     {
-        $assessment_questions = AsmntQuestion::withCount('hasAnswers')->latest()->get();
+        $assessment_questions = AsmntQuestion::withCount('hasAnswers')->get();
 
         return view('backside.page.assessment-information.questions.index', compact('assessment_uuid', 'assessment_questions'));
     }
@@ -80,7 +80,10 @@ class AssessmentQuestionController extends Controller
      */
     public function show($assessment_uuid, $question_uuid)
     {
-        return view('backside.page.assessment-information.questions.detail');
+        $assessment = Assessment::where('uuid', $assessment_uuid)->first();
+        $assessment_question = AsmntQuestion::where('uuid', $question_uuid)->first();
+
+        return view('backside.page.assessment-information.questions.detail', compact('assessment_uuid', 'assessment', 'assessment_question'));
     }
 
     /**
