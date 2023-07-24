@@ -74,7 +74,8 @@ class AssessmentQuestionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  string  $uuid
+     * @param  string  $assessment_uuid
+     * @param  string  $question_uuid
      * @return \Illuminate\Http\Response
      */
     public function show($assessment_uuid, $question_uuid)
@@ -85,7 +86,8 @@ class AssessmentQuestionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  string  $uuid
+     * @param  string  $assessment_uuid
+     * @param  string  $question_uuid
      * @return \Illuminate\Http\Response
      */
     public function edit($assessment_uuid, $question_uuid)

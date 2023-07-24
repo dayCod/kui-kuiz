@@ -34,11 +34,11 @@
                                 <td class="text-center align-middle">{{ $asmnt_question->question }}</td>
                                 <td class="text-center align-middle">{{ $asmnt_question->has_answers_count }}</td>
                                 <td class="text-center align-middle">
-                                    <a href="{{ route('assessment-information.manage-assessment.questions.show', ['assessment_uuid' => 'df6fdea1-10c3-474c-ae62-e63def80d0b', 'question_uuid' => 'df6fdea1-10c3-474c-ae62-e63def80d0b']) }}" class="btn btn-success btn-sm text-white">
+                                    <a href="{{ route('assessment-information.manage-assessment.questions.show', ['assessment_uuid' => $assessment_uuid, 'question_uuid' => $asmnt_question->uuid]) }}" class="btn btn-success btn-sm text-white">
                                         <i class="fa fa-eye"></i>
                                         {{ __('Detail') }}
                                     </a>
-                                    <a href="{{ route('assessment-information.manage-assessment.questions.edit', ['assessment_uuid' => 'df6fdea1-10c3-474c-ae62-e63def80d0b', 'question_uuid' => 'df6fdea1-10c3-474c-ae62-e63def80d0b']) }}" class="btn btn-warning btn-sm text-white">
+                                    <a href="{{ route('assessment-information.manage-assessment.questions.edit', ['assessment_uuid' => $assessment_uuid, 'question_uuid' => $asmnt_question->uuid]) }}" class="btn btn-warning btn-sm text-white">
                                         <i class="fa fa-edit"></i>
                                         {{ __('Edit') }}
                                     </a>
