@@ -42,7 +42,7 @@
                                 <td class="text-center align-middle">2023-07-10 10:14:55</td>
                                 <td class="text-center align-middle">2023-07-10 11:14:55</td>
                                 <td class="text-center align-middle">
-                                    <a href="{{ route('assessment-information.manage-assessment.questions.index', ['assessment_uuid' => 'df6fdea1-10c3-474c-ae62-e63def80d0b']) }}" class="btn btn-success btn-sm text-white">
+                                    <a href="{{ route('assessment-information.manage-assessment.questions.index', ['assessment_uuid' => $assessment->uuid]) }}" class="btn btn-success btn-sm text-white">
                                         <i class="fas fa-file"></i>
                                         {{ __('Add Question') }}
                                     </a>

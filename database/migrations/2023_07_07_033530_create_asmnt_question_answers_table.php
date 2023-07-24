@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('alphabet');
             $table->text('answer');
             $table->boolean('is_correct')->nullable();
-            $table->boolean('score')->nullable();
+            $table->bigInteger('score')->nullable();
             $table->timestamps();
         });
     }
