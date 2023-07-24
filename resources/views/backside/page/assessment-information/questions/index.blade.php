@@ -7,7 +7,7 @@
             <div class="card-body">
                 <div class="d-flex align-items-center justify-content-between mb-4">
                     <div>
-                        <a href="{{ route('assessment-information.manage-assessment.questions.create', ['assessment_uuid' => 'df6fdea1-10c3-474c-ae62-e63def80d0b']) }}" class="btn btn-info">
+                        <a href="{{ route('assessment-information.manage-assessment.questions.create', ['assessment_uuid' => $assessment_uuid]) }}" class="btn btn-info">
                             <i class="fa fa-plus-circle"></i>
                             {{ __('Create') }}
                         </a>

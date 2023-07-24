@@ -13,7 +13,9 @@
                         {{ __('Back') }}
                     </a>
                 </div>
-                <form action="#">
+                <form action="{{ route('assessment-information.manage-assessment.questions.store', ['assessment_uuid' => $assessment_uuid]) }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="asmnt_type" value="{{ $assessment->asmntSetting->asmnt_type }}">
                     <div class="form-body">
                         <div class="row mt-3">
                             <div class="col-md-12">
@@ -27,31 +29,34 @@
                             <div class="col-md-1">
                                 <label class="form-label"># </label>
                                 <div class="form-group mb-3">
-                                    <input type="text" class="form-control" placeholder="Alphabet" name="alphabet" value="A" style="cursor: not-allowed" readonly>
+                                    <input type="text" class="form-control" placeholder="Alphabet" name="alphabet[]" value="A" style="cursor: not-allowed" readonly>
                                 </div>
                             </div>
                             <div class="col-md-7">
                                 <label class="form-label">Answer <span class="text-danger">*</span> </label>
                                 <div class="form-group mb-3">
-                                    <input type="text" class="form-control" placeholder="Answer" name="answer" required>
+                                    <input type="text" class="form-control" placeholder="Answer" name="answer[]" required>
                                 </div>
                             </div>
+                            @if ($assessment->asmntSetting->asmnt_type == "corrections")
                             <div class="col-md-4">
                                 <label class="form-label">Is Correct ? <span class="text-danger">*</span> </label>
                                 <div class="form-group mb-3">
-                                    <select class="form-control" name="is_correct" required>
+                                    <select class="form-control" name="is_correct[]" required>
                                         <option value="" selected hidden>Select The Corrections</option>
                                         <option value="">Yes, Correct Answer!</option>
                                         <option value="">No, It's Not Correct!</option>
                                     </select>
                                 </div>
                             </div>
-                            {{-- <div class="col-md-4">
+                            @elseif ($assessment->asmntSetting->asmnt_type == "score")
+                            <div class="col-md-4">
                                 <label class="form-label">Score <span class="text-danger">*</span> </label>
                                 <div class="form-group mb-3">
-                                    <input type="number" min="1" class="form-control" placeholder="Score" name="score" required>
+                                    <input type="number" min="1" class="form-control" placeholder="Score" name="score[]" required>
                                 </div>
-                            </div> --}}
+                            </div>
+                            @endif
                         </div>
                         <div id="answer-section-divider"></div>
                     </div>

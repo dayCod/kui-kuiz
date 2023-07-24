@@ -3,6 +3,9 @@
 namespace App\Providers;
 
 use App\Facades\Images\Image;
+use App\Services\Answer\CreateAnswer;
+use App\Services\Answer\DeleteAnswer;
+use App\Services\Answer\UpdateAnswer;
 use App\Services\AsmntGroup\CreateAsmntGroup;
 use App\Services\AsmntGroup\DeleteAsmntGroup;
 use App\Services\AsmntGroup\UpdateAsmntGroup;
@@ -15,6 +18,12 @@ use App\Services\CertificateConfig\CreateCertificate;
 use App\Services\CertificateConfig\DeleteCertificate;
 use App\Services\CertificateConfig\FindCertificate;
 use App\Services\CertificateConfig\UpdateCertificate;
+use App\Services\Question\CreateQuestion;
+use App\Services\Question\DeleteQuestion;
+use App\Services\Question\UpdateQuestion;
+use App\Services\QuestionAnswer\CreateQuestionAnswer;
+use App\Services\QuestionAnswer\DeleteQuestionAnswer;
+use App\Services\QuestionAnswer\UpdateQuestionAnswer;
 use App\Services\Users\CreateUser;
 use App\Services\Users\DeleteUser;
 use App\Services\Users\FindUser;
@@ -56,6 +65,18 @@ class AppServiceProvider extends ServiceProvider
         $this->registerService('CreateAssessment', CreateAssessment::class);
         $this->registerService('UpdateAssessment', UpdateAssessment::class);
         $this->registerService('DeleteAssessment', DeleteAssessment::class);
+
+        $this->registerService('CreateQuestion', CreateQuestion::class);
+        $this->registerService('UpdateQuestion', UpdateQuestion::class);
+        $this->registerService('DeleteQuestion', DeleteQuestion::class);
+
+        $this->registerService('CreateAnswer', CreateAnswer::class);
+        $this->registerService('UpdateAnswer', UpdateAnswer::class);
+        $this->registerService('DeleteAnswer', DeleteAnswer::class);
+
+        $this->registerService('CreateQuestionAnswer', CreateQuestionAnswer::class);
+        $this->registerService('UpdateQuestionAnswer', UpdateQuestionAnswer::class);
+        $this->registerService('DeleteQuestionAnswer', DeleteQuestionAnswer::class);
     }
 
     /**
