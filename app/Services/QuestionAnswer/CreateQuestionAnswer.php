@@ -4,7 +4,6 @@ namespace App\Services\QuestionAnswer;
 
 use App\Base\BaseImplement;
 use App\Base\BaseInterface;
-use Illuminate\Support\Str;
 
 class CreateQuestionAnswer extends BaseImplement implements BaseInterface
 {

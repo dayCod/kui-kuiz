@@ -53,6 +53,7 @@ class AssessmentQuestionController extends Controller
         DB::beginTransaction();
 
         try {
+
             $process = app('CreateQuestionAnswer')->execute([
                 'asmnt_question_uuid' => Str::uuid(),
                 'asmnt_id' => $assessment->id,
@@ -95,7 +96,10 @@ class AssessmentQuestionController extends Controller
      */
     public function edit($assessment_uuid, $question_uuid)
     {
-        return view('backside.page.assessment-information.questions.edit');
+        $assessment = Assessment::where('uuid', $assessment_uuid)->first();
+        $assessment_question = AsmntQuestion::where('uuid', $question_uuid)->first();
+
+        return view('backside.page.assessment-information.questions.edit', compact('assessment_uuid', 'question_uuid', 'assessment', 'assessment_question'));
     }
 
     /**
@@ -107,7 +111,30 @@ class AssessmentQuestionController extends Controller
      */
     public function update(Request $request, $assessment_uuid, $question_uuid)
     {
-        //
+        $process = ['success' => false, 'message' => 'Throwed Exception'];
+
+        $assessment_question = AsmntQuestion::where('uuid', $question_uuid)->first();
+
+        DB::beginTransaction();
+
+        try {
+
+            $process = app('UpdateQuestionAnswer')->execute([
+                'asmnt_question_uuid' => $question_uuid,
+                'question' => $request->question,
+                'asmnt_question_answer_uuid' => $assessment_question->hasAnswers->toArray(), // array
+                'alphabet' => $request->alphabet,
+                'answer' => $request->answer,
+                'is_correct' => $request->is_correct,
+                'score' => $request->score,
+            ]);
+            // return $process;
+
+            DB::commit();
+
+        } catch (\Exception $err) { DB::rollBack(); }
+
+        return redirect()->route('assessment-information.manage-assessment.questions.index', ['assessment_uuid' => $assessment_uuid])->with((($process['success']) ? 'success' : 'fail'), $process['message']);
     }
 
     /**
