@@ -22,7 +22,6 @@ use App\Services\Question\CreateQuestion;
 use App\Services\Question\DeleteQuestion;
 use App\Services\Question\UpdateQuestion;
 use App\Services\QuestionAnswer\CreateQuestionAnswer;
-use App\Services\QuestionAnswer\DeleteQuestionAnswer;
 use App\Services\QuestionAnswer\UpdateQuestionAnswer;
 use App\Services\Users\CreateUser;
 use App\Services\Users\DeleteUser;
@@ -42,9 +41,19 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        /*
+        |--------------------------------------------------------------------------
+        | Login and Logout Services
+        |--------------------------------------------------------------------------
+        */
         $this->registerService('Login', Login::class);
         $this->registerService('Logout', Logout::class);
 
+        /*
+        |--------------------------------------------------------------------------
+        | Users Services
+        |--------------------------------------------------------------------------
+        */
         $this->registerService('FindUser', FindUser::class);
         $this->registerService('CreateUser', CreateUser::class);
         $this->registerService('UpdateUser', UpdateUser::class);
@@ -53,30 +62,59 @@ class AppServiceProvider extends ServiceProvider
         $this->registerService('RestoreUser', RestoreUser::class);
         $this->registerService('ForceDelete', ForceDelete::class);
 
+        /*
+        |--------------------------------------------------------------------------
+        | Certificate Services
+        |--------------------------------------------------------------------------
+        */
         $this->registerService('CreateCertificate', CreateCertificate::class);
         $this->registerService('FindCertificate', FindCertificate::class);
         $this->registerService('UpdateCertificate', UpdateCertificate::class);
         $this->registerService('DeleteCertificate', DeleteCertificate::class);
 
+        /*
+        |--------------------------------------------------------------------------
+        | Assessment Group Services
+        |--------------------------------------------------------------------------
+        */
         $this->registerService('CreateAsmntGroup', CreateAsmntGroup::class);
         $this->registerService('UpdateAsmntGroup', UpdateAsmntGroup::class);
         $this->registerService('DeleteAsmntGroup', DeleteAsmntGroup::class);
 
+        /*
+        |--------------------------------------------------------------------------
+        | Assessment Services
+        |--------------------------------------------------------------------------
+        */
         $this->registerService('CreateAssessment', CreateAssessment::class);
         $this->registerService('UpdateAssessment', UpdateAssessment::class);
         $this->registerService('DeleteAssessment', DeleteAssessment::class);
 
+        /*
+        |--------------------------------------------------------------------------
+        | Question Services
+        |--------------------------------------------------------------------------
+        */
         $this->registerService('CreateQuestion', CreateQuestion::class);
         $this->registerService('UpdateQuestion', UpdateQuestion::class);
         $this->registerService('DeleteQuestion', DeleteQuestion::class);
 
+        /*
+        |--------------------------------------------------------------------------
+        | Answer Services
+        |--------------------------------------------------------------------------
+        */
         $this->registerService('CreateAnswer', CreateAnswer::class);
         $this->registerService('UpdateAnswer', UpdateAnswer::class);
         $this->registerService('DeleteAnswer', DeleteAnswer::class);
 
+        /*
+        |--------------------------------------------------------------------------
+        | Question Answers Services
+        |--------------------------------------------------------------------------
+        */
         $this->registerService('CreateQuestionAnswer', CreateQuestionAnswer::class);
         $this->registerService('UpdateQuestionAnswer', UpdateQuestionAnswer::class);
-        $this->registerService('DeleteQuestionAnswer', DeleteQuestionAnswer::class);
     }
 
     /**
