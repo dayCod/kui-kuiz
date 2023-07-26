@@ -70,7 +70,7 @@
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="submit" class="btn btn-primary text-uppercase">
+                                                <button type="submit" class="btn btn-primary text-uppercase" disabled>
                                                     <i class="fa fa-save"></i>
                                                     Submit
                                                 </button>
