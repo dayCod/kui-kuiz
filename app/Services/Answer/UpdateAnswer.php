@@ -57,13 +57,15 @@ class UpdateAnswer extends BaseImplement implements BaseInterface
 
             $old_answer_data = array();
             $new_answer_data = array();
+            $removed_answer_data = array_splice($data['asmnt_question_answer_uuid'], count($data['answer']));
 
+            // Update Answers
             foreach (array_filter($old_answer_input_data, fn($item) => $item !== []) as [$item]) {
                 array_push($old_answer_data, $item);
                 $answers_model->where('uuid', $item['uuid'])->update($item);
             }
 
-
+            // Create if there is new answer input data
             if (count($new_answer_input_data) > 0) {
                 foreach (array_filter($new_answer_input_data, fn($item) => $item !== []) as [$item]) {
                     $item['uuid'] = Str::uuid();
@@ -73,12 +75,20 @@ class UpdateAnswer extends BaseImplement implements BaseInterface
                 }
             }
 
+            // Delete if there is a deleted answer
+            if (count($removed_answer_data) > 0) {
+                foreach ($removed_answer_data as $removed_answer) {
+                    $answers_model->where('uuid', $removed_answer['uuid'])->delete();
+                }
+            }
+
             $this->results['response_code'] = 200;
             $this->results['success'] = true;
             $this->results['message'] = "Answer Successfully Updated";
             $this->results['data'] = [
                 'edited_answer' => $old_answer_data,
                 'new_answer' => $new_answer_data,
+                'removed_answer' => $removed_answer_data,
             ];
         } else {
             $this->results['response_code'] = 404;

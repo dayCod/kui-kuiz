@@ -128,7 +128,6 @@ class AssessmentQuestionController extends Controller
                 'is_correct' => $request->is_correct,
                 'score' => $request->score,
             ]);
-            // return $process;
 
             DB::commit();
 

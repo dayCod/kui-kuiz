@@ -27,7 +27,7 @@ class UpdateQuestionAnswer extends BaseImplement implements BaseInterface
         $this->results['success'] = true;
         $this->results['message'] = "Question and Answer Updated Successfully";
         $this->results['data'] = [
-            'question' => $question,
+            // 'question' => $question,
             'answers' => $answers,
         ];
     }
