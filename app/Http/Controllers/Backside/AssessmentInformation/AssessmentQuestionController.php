@@ -145,6 +145,10 @@ class AssessmentQuestionController extends Controller
      */
     public function destroy($assessment_uuid, $question_uuid)
     {
-        //
+        $process = app('DeleteQuestion')->execute([
+            'asmnt_question_uuid' => $question_uuid,
+        ]);
+
+        return response()->json(['success' => $process['message']], 200);
     }
 }
