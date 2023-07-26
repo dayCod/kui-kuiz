@@ -31,7 +31,7 @@
                             </table>
                         </div>
                         <div class="text-end">
-                            <a href="" class="btn btn-danger text-uppercase">
+                            <a href="{{ route('assessment-test.participant-logout') }}" class="btn btn-danger text-uppercase">
                                 <i class="fa fa-sign-out-alt"></i>
                                 Logout
                             </a>

@@ -68,6 +68,23 @@ class AssessmentTestController extends Controller
         return view('frontside.pages.assessment-test-page');
     }
 
+    public function logoutParticipant(Request $request): RedirectResponse
+    {
+        $process = app('Logout')->execute([
+            'user_id' => auth()->id(),
+        ]);
+
+        if ($process['success']) {
+            $request->session()->invalidate();
+
+            $request->session()->regenerateToken();
+
+            return redirect()->route('assessment-test.participant-authentication-page')->with('success', $process['message']);
+        } else {
+            return redirect()->back()->with('fail', $process['message']);
+        }
+    }
+
 
     /*
     |--------------------------------------------------------------------------

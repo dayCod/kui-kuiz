@@ -38,6 +38,7 @@ Route::group([
     Route::get('/', 'assessmentTestPage')->name('assessment-test-page');
     Route::get('/welcome', 'welcomePage')->name('welcome-page');
     Route::get('/participant-page', 'participantPage')->name('participant-page');
+    Route::get('/participant-logout', 'logoutParticipant')->name('participant-logout');
 });
 
 

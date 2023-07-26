@@ -11,7 +11,6 @@ class Logout extends BaseImplement implements BaseInterface
 {
     public function process($dto)
     {
-
         $user = User::where('id', $dto['user_id'])->first();
 
         if (!empty($user)) {
