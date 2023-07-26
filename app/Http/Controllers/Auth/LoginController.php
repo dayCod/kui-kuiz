@@ -28,6 +28,5 @@ class LoginController extends Controller
         } else {
             return redirect()->back()->with('fail', $process['message']);
         }
-
     }
 }

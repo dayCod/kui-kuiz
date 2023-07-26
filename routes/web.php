@@ -19,14 +19,27 @@ Route::group(['middleware' => ['guest']], function () {
 | Assessment Test Controller
 |--------------------------------------------------------------------------
 */
-Route::group(['prefix' => 'assessment-test', 'as' => 'assessment-test.', 'middleware' => ['guest']], function () {
-
-    Route::controller(AssessmentTestController::class)->group(function () {
-        Route::get('/', 'assessmentTestPage')->name('assessment-test-page');
-        Route::get('/welcome', 'welcomePage')->name('welcome-page');
-    });
-
+Route::group([
+    'prefix' => 'assessment-test',
+    'as' => 'assessment-test.',
+    'middleware' => ['guest'],
+    'controller' => AssessmentTestController::class
+], function () {
+    Route::get('/authentication', 'participantAuthenticationPage')->name('participant-authentication-page');
+    Route::post('/authentication', 'participantAuthentication')->name('participant-authentication');
 });
+
+Route::group([
+    'prefix' => 'assessment-test',
+    'as' => 'assessment-test.',
+    'middleware' => ['auth.participant'],
+    'controller' => AssessmentTestController::class
+], function () {
+    Route::get('/', 'assessmentTestPage')->name('assessment-test-page');
+    Route::get('/welcome', 'welcomePage')->name('welcome-page');
+    Route::get('/participant-page', 'participantPage')->name('participant-page');
+});
+
 
 
 

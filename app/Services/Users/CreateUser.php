@@ -17,7 +17,9 @@ class CreateUser extends BaseImplement implements BaseInterface
             'email' => $dto['email'],
             'password' => $dto['password'],
             'role' => $dto['role'],
-            'profile_picture' => (new Images('profile', 'profile-img', 600, 600))->storeToStorage($dto['profile_picture']),
+            'profile_picture' => (!is_null($dto['profile_picture']))
+                ? (new Images('profile', 'profile-img', 600, 600))->storeToStorage($dto['profile_picture'])
+                : null,
         ]);
 
         $this->results['response_code'] = 200;
