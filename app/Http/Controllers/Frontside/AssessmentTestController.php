@@ -11,6 +11,11 @@ use Illuminate\Http\RedirectResponse;
 
 class AssessmentTestController extends Controller
 {
+    /*
+    |---------------------------------------------------------------------------
+    | Participant Function for Preparing The Assessment Test | Middleware Guest
+    |---------------------------------------------------------------------------
+    */
     public function participantAuthenticationPage(): View
     {
         return view('frontside.pages.participant-auth');
@@ -37,6 +42,12 @@ class AssessmentTestController extends Controller
         }
     }
 
+
+    /*
+    |---------------------------------------------------------------------------------
+    | Participant Page Before Start The Assessment Test | Middleware Auth Participant
+    |---------------------------------------------------------------------------------
+    */
     public function participantPage(): View
     {
         $participant = auth()->user();
@@ -53,5 +64,14 @@ class AssessmentTestController extends Controller
     {
         return view('frontside.pages.assessment-test-page');
     }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Form Inquiries | Response JSON
+    |--------------------------------------------------------------------------
+    */
+
+
 
 }
