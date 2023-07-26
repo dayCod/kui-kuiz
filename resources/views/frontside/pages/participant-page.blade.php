@@ -58,6 +58,9 @@
                                                     <select name="asmnt_group" id="" class="form-control">
                                                         <option value="" selected hidden>Select Assessment Group
                                                         </option>
+                                                        @foreach($asmnt_groups as $asmnt_group)
+                                                        <option value="{{ $asmnt_group->uuid }}">{{ ucfirst($asmnt_group->name) }}</option>
+                                                        @endforeach
                                                     </select>
                                                 </div>
                                                 <div class="mb-3">
@@ -83,3 +86,45 @@
         </div>
     </div>
 @endsection
+
+@push('custom-js')
+
+<script>
+    $(document).ready(function () {
+        $('select[name="asmnt_group"]').change(function () {
+            const ASMNT_GROUP_UUID = $(this).find(':selected').val();
+            let routeUrl = "{{ route('api.res.get-assessment', [':asmnt_group_uuid']) }}";
+            routeUrl = routeUrl.replace(':asmnt_group_uuid', ASMNT_GROUP_UUID);
+
+            $.ajax({
+                url: routeUrl,
+                beforeSend: function() {
+                    $('select[name="assessment"]').attr('disabled', 'disabled');
+                    $('select[name="assessment"]').children()[0].innerHTML = "Please Wait..";
+                },
+                complete: function() {
+                    $('select[name="assessment"]').removeAttr('disabled');
+                    $('select[name="assessment"]').children()[0].innerHTML = "Select Assessment";
+                },
+                success: function(res) {
+                    let selectHtml = ``;
+
+                    $('select[name="assessment"]').empty();
+                    $('select[name="assessment"]').append(`<option value="" selected hidden>Select Assessment</option>`);
+
+                    $.each(res.data, function (key, item) {
+                        selectHtml += `<option value="${item.uuid}">${item.asmnt_name}</option> `;
+                    });
+
+                    $('select[name="assessment"]').append(selectHtml);
+
+                },
+                error: function(err) {
+                    console.log(err);
+                }
+            })
+        });
+    });
+</script>
+
+@endpush

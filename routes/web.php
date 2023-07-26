@@ -41,6 +41,14 @@ Route::group([
 });
 
 
+/*
+|--------------------------------------------------------------------------
+| Assessment Test Controller | Response JSON
+|--------------------------------------------------------------------------
+*/
+Route::controller(AssessmentTestController::class)->group(function () {
+    Route::get('/get-assessment/from/{asmnt_group_uuid}', 'getAssessment')->name('api.res.get-assessment');
+});
 
 
 /*

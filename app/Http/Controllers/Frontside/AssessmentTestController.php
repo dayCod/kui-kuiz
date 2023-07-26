@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Frontside;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\AsmntGroup;
+use App\Models\Assessment;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -51,8 +53,9 @@ class AssessmentTestController extends Controller
     public function participantPage(): View
     {
         $participant = auth()->user();
+        $asmnt_groups = AsmntGroup::latest()->get();
 
-        return view('frontside.pages.participant-page', compact('participant'));
+        return view('frontside.pages.participant-page', compact('participant', 'asmnt_groups'));
     }
 
     public function welcomePage(): View
@@ -71,6 +74,14 @@ class AssessmentTestController extends Controller
     | Form Inquiries | Response JSON
     |--------------------------------------------------------------------------
     */
+    public function getAssessment($asmnt_group_uuid)
+    {
+        $assessments = Assessment::where(
+            'asmnt_group_id', AsmntGroup::where('uuid', $asmnt_group_uuid
+        )->first()->id)->latest()->get();
+
+        return response()->json(['data' => $assessments]);
+    }
 
 
 
