@@ -65,7 +65,7 @@
                                                 </div>
                                                 <div class="mb-3">
                                                     <select name="assessment" id="" class="form-control">
-                                                        <option value="" selected hidden>Select Assessment</option>
+                                                        <option value="" selected hidden>Select an unclosed Test Assessment Session</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -96,6 +96,8 @@
             let routeUrl = "{{ route('api.res.get-assessment', [':asmnt_group_uuid']) }}";
             routeUrl = routeUrl.replace(':asmnt_group_uuid', ASMNT_GROUP_UUID);
 
+            console.log(routeUrl)
+
             $.ajax({
                 url: routeUrl,
                 beforeSend: function() {
@@ -104,13 +106,13 @@
                 },
                 complete: function() {
                     $('select[name="assessment"]').removeAttr('disabled');
-                    $('select[name="assessment"]').children()[0].innerHTML = "Select Assessment";
+                    $('select[name="assessment"]').children()[0].innerHTML = "Select an unclosed Test Assessment Sessiont";
                 },
                 success: function(res) {
                     let selectHtml = ``;
 
                     $('select[name="assessment"]').empty();
-                    $('select[name="assessment"]').append(`<option value="" selected hidden>Select Assessment</option>`);
+                    $('select[name="assessment"]').append(`<option value="" selected hidden>Select an unclosed Test Assessment Sessiont</option>`);
 
                     $.each(res.data, function (key, item) {
                         selectHtml += `<option value="${item.uuid}">${item.asmnt_name}</option> `;

@@ -5,6 +5,9 @@
 | Get File Name From Formatted Image URL
 |--------------------------------------------------------------------------
 */
+
+use Carbon\Carbon;
+
 if (!function_exists('getFileName')) {
 
     function getFileName(string $file_url)
@@ -31,6 +34,21 @@ if (!function_exists('array_value_recursive')) {
             if($k == $key) array_push($val, $v);
         });
         return count($val) > 1 ? $val : array_pop($val);
+    }
+
+}
+
+/*
+|--------------------------------------------------------------------------
+| Format Timestamp Based on Local Config Timezone
+|--------------------------------------------------------------------------
+*/
+if (!function_exists('setTimestamp')) {
+
+    function setTimestamp(string $date, bool $is_unix = false){
+        $carbon = Carbon::parse($date)->setTimezone(config('app.timezone', 'Asia/Bangkok'));
+
+        return ($is_unix) ? $carbon->timestamp : $carbon->format('Y-m-d H:i:s');
     }
 
 }

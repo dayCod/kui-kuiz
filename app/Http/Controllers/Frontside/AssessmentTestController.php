@@ -10,6 +10,7 @@ use App\Models\Assessment;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Carbon;
 
 class AssessmentTestController extends Controller
 {
@@ -95,7 +96,9 @@ class AssessmentTestController extends Controller
     {
         $assessments = Assessment::where(
             'asmnt_group_id', AsmntGroup::where('uuid', $asmnt_group_uuid
-        )->first()->id)->latest()->get();
+        )->first()->id)->latest()->get()->filter(function ($assessment) {
+            return setTimestamp(now(), true) >= setTimestamp($assessment->time_open, true) && setTimestamp(now(), true) <= setTimestamp($assessment->time_close, true);
+        });
 
         return response()->json(['data' => $assessments]);
     }

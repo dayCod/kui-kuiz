@@ -39,8 +39,8 @@
                                 <td class="text-center align-middle">{{ $assessment->asmnt_serial_number }}</td>
                                 <td class="text-center align-middle">{{ $assessment->asmnt_name }}</td>
                                 <td class="text-center align-middle">{{ $assessment->asmnt_time_test }}</td>
-                                <td class="text-center align-middle">2023-07-10 10:14:55</td>
-                                <td class="text-center align-middle">2023-07-10 11:14:55</td>
+                                <td class="text-center align-middle">{{ $assessment->time_open }}</td>
+                                <td class="text-center align-middle">{{ $assessment->time_close }}</td>
                                 <td class="text-center align-middle">
                                     <a href="{{ route('assessment-information.manage-assessment.questions.index', ['assessment_uuid' => $assessment->uuid]) }}" class="btn btn-success btn-sm text-white">
                                         <i class="fas fa-file"></i>
