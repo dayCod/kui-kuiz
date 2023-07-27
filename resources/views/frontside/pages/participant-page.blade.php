@@ -96,8 +96,6 @@
             let routeUrl = "{{ route('api.res.get-assessment', [':asmnt_group_uuid']) }}";
             routeUrl = routeUrl.replace(':asmnt_group_uuid', ASMNT_GROUP_UUID);
 
-            console.log(routeUrl)
-
             $.ajax({
                 url: routeUrl,
                 beforeSend: function() {
