@@ -33,4 +33,9 @@ class Assessment extends Model
     {
         return $this->belongsTo(AsmntSetting::class, 'asmnt_setting_id', 'id');
     }
+
+    public function asmntQuestion()
+    {
+        return $this->hasMany(AsmntQuestion::class, 'asmnt_id', 'id');
+    }
 }

@@ -18,7 +18,6 @@
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th class="text-center align-middle">#</th>
                                     <th class="text-center align-middle">Group Name</th>
                                     <th class="text-center align-middle">Assessment Name</th>
                                     <th class="text-center align-middle">Total Question</th>
@@ -27,16 +26,19 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td class="text-center align-middle">1</td>
-                                    <td class="text-center align-middle">FTI</td>
-                                    <td class="text-center align-middle">Teknik Informatika</td>
-                                    <td class="text-center align-middle">40</td>
-                                    <td class="text-center align-middle">120 Minutes</td>
+                                    <td class="text-center align-middle">{{ $asmnt_group->name }}</td>
+                                    <td class="text-center align-middle">{{ $assessment->asmnt_name }}</td>
+                                    <td class="text-center align-middle">{{ $total_assessment_question }}</td>
+                                    <td class="text-center align-middle">{{ $assessment->asmnt_time_test.' Minute' }}</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                     <div class="text-end">
+                        <a href="{{ route('assessment-test.participant-logout') }}" class="btn btn-danger text-uppercase">
+                            <i class="fa fa-sign-out-alt"></i>
+                            Logout
+                        </a>
                         <a href="{{ route('assessment-test.assessment-test-page') }}" class="btn btn-primary text-uppercase">start the test <i class="fa fa-arrow-right"></i></a>
                     </div>
                 </div>

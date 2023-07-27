@@ -86,7 +86,14 @@ class AssessmentTestController extends Controller
 
     public function welcomePage(): View
     {
-        return view('frontside.pages.welcome');
+        $user_assessment_test = User::where('id', auth()->id())->first()->userAssessmentTest()->latest()->first();
+
+        return view('frontside.pages.welcome', [
+            'user_assessment_test' => $user_assessment_test,
+            'asmnt_group' => $user_assessment_test->assessment->asmntGroup,
+            'assessment' => $user_assessment_test->assessment,
+            'total_assessment_question' => $user_assessment_test->assessment->asmntQuestion->count(),
+        ]);
     }
 
     public function assessmentTestPage(): View
