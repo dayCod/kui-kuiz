@@ -10,7 +10,8 @@ use App\Models\Assessment;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class AssessmentTestController extends Controller
 {
@@ -57,6 +58,30 @@ class AssessmentTestController extends Controller
         $asmnt_groups = AsmntGroup::latest()->get();
 
         return view('frontside.pages.participant-page', compact('participant', 'asmnt_groups'));
+    }
+
+    public function prepareForAssessmentTest(Request $request): RedirectResponse
+    {
+        $process = ['success' => false, 'message' => 'Throwed Exception'];
+
+        $assessment = Assessment::where('uuid', $request->assessment)->first();
+
+        DB::beginTransaction();
+
+        try {
+
+            $process = app('CreateUserAssessmentTest')->execute([
+                'assessment_test_uuid' => Str::uuid(),
+                'assessment_id' => $assessment->id,
+                'user_assessment_test_uuid' => Str::uuid(),
+                'user_participant_id' => auth()->id(),
+            ]);
+
+            DB::commit();
+
+        } catch (\Exception $err) { DB::rollBack(); }
+
+        return redirect()->route('assessment-test.welcome-page')->with((($process['success']) ? 'success' : 'fail'), $process['message']);
     }
 
     public function welcomePage(): View

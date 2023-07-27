@@ -14,42 +14,40 @@ Route::group(['middleware' => ['guest']], function () {
     Route::get('/', [LandingpageController::class, 'index'])->name('index');
 });
 
-/*
-|--------------------------------------------------------------------------
-| Assessment Test Controller
-|--------------------------------------------------------------------------
-*/
-Route::group([
-    'prefix' => 'assessment-test',
-    'as' => 'assessment-test.',
-    'middleware' => ['guest'],
-    'controller' => AssessmentTestController::class
-], function () {
-    Route::get('/authentication', 'participantAuthenticationPage')->name('participant-authentication-page');
-    Route::post('/authentication', 'participantAuthentication')->name('participant-authentication');
-});
 
-Route::group([
-    'prefix' => 'assessment-test',
-    'as' => 'assessment-test.',
-    'middleware' => ['auth.participant'],
-    'controller' => AssessmentTestController::class
-], function () {
-    Route::get('/', 'assessmentTestPage')->name('assessment-test-page');
-    Route::get('/welcome', 'welcomePage')->name('welcome-page');
-    Route::get('/participant-page', 'participantPage')->name('participant-page');
-    Route::get('/participant-logout', 'logoutParticipant')->name('participant-logout');
-});
+Route::group(['prefix' => 'assessment-test', 'as' => 'assessment-test.', 'controller' => AssessmentTestController::class], function () {
 
+    /*
+    |--------------------------------------------------------------------------
+    | Middleware Guest
+    |--------------------------------------------------------------------------
+    */
+    Route::middleware(['guest'])->group(function () {
+        Route::get('/authentication', 'participantAuthenticationPage')->name('participant-authentication-page');
+        Route::post('/authentication', 'participantAuthentication')->name('participant-authentication');
+    });
+
+    /*
+    |--------------------------------------------------------------------------
+    | Middleware Auth Participant
+    |--------------------------------------------------------------------------
+    */
+    Route::middleware(['auth.participant'])->group(function () {
+        Route::get('/', 'assessmentTestPage')->name('assessment-test-page');
+        Route::get('/welcome', 'welcomePage')->name('welcome-page');
+        Route::get('/participant-page', 'participantPage')->name('participant-page');
+        Route::post('/participant-prepare', 'prepareForAssessmentTest')->name('participant-prepare');
+        Route::get('/participant-logout', 'logoutParticipant')->name('participant-logout');
+    });
+
+});
 
 /*
 |--------------------------------------------------------------------------
 | Assessment Test Controller | Response JSON
 |--------------------------------------------------------------------------
 */
-Route::controller(AssessmentTestController::class)->group(function () {
-    Route::get('/get-assessment/from/{asmnt_group_uuid}', 'getAssessment')->name('api.res.get-assessment');
-});
+Route::get('/get-assessment/from/{asmnt_group_uuid}', [AssessmentTestController::class, 'getAssessment'])->name('api.res.get-assessment');
 
 
 /*

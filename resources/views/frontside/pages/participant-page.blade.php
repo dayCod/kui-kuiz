@@ -51,7 +51,7 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-hidden="true"></button>
                                         </div>
-                                        <form action="#" method="POST">
+                                        <form action="{{ route('assessment-test.participant-prepare') }}" method="POST">
                                             <div class="modal-body">
                                                 @csrf
                                                 <div class="mb-3">
@@ -70,7 +70,7 @@
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="submit" class="btn btn-primary text-uppercase" disabled>
+                                                <button type="submit" class="btn btn-primary text-uppercase">
                                                     <i class="fa fa-save"></i>
                                                     Submit
                                                 </button>

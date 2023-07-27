@@ -23,6 +23,8 @@ use App\Services\Question\DeleteQuestion;
 use App\Services\Question\UpdateQuestion;
 use App\Services\QuestionAnswer\CreateQuestionAnswer;
 use App\Services\QuestionAnswer\UpdateQuestionAnswer;
+use App\Services\UserAssessmentTest\CreateUserAssessmentTest;
+use App\Services\UserAssessmentTest\UpdateUserAssessmentTest;
 use App\Services\Users\CreateUser;
 use App\Services\Users\DeleteUser;
 use App\Services\Users\FindUser;
@@ -115,6 +117,14 @@ class AppServiceProvider extends ServiceProvider
         */
         $this->registerService('CreateQuestionAnswer', CreateQuestionAnswer::class);
         $this->registerService('UpdateQuestionAnswer', UpdateQuestionAnswer::class);
+
+        /*
+        |--------------------------------------------------------------------------
+        | User Assessment Test Services
+        |--------------------------------------------------------------------------
+        */
+        $this->registerService('CreateUserAssessmentTest', CreateUserAssessmentTest::class);
+        $this->registerService('UpdateUserAssessmentTest', UpdateUserAssessmentTest::class);
     }
 
     /**
