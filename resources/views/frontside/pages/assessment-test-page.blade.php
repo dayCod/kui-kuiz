@@ -1,6 +1,5 @@
 @extends('auth.layout.app')
 
-
 @section('content')
 
 <div class="container">
@@ -16,42 +15,11 @@
                         <hr class="pb-3">
                     </div>
                     <div class="row align-items-stretch">
+                        @for($question_number = 1; $question_number <= $user_assessment_test['total']; $question_number++)
                         <div class="col-3 mb-3">
-                            <a href="#" class="btn border-secondary rounded-circle bg-primary text-white" style="width: 100%; height: 100%">1</a>
+                            <a href="#" class="btn border-secondary rounded-circle {{ is_null($assessment_test['question_answer_data'][$question_number - 1]->user_participant_answer_id) ? '' : 'bg-primary text-white' }}" style="width: 100%; height: 100%">{{ $question_number }}</a>
                         </div>
-                        <div class="col-3 mb-3">
-                            <a href="#" class="btn border-secondary rounded-circle bg-primary text-white" style="width: 100%; height: 100%">2</a>
-                        </div>
-                        <div class="col-3 mb-3">
-                            <a href="#" class="btn border-secondary rounded-circle bg-primary text-white" style="width: 100%; height: 100%">3</a>
-                        </div>
-                        <div class="col-3 mb-3">
-                            <a href="#" class="btn border-secondary rounded-circle bg-primary text-white" style="width: 100%; height: 100%">4</a>
-                        </div>
-                        <div class="col-3 mb-3">
-                            <a href="#" class="btn border-secondary rounded-circle bg-primary text-white" style="width: 100%; height: 100%">5</a>
-                        </div>
-                        <div class="col-3 mb-3">
-                            <a href="#" class="btn border-secondary rounded-circle" style="width: 100%; height: 100%">6</a>
-                        </div>
-                        <div class="col-3 mb-3">
-                            <a href="#" class="btn border-secondary rounded-circle" style="width: 100%; height: 100%">7</a>
-                        </div>
-                        <div class="col-3 mb-3">
-                            <a href="#" class="btn border-secondary rounded-circle" style="width: 100%; height: 100%">8</a>
-                        </div>
-                        <div class="col-3 mb-3">
-                            <a href="#" class="btn border-secondary rounded-circle" style="width: 100%; height: 100%">9</a>
-                        </div>
-                        <div class="col-3 mb-3">
-                            <a href="#" class="btn border-secondary rounded-circle" style="width: 100%; height: 100%">10</a>
-                        </div>
-                        <div class="col-3 mb-3">
-                            <a href="#" class="btn border-secondary rounded-circle" style="width: 100%; height: 100%">11</a>
-                        </div>
-                        <div class="col-3 mb-3">
-                            <a href="#" class="btn border-secondary rounded-circle" style="width: 100%; height: 100%">12</a>
-                        </div>
+                        @endfor
                     </div>
                     <hr class="pb-3">
                     <div class="d-flex flex-column ">
@@ -70,45 +38,38 @@
         <div class="col-12 col-md-8">
             <div class="card border border-0 shadow p-4" style="height: 100%">
                 <div class="card-title">
-                    <h3 class="text-uppercase mb-3">#5. Question</h3>
-                    <h3>Apa Nama Ibukota Indonesia ? </h3>
+                    <h3 class="text-uppercase mb-3">{{ '#'.$user_assessment_test['current_page'].' Question' }}</h3>
+                    <h3>{{ $user_assessment_test['data'][0]['question'] }}</h3>
                     <hr>
                 </div>
                 <div class="d-flex flex-column">
+                    @foreach ($user_assessment_test['data'][0]['has_answers'] as $key => $answer)
                     <div class="d-flex align-items-center gap-3 flex-row mb-3">
-                        <span class="btn border border-dark rounded-circle text-uppercase bg-info text-white">A</span>
-                        <span class="text-uppercase">Jakarta</span>
+                        <span class="btn-answers btn border border-dark rounded-circle text-uppercase {{ $answer['id'] ==  $assessment_test['question_answer_data'][$user_assessment_test['current_page'] - 1]->user_participant_answer_id ? 'bg-info text-white' : '' }}">
+                            {{ ucfirst($answer['alphabet']) }}
+                        </span>
+                        <span class="text-uppercase">
+                            {{ ucfirst($answer['answer']) }}
+                        </span>
                     </div>
-                    <div class="d-flex align-items-center gap-3 flex-row mb-3">
-                        <span class="btn border border-dark rounded-circle text-uppercase">B</span>
-                        <span class="text-uppercase">Medan</span>
-                    </div>
-                    <div class="d-flex align-items-center gap-3 flex-row mb-3">
-                        <span class="btn border border-dark rounded-circle text-uppercase">C</span>
-                        <span class="text-uppercase">Palembang</span>
-                    </div>
-                    <div class="d-flex align-items-center gap-3 flex-row mb-3">
-                        <span class="btn border border-dark rounded-circle text-uppercase">D</span>
-                        <span class="text-uppercase">Ambon</span>
-                    </div>
-                    <div class="d-flex align-items-center gap-3 flex-row">
-                        <span class="btn border border-dark rounded-circle text-uppercase">E</span>
-                        <span class="text-uppercase">Kalimantan</span>
-                    </div>
+                    @endforeach
                 </div>
                 <div class="d-flex justify-content-between mt-4 mb-3">
-                    <a href="" class="btn btn-danger">
+                    <a href="{{ $user_assessment_test['prev_page_url'] }}" class="btn btn-danger {{ ($user_assessment_test['current_page'] == 1) ? 'disabled' : '' }}">
                         <i class="fa fa-arrow-left"></i>
                         Prev
                     </a>
-                    <a href="" class="btn btn-info">
+                    @if ($user_assessment_test['current_page'] !== $user_assessment_test['last_page'])
+                    <a href="{{ $user_assessment_test['next_page_url'] }}" class="btn btn-info">
                         Next
                         <i class="fa fa-arrow-right"></i>
                     </a>
-                    {{-- <a href="" class="btn btn-info">
+                    @else
+                    <a href="" class="btn btn-info disabled">
                         Submit
                         <i class="fas fa-save"></i>
-                    </a> --}}
+                    </a>
+                    @endif
                 </div>
             </div>
         </div>
@@ -116,3 +77,18 @@
 </div>
 
 @endsection
+
+@push('custom-js')
+
+<script>
+
+    $(document).ready(function () {
+        $('span.btn-answers').click(function () {
+            $('span.btn-answers').removeClass('bg-info text-white')
+            $(this).addClass('bg-info text-white');
+        })
+    });
+
+</script>
+
+@endpush

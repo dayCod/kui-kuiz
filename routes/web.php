@@ -35,6 +35,7 @@ Route::group(['prefix' => 'assessment-test', 'as' => 'assessment-test.', 'contro
     Route::middleware(['auth.participant'])->group(function () {
         Route::get('/', 'assessmentTestPage')->name('assessment-test-page');
         Route::get('/welcome', 'welcomePage')->name('welcome-page');
+        Route::post('/generate-assessment-setup', 'generateAssessmentSetup')->name('generate-assessment-setup');
         Route::get('/participant-page', 'participantPage')->name('participant-page');
         Route::post('/participant-prepare', 'prepareForAssessmentTest')->name('participant-prepare');
         Route::get('/participant-logout', 'logoutParticipant')->name('participant-logout');

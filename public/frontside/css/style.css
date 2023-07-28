@@ -13,6 +13,11 @@ body {
   color: #444444;
 }
 
+a.disabled {
+  pointer-events: none;
+  cursor: default;
+}
+
 a {
   text-decoration: none;
   color: #49b5e7;
@@ -99,7 +104,7 @@ h6 {
 # Navigation Menu
 --------------------------------------------------------------*/
 /**
-* Desktop Navigation 
+* Desktop Navigation
 */
 .navbar {
   padding: 0;
@@ -212,7 +217,7 @@ h6 {
 }
 
 /**
-* Mobile Navigation 
+* Mobile Navigation
 */
 .mobile-nav-toggle {
   color: #0f394c;

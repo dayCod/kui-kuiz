@@ -34,12 +34,16 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="text-end">
+                    <div class="d-flex align-items-center justify-content-end gap-2">
                         <a href="{{ route('assessment-test.participant-logout') }}" class="btn btn-danger text-uppercase">
                             <i class="fa fa-sign-out-alt"></i>
                             Logout
                         </a>
-                        <a href="{{ route('assessment-test.assessment-test-page') }}" class="btn btn-primary text-uppercase">start the test <i class="fa fa-arrow-right"></i></a>
+                        <form action="{{ route('assessment-test.generate-assessment-setup') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="assessment_collection" value="{{ $assessment_collection }}">
+                            <button type="submit" class="btn btn-primary text-uppercase">start the test <i class="fa fa-arrow-right"></i></button>
+                        </form>
                     </div>
                 </div>
             </div>

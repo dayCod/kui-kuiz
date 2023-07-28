@@ -88,17 +88,50 @@ class AssessmentTestController extends Controller
     {
         $user_assessment_test = User::where('id', auth()->id())->first()->userAssessmentTest()->latest()->first();
 
+        $assessment_collection = [
+            'assessment_test_id' => $user_assessment_test->id,
+            'user_participant_id' => auth()->id(),
+            'question_answer_data' => array(),
+        ];
+
+        foreach ($user_assessment_test->assessment->asmntQuestion as $question) {
+            $assessment_collection['question_answer_data'][] = [
+                'question_id' => $question->id,
+                'user_participant_answer_id' => null,
+                'user_participant_answer_alphabet' => null,
+                'answer_score' => null,
+                'is_correct_answer' => null,
+            ];
+        }
+
         return view('frontside.pages.welcome', [
             'user_assessment_test' => $user_assessment_test,
             'asmnt_group' => $user_assessment_test->assessment->asmntGroup,
             'assessment' => $user_assessment_test->assessment,
             'total_assessment_question' => $user_assessment_test->assessment->asmntQuestion->count(),
+            'assessment_collection' => json_encode($assessment_collection),
         ]);
+    }
+
+    public function generateAssessmentSetup(Request $request)
+    {
+        cache()->remember('assessment-test', 60*60*24, function () use ($request) {
+            return (array)json_decode($request->assessment_collection);
+        });
+
+        return redirect()->route('assessment-test.assessment-test-page');
     }
 
     public function assessmentTestPage(): View
     {
-        return view('frontside.pages.assessment-test-page');
+        $user_assessment_test = User::where('id', auth()->id())->first()
+            ->userAssessmentTest()->latest()->first()
+            ->assessment->asmntQuestion()->paginate(1)->toArray();
+
+        $assessment_test = cache()->get('assessment-test');
+        // dd($user_assessment_test, cache()->get('assessment-test'));
+
+        return view('frontside.pages.assessment-test-page', compact('user_assessment_test', 'assessment_test'));
     }
 
     public function logoutParticipant(Request $request): RedirectResponse
