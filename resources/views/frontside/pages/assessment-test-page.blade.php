@@ -45,7 +45,7 @@
                 <div class="d-flex flex-column">
                     @foreach ($user_assessment_test['data'][0]['has_answers'] as $key => $answer)
                     <div class="d-flex align-items-center gap-3 flex-row mb-3">
-                        <span class="btn-answers btn border border-dark rounded-circle text-uppercase {{ $answer['id'] ==  $assessment_test['question_answer_data'][$user_assessment_test['current_page'] - 1]->user_participant_answer_id ? 'bg-info text-white' : '' }}">
+                        <span class="btn-answers btn border border-dark rounded-circle text-uppercase {{ $answer['id'] ==  $assessment_test['question_answer_data'][$user_assessment_test['current_page'] - 1]->user_participant_answer_id ? 'bg-info text-white' : '' }}" data-answer-id="{{ $answer['id'] }}" data-answer-alphabet="{{ $answer['alphabet'] }}" data-answer-score="{{ $answer['score'] ?? null }}" data-answer-correct="{{ $answer['is_correct'] ?? null }}">
                             {{ ucfirst($answer['alphabet']) }}
                         </span>
                         <span class="text-uppercase">
@@ -60,17 +60,34 @@
                         Prev
                     </a>
                     @if ($user_assessment_test['current_page'] !== $user_assessment_test['last_page'])
-                    <a href="{{ $user_assessment_test['next_page_url'] }}" class="btn btn-info">
+                    <a href="{{ $user_assessment_test['next_page_url'] }}" class="btn btn-info" id="next-question">
                         Next
                         <i class="fa fa-arrow-right"></i>
                     </a>
                     @else
-                    <a href="" class="btn btn-info disabled">
+                    <a href="#" class="btn btn-info" id="submit-question">
                         Submit
                         <i class="fas fa-save"></i>
                     </a>
                     @endif
                 </div>
+                @if ($user_assessment_test['current_page'] !== $user_assessment_test['last_page'])
+                    <form action="{{ route('assessment-test.append-qna') }}" id="form-next-question" method="POST">
+                        @csrf
+                        <input type="hidden" name="next_page_url" value="{{ $user_assessment_test['next_page_url'] }}">
+                        <input type="hidden" name="page" value="{{ request()->get('page') ?? 1 }}">
+                        <input type="hidden" name="question_id" value="{{ $user_assessment_test['data'][0]['id'] }}">
+                        <input type="hidden" name="answer_collection" value="">
+                    </form>
+                @else
+                    <form action="{{ route('assessment-test.submit-qna') }}" id="form-submit-question" method="POST">
+                        @csrf
+                        <input type="hidden" name="next_page_url" value="{{ $user_assessment_test['next_page_url'] }}">
+                        <input type="hidden" name="page" value="{{ request()->get('page') ?? 1 }}">
+                        <input type="hidden" name="question_id" value="{{ $user_assessment_test['data'][0]['id'] }}">
+                        <input type="hidden" name="answer_collection" value="">
+                    </form>
+                @endif
             </div>
         </div>
     </div>
@@ -84,8 +101,37 @@
 
     $(document).ready(function () {
         $('span.btn-answers').click(function () {
-            $('span.btn-answers').removeClass('bg-info text-white')
-            $(this).addClass('bg-info text-white');
+            $('span.btn-answers').removeClass('bg-info text-white selected')
+            $(this).addClass('bg-info text-white selected');
+        })
+
+        function answerCollectionFunc(answerElem, inputHiddenElem) {
+            const ANSWERS_COLLECTION = {
+                answerId: answerElem.data('answer-id'),
+                answerAlphabet: answerElem.data('answer-alphabet'),
+                answerScore: answerElem.data('answer-score'),
+                answerCorrect: answerElem.data('answer-correct')
+            }
+
+            inputHiddenElem.val(JSON.stringify(ANSWERS_COLLECTION))
+        }
+
+        $('#next-question').click(function (e) {
+            e.preventDefault();
+            let answers = $('span.btn-answers.selected')
+
+            answerCollectionFunc(answers, $('#form-next-question > input[name="answer_collection"]'));
+
+            $('#form-next-question').submit();
+        })
+
+        $('#submit-question').click(function (e) {
+            e.preventDefault();
+            let answers = $('span.btn-answers.selected')
+
+            answerCollectionFunc(answers, $('#form-submit-question > input[name="answer_collection"]'));
+
+            $('#form-submit-question').submit();
         })
     });
 

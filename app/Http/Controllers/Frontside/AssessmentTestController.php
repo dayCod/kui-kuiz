@@ -129,9 +129,64 @@ class AssessmentTestController extends Controller
             ->assessment->asmntQuestion()->paginate(1)->toArray();
 
         $assessment_test = cache()->get('assessment-test');
-        // dd($user_assessment_test, cache()->get('assessment-test'));
+
+        // dd($user_assessment_test, $assessment_test);
 
         return view('frontside.pages.assessment-test-page', compact('user_assessment_test', 'assessment_test'));
+    }
+
+    private function collectQuestionAnswer($request)
+    {
+        $result = ['is_changes' => false];
+        $assessment_test = cache()->get('assessment-test');
+        $decodeAnswerCollection = json_decode($request->answer_collection);
+
+        if (!empty((array)$decodeAnswerCollection)) {
+            if ($request->page) {
+                $assessment_test['question_answer_data'][($request->page == 1) ? 0: $request->page - 1] = (object)[
+                    "question_id" => (int)$request->question_id,
+                    "user_participant_answer_id" => $decodeAnswerCollection->answerId,
+                    "user_participant_answer_alphabet" => $decodeAnswerCollection->answerAlphabet,
+                    "answer_score" => empty($decodeAnswerCollection->answerScore) ? null : $decodeAnswerCollection->answerScore,
+                    "is_correct_answer" => empty($decodeAnswerCollection->answerCorrect) ? null : $decodeAnswerCollection->answerCorrect,
+                ];
+            }
+            cache()->put('assessment-test', $assessment_test);
+
+            return $result['is_changes'] = true;
+        }
+
+        return $result['is_changes'];
+    }
+
+    public function appendQuestionAnswer(Request $request)
+    {
+        $collectQuestionAnswer = $this->collectQuestionAnswer($request);
+
+        return redirect($request->next_page_url)->with('success', ($collectQuestionAnswer)
+            ? 'Previous Answer Was Successfully Recorded'
+            : 'There Is No Changes with Your Previous Answers');
+    }
+
+    public function submitQuestionAnswer(Request $request)
+    {
+        $collectQuestionAnswer = $this->collectQuestionAnswer($request);
+        $assessment_test = cache()->get('assessment-test');
+
+        $process = app('UpdateUserAssessmentTest')->execute([
+            'assessment_test_id' => $assessment_test['assessment_test_id'],
+            'total_is_correct' => is_null($assessment_test['question_answer_data'][0]->is_correct_answer)
+                    ? null
+                    : collect($assessment_test['question_answer_data'])->pluck('is_correct_answer')->filter(fn ($item) => $item === true)->count(),
+            'total_score' => is_null($assessment_test['question_answer_data'][0]->answer_score)
+                    ? null
+                    : collect($assessment_test['question_answer_data'])->pluck('answer_score')->sum(),
+        ]);
+
+        $this->logoutParticipant($request);
+
+        return redirect()->route('assessment-test.participant-authentication-page')->with('success', $process['message']);
+
     }
 
     public function logoutParticipant(Request $request): RedirectResponse
