@@ -115,7 +115,7 @@ class AssessmentTestController extends Controller
 
     public function generateAssessmentSetup(Request $request)
     {
-        cache()->remember('assessment-test', 60*60*24, function () use ($request) {
+        cache()->remember('assessment-test:'.auth()->id(), 60*60*24, function () use ($request) {
             return (array)json_decode($request->assessment_collection);
         });
 
@@ -128,7 +128,7 @@ class AssessmentTestController extends Controller
             ->userAssessmentTest()->latest()->first()
             ->assessment->asmntQuestion()->paginate(1)->toArray();
 
-        $assessment_test = cache()->get('assessment-test');
+        $assessment_test = cache()->get('assessment-test:'.auth()->id());
 
         // dd($user_assessment_test, $assessment_test);
 
@@ -138,7 +138,7 @@ class AssessmentTestController extends Controller
     private function collectQuestionAnswer($request)
     {
         $result = ['is_changes' => false];
-        $assessment_test = cache()->get('assessment-test');
+        $assessment_test = cache()->get('assessment-test:'.auth()->id());
         $decodeAnswerCollection = json_decode($request->answer_collection);
 
         if (!empty((array)$decodeAnswerCollection)) {
@@ -151,7 +151,7 @@ class AssessmentTestController extends Controller
                     "is_correct_answer" => empty($decodeAnswerCollection->answerCorrect) ? null : $decodeAnswerCollection->answerCorrect,
                 ];
             }
-            cache()->put('assessment-test', $assessment_test);
+            cache()->put('assessment-test:'.auth()->id(), $assessment_test);
 
             return $result['is_changes'] = true;
         }
@@ -171,7 +171,7 @@ class AssessmentTestController extends Controller
     public function submitQuestionAnswer(Request $request)
     {
         $collectQuestionAnswer = $this->collectQuestionAnswer($request);
-        $assessment_test = cache()->get('assessment-test');
+        $assessment_test = cache()->get('assessment-test:'.auth()->id());
 
         $process = app('UpdateUserAssessmentTest')->execute([
             'assessment_test_id' => $assessment_test['assessment_test_id'],
@@ -183,9 +183,11 @@ class AssessmentTestController extends Controller
                     : collect($assessment_test['question_answer_data'])->pluck('answer_score')->sum(),
         ]);
 
+        cache()->forget('assessment-test:'.auth()->id());
+
         $this->logoutParticipant($request);
 
-        return redirect()->route('assessment-test.participant-authentication-page')->with('success', $process['message']);
+        return redirect()->route('assessment-test.participant-authentication-page')->with('success', 'Thanks For Using This App');
 
     }
 
