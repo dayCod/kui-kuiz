@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers\Frontside;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Http\Requests\Auth\LoginRequest;
+use App\Models\User;
 use App\Models\AsmntGroup;
 use App\Models\Assessment;
-use App\Models\User;
-use Illuminate\Contracts\View\View;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Contracts\View\View;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Http\RedirectResponse;
+use App\Http\Requests\Auth\LoginRequest;
+use App\Mail\AssessmentResultMail;
 
 class AssessmentTestController extends Controller
 {
@@ -182,6 +184,8 @@ class AssessmentTestController extends Controller
                     ? null
                     : collect($assessment_test['question_answer_data'])->pluck('answer_score')->sum(),
         ]);
+
+        Mail::to(auth()->user()->email)->send(new AssessmentResultMail());
 
         cache()->forget('assessment-test:'.auth()->id());
 
