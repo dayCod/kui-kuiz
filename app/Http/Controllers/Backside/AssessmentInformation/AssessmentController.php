@@ -51,7 +51,7 @@ class AssessmentController extends Controller
             'uuid' => Str::uuid(),
             'asmnt_group_id' => $request->asmnt_group_id,
             'asmnt_setting_id' => $request->asmnt_setting_id,
-            'asmnt_serial_number' => 'ASMNT/001/010/VII/1454/2023',
+            'asmnt_serial_number' => getAsmntSerialNumber(),
             'asmnt_name' => $request->asmnt_name,
             'time_open' => $request->time_open,
             'time_close' => $request->time_close,
