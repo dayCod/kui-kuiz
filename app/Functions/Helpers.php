@@ -106,3 +106,17 @@ if (!function_exists('numberToRomanRepresentation')) {
     }
 
 }
+
+/*
+|--------------------------------------------------------------------------
+| Get Score From Total Correct Answers
+|--------------------------------------------------------------------------
+*/
+if (!function_exists('getScoreFromTotalCorrectAnswer')) {
+    function getScoreFromTotalCorrectAnswer(int $total_question, int $total_correct_answer, bool $with_string = true)
+    {
+        return ($with_string)
+            ? (string)round(($total_correct_answer / $total_question) * 100)
+            : round(($total_correct_answer / $total_question) * 100);
+    }
+}

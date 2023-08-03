@@ -41,7 +41,10 @@
                                 <td class="text-center align-middle">
                                     {{ is_null($assessment_test->total_score)
                                         ? (!is_null($assessment_test->total_is_correct)
-                                            ? $assessment_test->total_is_correct.' Correct'
+                                            ? $assessment_test->total_is_correct.' Correct - Score '. getScoreFromTotalCorrectAnswer(
+                                                $assessment_test->assessment->asmntQuestion->count(),
+                                                $assessment_test->total_is_correct
+                                            ).'/100'
                                             : '-')
                                         : (!is_null($assessment_test->total_score)
                                             ? $assessment_test->total_score.' Score'

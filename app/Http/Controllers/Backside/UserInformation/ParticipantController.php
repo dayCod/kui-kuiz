@@ -126,7 +126,7 @@ class ParticipantController extends Controller
     public function assessmentHistory($uuid)
     {
         $participant = User::with('userAssessmentTest')->where('role', 'participant')->where('uuid', $uuid)->latest()->first();
-        // dd($participant);
+        // dd(getScoreFromTotalCorrectAnswer(5, 5));
 
         return view('backside.page.user-information.participants.history-assessment', compact('participant'));
     }
