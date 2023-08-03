@@ -11,7 +11,7 @@
                             <i class="fa fa-plus-circle"></i>
                             {{ __('Create') }}
                         </a>
-                        <a href="{{ route('user-information.participant.export') }}" class="btn btn-success">
+                        <a href="{{ route('user-information.participant.export') }}" class="btn btn-success {{ $participants->count() < 1 ? 'disabled' : '' }}">
                             <i class="fas fa-file-excel"></i>
                             {{ __('Export') }}
                         </a>
