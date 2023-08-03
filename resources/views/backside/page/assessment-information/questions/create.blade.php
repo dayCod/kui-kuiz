@@ -44,8 +44,8 @@
                                 <div class="form-group mb-3">
                                     <select class="form-control" name="is_correct[]" required>
                                         <option value="" selected hidden>Select The Corrections</option>
-                                        <option value="">Yes, Correct Answer!</option>
-                                        <option value="">No, It's Not Correct!</option>
+                                        <option value="1">Yes, Correct Answer!</option>
+                                        <option value="0">No, It's Not Correct!</option>
                                     </select>
                                 </div>
                             </div>

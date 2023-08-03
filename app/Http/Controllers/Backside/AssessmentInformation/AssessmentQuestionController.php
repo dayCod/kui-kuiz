@@ -19,7 +19,8 @@ class AssessmentQuestionController extends Controller
      */
     public function index($assessment_uuid)
     {
-        $assessment_questions = AsmntQuestion::withCount('hasAnswers')->get();
+        $assessment = Assessment::where('uuid', $assessment_uuid)->first();
+        $assessment_questions = AsmntQuestion::where('asmnt_id', $assessment->id)->withCount('hasAnswers')->get();
 
         return view('backside.page.assessment-information.questions.index', compact('assessment_uuid', 'assessment_questions'));
     }

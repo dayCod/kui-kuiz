@@ -33,8 +33,10 @@ class CreateAnswer extends BaseImplement implements BaseInterface
                     'asmnt_question_id' => $item['asmnt_question_id'],
                     'alphabet' => $item['alphabet'][$answer_key],
                     'answer' => $answer,
-                    'is_correct' => $item['is_correct'],
-                    'score' => $item['score'][$answer_key],
+                    'is_correct' => !is_null($item['is_correct'][$answer_key])
+                        ? (($item['is_correct'][$answer_key] == 1) ? true : false)
+                        : null,
+                    'score' => $item['score'][$answer_key] ?? null,
                 ];
             }
 

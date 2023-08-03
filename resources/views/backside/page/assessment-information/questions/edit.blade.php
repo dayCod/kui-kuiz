@@ -46,8 +46,8 @@
                                 <div class="form-group mb-3">
                                     <select class="form-control" name="is_correct[]">
                                         <option value="" selected hidden>Select The Corrections</option>
-                                        <option value="">Yes, Correct Answer!</option>
-                                        <option value="">No, It's Not Correct!</option>
+                                        <option value="1" @selected($answer->is_correct == true)>Yes, Correct Answer!</option>
+                                        <option value="0" @selected($answer->is_correct == false)>No, It's Not Correct!</option>
                                     </select>
                                 </div>
                             </div>

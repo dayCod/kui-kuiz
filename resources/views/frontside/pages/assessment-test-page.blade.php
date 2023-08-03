@@ -45,7 +45,7 @@
                 <div class="d-flex flex-column">
                     @foreach ($user_assessment_test['data'][0]['has_answers'] as $key => $answer)
                     <div class="d-flex align-items-center gap-3 flex-row mb-3">
-                        <span class="btn-answers btn border border-dark rounded-circle text-uppercase {{ $answer['id'] ==  $assessment_test['question_answer_data'][$user_assessment_test['current_page'] - 1]->user_participant_answer_id ? 'bg-info text-white' : '' }}" data-answer-id="{{ $answer['id'] }}" data-answer-alphabet="{{ $answer['alphabet'] }}" data-answer-score="{{ $answer['score'] ?? null }}" data-answer-correct="{{ $answer['is_correct'] ?? null }}">
+                        <span class="btn-answers btn border border-dark rounded-circle text-uppercase {{ $answer['id'] ==  $assessment_test['question_answer_data'][$user_assessment_test['current_page'] - 1]->user_participant_answer_id ? 'bg-info text-white' : '' }}" data-answer-id="{{ $answer['id'] }}" data-answer-alphabet="{{ $answer['alphabet'] }}" data-answer-score="{{ $answer['score'] ?? null }}" data-answer-correct="{{ $answer['is_correct'] }}">
                             {{ ucfirst($answer['alphabet']) }}
                         </span>
                         <span class="text-uppercase">

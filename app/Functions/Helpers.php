@@ -68,7 +68,7 @@ if (!function_exists('getAsmntSerialNumber')) {
         $count_assessment_history = sprintf("%03s", (Assessment::count() + 1));
         $month = numberToRomanRepresentation(Carbon::now()->format('m'));
         $hour_minute = Carbon::now()->format('Hi');
-        $year = Carbon::now()->fomat('Y');
+        $year = Carbon::now()->format('Y');
 
         return "ASMNT/$count_assessment_history/$month/$hour_minute/$year";
     }

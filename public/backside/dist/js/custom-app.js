@@ -57,6 +57,7 @@ $(document).ready(function () {
             let formGroupHtml = '';
 
             if (asmntType == "score") {
+                console.log('score')
                 formGroupHtml = `
                 <div class="row answer-section">
                     <div class="col-md-1">
@@ -80,7 +81,8 @@ $(document).ready(function () {
                 </div>
                 `
 
-            } else if ($asmntType == "corrections") {
+            } else if (asmntType == "corrections") {
+                console.log('corrections')
                 formGroupHtml = `
                 <div class="row answer-section">
                     <div class="col-md-1">
@@ -100,8 +102,8 @@ $(document).ready(function () {
                         <div class="form-group mb-3">
                             <select class="form-control" name="is_correct[]" required>
                                 <option value="" selected hidden>Select The Corrections</option>
-                                <option value="">Yes, Correct Answer!</option>
-                                <option value="">No, It's Not Correct!</option>
+                                <option value="1">Yes, Correct Answer!</option>
+                                <option value="0">No, It's Not Correct!</option>
                             </select>
                         </div>
                     </div>

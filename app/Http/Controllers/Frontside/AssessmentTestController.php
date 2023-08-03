@@ -124,6 +124,11 @@ class AssessmentTestController extends Controller
         return redirect()->route('assessment-test.assessment-test-page');
     }
 
+    /*
+    |---------------------------------------------------------------------------------
+    | Assessment Test Page | Middleware Auth Participant
+    |---------------------------------------------------------------------------------
+    */
     public function assessmentTestPage(): View
     {
         $user_assessment_test = User::where('id', auth()->id())->first()
@@ -179,7 +184,7 @@ class AssessmentTestController extends Controller
             'assessment_test_id' => $assessment_test['assessment_test_id'],
             'total_is_correct' => is_null($assessment_test['question_answer_data'][0]->is_correct_answer)
                     ? null
-                    : collect($assessment_test['question_answer_data'])->pluck('is_correct_answer')->filter(fn ($item) => $item === true)->count(),
+                    : collect($assessment_test['question_answer_data'])->pluck('is_correct_answer')->filter(fn ($item) => $item == 1)->count(),
             'total_score' => is_null($assessment_test['question_answer_data'][0]->answer_score)
                     ? null
                     : collect($assessment_test['question_answer_data'])->pluck('answer_score')->sum(),
