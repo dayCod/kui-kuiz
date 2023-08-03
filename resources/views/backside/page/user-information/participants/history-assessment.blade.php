@@ -29,12 +29,25 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @php
+                                $num = 1;
+                            @endphp
+                            @foreach($participant->userAssessmentTest as $assessment_test)
                             <tr>
-                                <td class="text-center align-middle">1</td>
-                                <td class="text-center align-middle">johndoe@mail.com</td>
-                                <td class="text-center align-middle">TKA</td>
+                                <td class="text-center align-middle">{{ $num++ }}</td>
+                                <td class="text-center align-middle">{{ $participant->email }}</td>
+                                <td class="text-center align-middle">{{ $assessment_test->assessment->asmntGroup->name }}</td>
                                 <td class="text-center align-middle">ASMNT/001/010/VII/1454/2023</td>
-                                <td class="text-center align-middle">934 Score / 2 Uncorrect (98 A)</td>
+                                <td class="text-center align-middle">
+                                    {{ is_null($assessment_test->total_score)
+                                        ? (!is_null($assessment_test->total_is_correct)
+                                            ? $assessment_test->total_is_correct.' Correct'
+                                            : '-')
+                                        : (!is_null($assessment_test->total_score)
+                                            ? $assessment_test->total_score.' Score'
+                                            : '-')  }}
+                                </td>
+                                {{-- <td class="text-center align-middle">934 Score / 2 Uncorrect (98 A)</td> --}}
                                 <td class="text-center align-middle">
                                     <a href="" class="btn btn-success btn-sm text-white">
                                         <i class="far fa-file-pdf"></i>
@@ -42,6 +55,7 @@
                                     </a>
                                 </td>
                             </tr>
+                            @endforeach
                         </tbody>
                         <tfoot>
                             <tr>

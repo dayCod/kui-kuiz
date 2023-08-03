@@ -12,6 +12,8 @@ class AssessmentTest extends Model
 
     protected $guarded = ['id'];
 
+    protected $with = ['assessment'];
+
     public function assessment(): BelongsTo
     {
         return $this->belongsTo(Assessment::class, 'assessment_id', 'id');

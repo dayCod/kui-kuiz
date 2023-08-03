@@ -41,7 +41,11 @@
                                 <td class="text-center align-middle">{{ $participant->name }}</td>
                                 <td class="text-center align-middle">{{ $participant->email }}</td>
                                 <td class="text-center align-middle">
+                                    @if($participant->userAssessmentTest->count() < 1)
                                     <span class="badge bg-danger p-2">Haven't taken a test yet</span>
+                                    @else
+                                    <a href="{{ route('user-information.participant.asessment-history', ['uuid' => $participant->uuid]) }}" class="btn btn-success btn-sm">Show</a>
+                                    @endif
                                 </td>
                                 <td class="text-center align-middle">
                                     <a href="{{ route('user-information.participant.show', ['uuid' => $participant->uuid]) }}" class="btn btn-success btn-sm text-white">

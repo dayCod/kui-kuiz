@@ -21,7 +21,7 @@ class ParticipantController extends Controller
      */
     public function index()
     {
-        $participants = User::where('role', 'participant')->latest()->get();
+        $participants = User::with('userAssessmentTest')->where('role', 'participant')->latest()->get();
 
         return view('backside.page.user-information.participants.index', compact('participants'));
     }
@@ -125,7 +125,10 @@ class ParticipantController extends Controller
      */
     public function assessmentHistory($uuid)
     {
-        return view('backside.page.user-information.participants.history-assessment');
+        $participant = User::with('userAssessmentTest')->where('role', 'participant')->where('uuid', $uuid)->latest()->first();
+        // dd($participant);
+
+        return view('backside.page.user-information.participants.history-assessment', compact('participant'));
     }
 
     /**
