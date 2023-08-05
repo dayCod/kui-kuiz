@@ -18,9 +18,14 @@ Copy the environment example file then, Generate the application key.
 cp .env.example .env && php artisan key:generate
 ```
 
-After all the installation progress, Migrate the Database and Sample Data.
+After all the installation progress, Migrate and make database.
 ```bash
-php artisan migrate:fresh && php artisan sample-data:seed
+php artisan migrate
+```
+
+After make the database, Seed a Sample Data.
+```bash
+php artisan sample-data:seed
 ```
 
 It will generate login credentials, below:
