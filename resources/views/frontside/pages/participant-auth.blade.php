@@ -19,6 +19,11 @@
                                 </ul>
                             </div>
                         @endif
+                        @if(session()->has('fail'))
+                            <div class="alert alert-danger">
+                                {{ session()->pull('fail') }}
+                            </div>
+                        @endif
                         <form action="{{ route('assessment-test.participant-authentication') }}" method="POST">
                             @csrf
                             <div class="mb-3">

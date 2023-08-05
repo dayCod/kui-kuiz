@@ -29,7 +29,7 @@
                             <div class="col-md-12">
                                 <label class="form-label">Group Name <span class="text-danger">*</span> </label>
                                 <div class="form-group mb-3">
-                                    <input type="text" class="form-control" placeholder="Name" name="name" required>
+                                    <input type="text" class="form-control" placeholder="Name" name="name" value="{{ old('name') }}" required>
                                 </div>
                             </div>
                         </div>
@@ -40,7 +40,7 @@
                                     <select class="form-control" name="certificate_setting_id" id="" required>
                                         <option value="" selected hidden>Select The Certificate Configuration</option>
                                         @foreach($certificates as $certificate)
-                                        <option value="{{ $certificate->id }}">{{ ucfirst($certificate->page_orientation).' - '.$certificate->heading }}</option>
+                                        <option value="{{ $certificate->id }}" @selected(old('certificate_setting_id') == $certificate->id)>{{ ucfirst($certificate->page_orientation).' - '.$certificate->heading }}</option>
                                         @endforeach
                                     </select>
                                 </div>

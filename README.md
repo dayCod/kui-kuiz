@@ -28,6 +28,11 @@ After make the database, Seed a Sample Data.
 php artisan sample-data:seed
 ```
 
+Last Step, make storage link.
+```bash
+php artisan storage:link
+```
+
 It will generate login credentials, below:
 ```bash
 Email: user@admin.com
