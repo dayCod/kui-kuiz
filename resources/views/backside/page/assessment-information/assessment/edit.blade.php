@@ -33,7 +33,7 @@
                                     <select class="form-control" name="asmnt_group_id" id="" required>
                                         <option value="" selected hidden>Select The Assessment Group</option>
                                         @foreach($asmnt_groups as $asmnt_group)
-                                        <option value="{{ $asmnt_group->id }}" @selected($assessment->asmnt_group_id == $asmnt_group->id)>{{ $asmnt_group->name }}</option>
+                                        <option value="{{ $asmnt_group->id }}" @selected(old('asmnt_group_id', $assessment->asmnt_group_id) == $asmnt_group->id)>{{ $asmnt_group->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -46,7 +46,7 @@
                                     <select class="form-control" name="asmnt_setting_id" id="" required>
                                         <option value="" selected hidden>Select The Assessment Setting</option>
                                         @foreach($asmnt_settings as $asmnt_setting)
-                                        <option value="{{ $asmnt_setting->id }}" @selected($assessment->asmnt_setting_id == $asmnt_setting->id)>{{ ucfirst($asmnt_setting->asmnt_type).' - '.ucfirst($asmnt_setting->check_type) }}</option>
+                                        <option value="{{ $asmnt_setting->id }}" @selected(old('asmnt_setting_id', $assessment->asmnt_setting_id) == $asmnt_setting->id)>{{ ucfirst($asmnt_setting->asmnt_type).' - '.ucfirst($asmnt_setting->check_type) }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -56,7 +56,7 @@
                             <div class="col-md-12">
                                 <label class="form-label">Assessment Name <span class="text-danger">*</span> </label>
                                 <div class="form-group mb-3">
-                                    <input type="text" class="form-control" placeholder="Assessment Name" name="asmnt_name" value="{{ $assessment->asmnt_name }}" required>
+                                    <input type="text" class="form-control" placeholder="Assessment Name" name="asmnt_name" value="{{ old('asmnt_name', $assessment->asmnt_name) }}" required>
                                 </div>
                             </div>
                         </div>
@@ -64,19 +64,19 @@
                             <div class="col-md-4">
                                 <label class="form-label">Assessment Time <span class="text-danger">*</span> </label>
                                 <div class="form-group mb-3">
-                                    <input type="number" min="1" class="form-control" placeholder="Assessment Time Test (Minutes)" name="asmnt_time_test" value="{{ $assessment->asmnt_time_test }}" required>
+                                    <input type="number" min="1" class="form-control" placeholder="Assessment Time Test (Minutes)" name="asmnt_time_test" value="{{ old('asmnt_time_test', $assessment->asmnt_time_test) }}" required>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <label class="form-label">Assessment Open at <span class="text-danger">*</span> </label>
                                 <div class="form-group mb-3">
-                                    <input type="datetime-local" class="form-control" name="time_open" value="{{ $assessment->time_open }}" required>
+                                    <input type="datetime-local" class="form-control" name="time_open" value="{{ old('time_open', $assessment->time_open) }}" required>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <label class="form-label">Assessment Closed at <span class="text-danger">*</span> </label>
                                 <div class="form-group mb-3">
-                                    <input type="datetime-local" class="form-control" name="time_close" value="{{ $assessment->time_close }}" required>
+                                    <input type="datetime-local" class="form-control" name="time_close" value="{{ old('time_close', $assessment->time_close) }}" required>
                                 </div>
                             </div>
                         </div>

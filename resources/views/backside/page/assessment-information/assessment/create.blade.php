@@ -63,7 +63,7 @@
                             <div class="col-md-4">
                                 <label class="form-label">Assessment Time <span class="text-danger">*</span> </label>
                                 <div class="form-group mb-3">
-                                    <input type="number" min="1" class="form-control" placeholder="Assessment Time Test (Minutes)" name="asmnt_time_test" value="{{ old('asmnt_name') }}" required>
+                                    <input type="number" min="1" class="form-control" placeholder="Assessment Time Test (Minutes)" name="asmnt_time_test" value="{{ old('asmnt_time_test') }}" required>
                                 </div>
                             </div>
                             <div class="col-md-4">
