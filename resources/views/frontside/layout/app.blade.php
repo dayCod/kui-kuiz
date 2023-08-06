@@ -53,6 +53,7 @@
             class="bi bi-arrow-up-short"></i></a>
 
     <!-- Vendor JS Files -->
+    <script src="{{ asset('backside/assets/libs/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ asset('frontside/vendor/purecounter/purecounter_vanilla.js') }}"></script>
     <script src="{{ asset('frontside/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('frontside/vendor/glightbox/js/glightbox.min.js') }}"></script>
@@ -61,6 +62,7 @@
     <script src="{{ asset('frontside/vendor/php-email-form/validate.js') }}"></script>
     <script src="{{ asset('frontside/vendor/iziToast/dist/js/iziToast.min.js') }}"></script>
     @include('util.toast')
+    @include('util.add-visitor')
 
     <!-- Template Main JS File -->
     <script src="{{ asset('frontside/js/main.js') }}"></script>

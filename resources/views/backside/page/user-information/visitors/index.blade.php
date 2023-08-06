@@ -25,17 +25,18 @@
                             <tr>
                                 <th class="text-center align-middle">No</th>
                                 <th class="text-center align-middle">IP Address</th>
-                                <th class="text-center align-middle">Location Coordinates</th>
+                                <th class="text-center align-middle">Total Visit</th>
                                 <th class="text-center align-middle">Action</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @forelse($visitors as $visitor)
                             <tr>
-                                <td class="text-center align-middle">1</td>
-                                <td class="text-center align-middle">127.0.0.1</td>
-                                <td class="text-center align-middle">Lat:12376236456, Lon:-12312312367</td>
+                                <td class="text-center align-middle">{{ $loop->iteration }}</td>
+                                <td class="text-center align-middle">{{ $visitor->guest_ip }}</td>
+                                <td class="text-center align-middle">{{ $visitor->guest_total_visit }}</td>
                                 <td class="text-center align-middle">
-                                    <a href="{{ route('user-information.visitor.show', ['uuid' => 'df6fdea1-10c3-474c-ae62-e63def80d0b']) }}" class="btn btn-success btn-sm text-white">
+                                    <a href="{{ route('user-information.visitor.show', ['uuid' => $visitor->guest_uuid]) }}" class="btn btn-success btn-sm text-white">
                                         <i class="fa fa-eye"></i>
                                         {{ __('Detail') }}
                                     </a>
@@ -45,12 +46,17 @@
                                     </a>
                                 </td>
                             </tr>
+                            @empty
+                            <tr>
+                                <td class="text-center" colspan="4">{{ __('Empty') }}</td>
+                            </tr>
+                            @endforelse
                         </tbody>
                         <tfoot>
                             <tr>
                                 <th class="text-center align-middle">No</th>
                                 <th class="text-center align-middle">IP Address</th>
-                                <th class="text-center align-middle">Location Coordinates</th>
+                                <th class="text-center align-middle">Total Visit</th>
                                 <th class="text-center align-middle">Action</th>
                             </tr>
                         </tfoot>

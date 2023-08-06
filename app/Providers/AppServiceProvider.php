@@ -32,6 +32,7 @@ use App\Services\Users\ForceDelete;
 use App\Services\Users\GetTrashedUser;
 use App\Services\Users\RestoreUser;
 use App\Services\Users\UpdateUser;
+use App\Services\Visitor\CreateVisitor;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -125,6 +126,13 @@ class AppServiceProvider extends ServiceProvider
         */
         $this->registerService('CreateUserAssessmentTest', CreateUserAssessmentTest::class);
         $this->registerService('UpdateUserAssessmentTest', UpdateUserAssessmentTest::class);
+
+        /*
+        |--------------------------------------------------------------------------
+        | Visitor | Guest Services
+        |--------------------------------------------------------------------------
+        */
+        $this->registerService('CreateVisitor', CreateVisitor::class);
     }
 
     /**

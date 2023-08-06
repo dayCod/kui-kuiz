@@ -19,7 +19,7 @@
                             <div class="col-md-12">
                                 <label class="form-label">IP Address </label>
                                 <div class="form-group mb-3">
-                                    <input type="text" class="form-control" placeholder="Name" value="127.0.0.1" disabled>
+                                    <input type="text" class="form-control" placeholder="Name" value="{{ $guest->ip_address }}" disabled>
                                 </div>
                             </div>
                         </div>
@@ -27,21 +27,27 @@
                             <div class="col-md-12">
                                 <label class="form-label">Location Coordinates </label>
                                 <div class="form-group mb-3">
-                                    <input type="email" class="form-control" placeholder="Email" value="Lat:12376236456, Lon:-12312312367" disabled>
+                                    <input type="email" class="form-control" value="{{ $guest->location ?? '-' }}" disabled>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <label class="form-label">Browser </label>
                                 <div class="form-group mb-3">
-                                    <input type="text" class="form-control" placeholder="Email" value="Chrome" disabled>
+                                    <input type="text" class="form-control" value="{{ $guest->browser }}" disabled>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <label class="form-label">Device </label>
                                 <div class="form-group mb-3">
-                                    <input type="text" class="form-control" placeholder="Email" value="Webkit" disabled>
+                                    <input type="text" class="form-control" value="{{ $guest->device }}" disabled>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Total Visit </label>
+                                <div class="form-group mb-3">
+                                    <input type="text" class="form-control" value="{{ $guest->total_visit }}" disabled>
                                 </div>
                             </div>
                         </div>

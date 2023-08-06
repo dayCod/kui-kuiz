@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backside\UserInformation\VisitorController;
 use App\Http\Controllers\Frontside\AssessmentTestController;
 use App\Http\Controllers\Frontside\LandingpageController;
 use Illuminate\Support\Facades\Route;
@@ -12,6 +13,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => ['guest']], function () {
     Route::get('/', [LandingpageController::class, 'index'])->name('index');
+
+    /*
+    |--------------------------------------------------------------------------
+    | Visitor | Guest Controller
+    |--------------------------------------------------------------------------
+    */
+    Route::get('/visitor', [VisitorController::class, 'store'])->name('visitor.store');
 });
 
 
@@ -51,6 +59,7 @@ Route::group(['prefix' => 'assessment-test', 'as' => 'assessment-test.', 'contro
 |--------------------------------------------------------------------------
 */
 Route::get('/get-assessment/from/{asmnt_group_uuid}', [AssessmentTestController::class, 'getAssessment'])->name('api.res.get-assessment');
+
 
 
 /*
