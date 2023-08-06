@@ -46,8 +46,8 @@ Password: password
 | Laravel Version  | 9      |
 
 ## Contributors
-[Wirandra Alaya](https://github.com/dayCod)
-[See All Contributors](https://github.com/dayCod/kui-kuiz/contributors)
+- [Wirandra Alaya](https://github.com/dayCod)
+- [See All Contributors](https://github.com/dayCod/kui-kuiz/contributors)
 
 ## Contributing
 Don't hesitate to contribute to the project by adapting or adding features, Bug Reports or Pull Request are welcome.
