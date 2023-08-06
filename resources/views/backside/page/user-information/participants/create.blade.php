@@ -29,7 +29,7 @@
                             <div class="col-md-12">
                                 <label class="form-label">Name <span class="text-danger">*</span> </label>
                                 <div class="form-group mb-3">
-                                    <input type="text" class="form-control" placeholder="Name" name="name" required>
+                                    <input type="text" class="form-control" placeholder="Name" name="name" value="{{ old("name") }}" required>
                                 </div>
                             </div>
                         </div>
@@ -37,7 +37,7 @@
                             <div class="col-md-6">
                                 <label class="form-label">Email <span class="text-danger">*</span> </label>
                                 <div class="form-group mb-3">
-                                    <input type="email" class="form-control" placeholder="Email" name="email" required>
+                                    <input type="email" class="form-control" placeholder="Email" name="email" value="{{ old('email') }}" required>
                                 </div>
                             </div>
                             <div class="col-md-6">

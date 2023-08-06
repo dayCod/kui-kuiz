@@ -9,13 +9,18 @@
             <div class="card border border-0 shadow p-4">
                 <h3 class="text-uppercase mb-4 text-center">kuikuiz - login</h3>
                 @if(session()->has('errors'))
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                @if(session()->has('fail'))
+                    <div class="alert alert-danger">
+                        {{ session()->pull('fail') }}
+                    </div>
                 @endif
                 <form action="{{ route('auth.authenticate') }}" method="POST">
                     @csrf
