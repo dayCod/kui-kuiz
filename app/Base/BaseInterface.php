@@ -4,5 +4,10 @@ namespace App\Base;
 
 interface BaseInterface
 {
-    public function execute( $data );
+    /**
+     * execute data transfer object from controller
+     *
+     * @param array $dto
+     */
+    public function execute( array $dto );
 }

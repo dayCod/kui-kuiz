@@ -6,18 +6,38 @@ use App\Base\BaseInterface;
 
 abstract class BaseImplement implements BaseInterface
 {
+    /**
+     * return expected array results
+     *
+     * @var array
+     */
     protected $results;
 
+    /**
+     * construct protected variable results to array
+     *
+     * @var array
+     */
     public function __construct()
     {
         $this->results = ['response_code' => null, 'success' => false, 'message' => null, 'data' => null];
     }
 
-    abstract protected function process( $dto );
+    /**
+     * pass the data transfer object to the process function services
+     *
+     * @param array
+     */
+    abstract protected function process( array $dto );
 
-    public function execute( $input_data )
+    /**
+     * implement execute data transfer object from controller
+     *
+     * @param array
+     */
+    public function execute( array $dto )
     {
-        $this->process( $input_data );
+        $this->process( $dto );
 
         return $this->results;
     }
