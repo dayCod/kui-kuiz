@@ -4,16 +4,29 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
-    public function login()
+    /**
+     * login page for admin and supervisor.
+     *
+     * @return View
+     */
+    public function login(): View
     {
         return view('auth.login');
     }
 
-    public function authenticate(LoginRequest $request)
+    /**
+     * authentication process for authenticate the granted users.
+     *
+     * @param $request
+     * @return RedirectResponse
+     */
+    public function authenticate(LoginRequest $request): RedirectResponse
     {
         $process = app('Login')->execute([
             'email' => $request->email,
