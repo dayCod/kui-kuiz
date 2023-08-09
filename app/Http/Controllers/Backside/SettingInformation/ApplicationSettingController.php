@@ -3,16 +3,17 @@
 namespace App\Http\Controllers\Backside\SettingInformation;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
 class ApplicationSettingController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * display the application setting page.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function index()
+    public function index(): View
     {
         return view('backside.page.setting-information.application-config.index', [
             'application_name' => config('app.name'),

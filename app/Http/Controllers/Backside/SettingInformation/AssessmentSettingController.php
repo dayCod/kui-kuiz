@@ -4,16 +4,17 @@ namespace App\Http\Controllers\Backside\SettingInformation;
 
 use App\Http\Controllers\Controller;
 use App\Models\AsmntSetting;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
 class AssessmentSettingController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * display the application assessment setting page.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function index()
+    public function index(): View
     {
         $assessment_settings = AsmntSetting::latest()->get();
 

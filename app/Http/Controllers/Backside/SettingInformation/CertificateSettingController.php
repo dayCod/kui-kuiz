@@ -6,17 +6,20 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Setting\Certificate\CertificateStoreRequest;
 use App\Http\Requests\Setting\Certificate\CertificateUpdateRequest;
 use App\Models\AsmntCertificateSetting;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class CertificateSettingController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * display the certificate setting page.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function index()
+    public function index(): View
     {
         $certificates = AsmntCertificateSetting::latest()->get();
 
@@ -24,22 +27,22 @@ class CertificateSettingController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * show the form page of certificate setting.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function create()
+    public function create(): View
     {
         return view('backside.page.setting-information.certificate-config.create');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created certificate setting resource in to database.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param $request
+     * @return RedirectResponse
      */
-    public function store(CertificateStoreRequest $request)
+    public function store(CertificateStoreRequest $request): RedirectResponse
     {
         $process = app('CreateCertificate')->execute([
             'uuid' => Str::uuid(),
@@ -55,12 +58,12 @@ class CertificateSettingController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * display the specified certificate setting resource.
      *
      * @param  string  $uuid
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function show($uuid)
+    public function show($uuid): View
     {
         $process = app('FindCertificate')->execute(['certificate_uuid' => $uuid]);
 
@@ -70,12 +73,12 @@ class CertificateSettingController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * show the form for editing the specified certificate setting resource.
      *
      * @param  string  $uuid
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function edit($uuid)
+    public function edit($uuid): View
     {
         $process = app('FindCertificate')->execute(['certificate_uuid' => $uuid]);
 
@@ -85,13 +88,13 @@ class CertificateSettingController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified certificate setting resource in to database.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  string  $uuid
-     * @return \Illuminate\Http\Response
+     * @param $request
+     * @param string  $uuid
+     * @return RedirectResponse
      */
-    public function update(CertificateUpdateRequest $request, $uuid)
+    public function update(CertificateUpdateRequest $request, $uuid): RedirectResponse
     {
         $process = app('UpdateCertificate')->execute([
             'certificate_uuid' => $uuid,
@@ -107,12 +110,12 @@ class CertificateSettingController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified certificate setting resource from databse.
      *
      * @param  string  $uuid
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
-    public function destroy($uuid)
+    public function destroy($uuid): JsonResponse
     {
         $process = app('DeleteCertificate')->execute(['certificate_uuid' => $uuid]);
 
