@@ -10,8 +10,18 @@ class AssessmentTest extends Model
 {
     use HasFactory;
 
+    /**
+     * Fill the model with an array of attributes.
+     *
+     * @var array
+     */
     protected $guarded = ['id'];
 
+    /**
+     * The relations to eager load on every query.
+     *
+     * @var array
+     */
     protected $with = ['assessment'];
 
     public function assessment(): BelongsTo

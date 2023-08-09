@@ -9,5 +9,10 @@ class UserAssessmentTest extends Model
 {
     use HasFactory;
 
+    /**
+     * Fill the model with an array of attributes.
+     *
+     * @var array
+     */
     protected $guarded = ['id'];
 }
