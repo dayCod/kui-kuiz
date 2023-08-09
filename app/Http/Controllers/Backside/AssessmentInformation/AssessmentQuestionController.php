@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Backside\AssessmentInformation;
 use App\Http\Controllers\Controller;
 use App\Models\AsmntQuestion;
 use App\Models\Assessment;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -12,12 +15,12 @@ use Illuminate\Support\Str;
 class AssessmentQuestionController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * display the assessment question for assessment question page.
      *
      * @param string $assessment_uuid
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function index($assessment_uuid)
+    public function index($assessment_uuid): View
     {
         $assessment = Assessment::where('uuid', $assessment_uuid)->first();
         $assessment_questions = AsmntQuestion::where('asmnt_id', $assessment->id)->withCount('hasAnswers')->get();
@@ -26,12 +29,12 @@ class AssessmentQuestionController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * show the form page of assessment question.
      *
      * @param string $assessment_uuid
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function create($assessment_uuid)
+    public function create($assessment_uuid): View
     {
         $assessment = Assessment::where('uuid', $assessment_uuid)->first();
 
@@ -39,13 +42,13 @@ class AssessmentQuestionController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created assessment question resource in to database.
      *
+     * @param $request
      * @param string $assessment_uuid
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse
      */
-    public function store(Request $request, $assessment_uuid)
+    public function store(Request $request, $assessment_uuid): RedirectResponse
     {
         $process = ['success' => false, 'message' => 'Throwed Exception'];
 
@@ -78,9 +81,9 @@ class AssessmentQuestionController extends Controller
      *
      * @param  string  $assessment_uuid
      * @param  string  $question_uuid
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function show($assessment_uuid, $question_uuid)
+    public function show($assessment_uuid, $question_uuid): View
     {
         $assessment = Assessment::where('uuid', $assessment_uuid)->first();
         $assessment_question = AsmntQuestion::where('uuid', $question_uuid)->first();
@@ -89,13 +92,13 @@ class AssessmentQuestionController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * show the form page of edit assessment question.
      *
-     * @param  string  $assessment_uuid
-     * @param  string  $question_uuid
-     * @return \Illuminate\Http\Response
+     * @param string $assessment_uuid
+     * @param string $question_uuid
+     * @return View
      */
-    public function edit($assessment_uuid, $question_uuid)
+    public function edit($assessment_uuid, $question_uuid): View
     {
         $assessment = Assessment::where('uuid', $assessment_uuid)->first();
         $assessment_question = AsmntQuestion::where('uuid', $question_uuid)->first();
@@ -104,13 +107,14 @@ class AssessmentQuestionController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified assessment question resource in to database.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  string  $uuid
-     * @return \Illuminate\Http\Response
+     * @param $request
+     * @param string $assessment_uuid
+     * @param string $question_uuid
+     * @return RedirectResponse
      */
-    public function update(Request $request, $assessment_uuid, $question_uuid)
+    public function update(Request $request, $assessment_uuid, $question_uuid): RedirectResponse
     {
         $process = ['success' => false, 'message' => 'Throwed Exception'];
 
@@ -138,12 +142,13 @@ class AssessmentQuestionController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified assessment question resource from databse.
      *
-     * @param  string  $uuid
-     * @return \Illuminate\Http\Response
+     * @param string $assessment_uuid
+     * @param string $question_uuid
+     * @return JsonResponse
      */
-    public function destroy($assessment_uuid, $question_uuid)
+    public function destroy($assessment_uuid, $question_uuid): JsonResponse
     {
         $process = app('DeleteQuestion')->execute([
             'asmnt_question_uuid' => $question_uuid,

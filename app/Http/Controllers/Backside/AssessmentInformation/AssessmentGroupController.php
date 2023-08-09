@@ -7,17 +7,20 @@ use App\Http\Requests\AsmntGroup\AsmntGroupStoreRequest;
 use App\Http\Requests\AsmntGroup\AsmntGroupUpdateRequest;
 use App\Models\AsmntCertificateSetting;
 use App\Models\AsmntGroup;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class AssessmentGroupController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * display the assessment group resource for assessment group page.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function index()
+    public function index(): View
     {
         $assessment_groups = AsmntGroup::latest()->get();
 
@@ -25,11 +28,11 @@ class AssessmentGroupController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * show the form page of assessment group.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function create()
+    public function create(): View
     {
         $certificates = AsmntCertificateSetting::latest()->get();
 
@@ -37,12 +40,12 @@ class AssessmentGroupController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created assessment group resource in to database.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param $request
+     * @return RedirectResponse
      */
-    public function store(AsmntGroupStoreRequest $request)
+    public function store(AsmntGroupStoreRequest $request): RedirectResponse
     {
         $process = app('CreateAsmntGroup')->execute([
             'uuid' => Str::uuid(),
@@ -54,12 +57,12 @@ class AssessmentGroupController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * show certificate configuration page.
      *
-     * @param  string  $certificate_setting_uuid
-     * @return \Illuminate\Http\Response
+     * @param string $certificate_setting_uuid
+     * @return View
      */
-    public function showCertificateConfig($certificate_setting_uuid)
+    public function showCertificateConfig($certificate_setting_uuid): View
     {
         $process = app('FindCertificate')->execute(['certificate_uuid' => $certificate_setting_uuid]);
 
@@ -69,12 +72,12 @@ class AssessmentGroupController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * show the form page of edit assessment group.
      *
-     * @param  string  $uuid
-     * @return \Illuminate\Http\Response
+     * @param string $uuid
+     * @return View
      */
-    public function edit($uuid)
+    public function edit($uuid): View
     {
         $asmnt_group = AsmntGroup::where('uuid', $uuid)->first();
         $certificates = AsmntCertificateSetting::latest()->get();
@@ -86,13 +89,13 @@ class AssessmentGroupController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified assessment group resource in to database.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  string  $uuid
-     * @return \Illuminate\Http\Response
+     * @param $request
+     * @param string  $uuid
+     * @return RedirectResponse
      */
-    public function update(AsmntGroupUpdateRequest $request, $uuid)
+    public function update(AsmntGroupUpdateRequest $request, $uuid): RedirectResponse
     {
         $process = app('UpdateAsmntGroup')->execute([
             'asmnt_group_uuid' => $uuid,
@@ -104,12 +107,12 @@ class AssessmentGroupController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified assessment group resource from databse.
      *
      * @param  string  $uuid
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
-    public function destroy($uuid)
+    public function destroy($uuid): JsonResponse
     {
         $process = app('DeleteAsmntGroup')->execute(['asmnt_group_uuid' => $uuid]);
 

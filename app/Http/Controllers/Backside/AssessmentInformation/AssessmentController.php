@@ -9,17 +9,20 @@ use App\Models\AsmntGroup;
 use App\Models\AsmntSetting;
 use App\Models\Assessment;
 use Carbon\Carbon;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class AssessmentController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * display the assessment resource for assessment page.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function index()
+    public function index(): View
     {
         $assessments = Assessment::latest()->get();
 
@@ -27,11 +30,11 @@ class AssessmentController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * show the form page of assessment.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function create()
+    public function create(): View
     {
         $asmnt_groups = AsmntGroup::latest()->get();
         $asmnt_settings = AsmntSetting::latest()->get();
@@ -40,12 +43,12 @@ class AssessmentController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created assessment resource in to database.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param $request
+     * @return RedirectResponse
      */
-    public function store(AssessmentStoreRequest $request)
+    public function store(AssessmentStoreRequest $request): RedirectResponse
     {
         $process = app('CreateAssessment')->execute([
             'uuid' => Str::uuid(),
@@ -62,23 +65,12 @@ class AssessmentController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * show the form page of edit assessment.
      *
-     * @param  string  $uuid
-     * @return \Illuminate\Http\Response
+     * @param string $uuid
+     * @return View
      */
-    public function show($uuid)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  string  $uuid
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($uuid)
+    public function edit($uuid): View
     {
         $asmnt_groups = AsmntGroup::latest()->get();
         $asmnt_settings = AsmntSetting::latest()->get();
@@ -88,13 +80,13 @@ class AssessmentController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified assessment resource in to database.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  string  $uuid
-     * @return \Illuminate\Http\Response
+     * @param $request
+     * @param string  $uuid
+     * @return RedirectResponse
      */
-    public function update(AssessmentUpdateRequest $request, $uuid)
+    public function update(AssessmentUpdateRequest $request, $uuid): RedirectResponse
     {
         $process = app('UpdateAssessment')->execute([
             'assessment_uuid' => $uuid,
@@ -110,12 +102,12 @@ class AssessmentController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified assessment resource from databse.
      *
      * @param  string  $uuid
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
-    public function destroy($uuid)
+    public function destroy($uuid): JsonResponse
     {
         $process = app('DeleteAssessment')->execute(['assessment_uuid' => $uuid]);
 
