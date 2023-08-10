@@ -34,7 +34,7 @@ class UpdateAnswer extends BaseImplement implements BaseInterface
                         'uuid' => $item['asmnt_question_answer_uuid'][$answer_key]['uuid'] ?? null,
                         'alphabet' => $item['alphabet'][$answer_key],
                         'answer' => $answer,
-                        'is_correct' => !is_null($item['is_correct'][$answer_key])
+                        'is_correct' => !is_null($item['is_correct'])
                             ? (($item['is_correct'][$answer_key] == 1) ? true : false)
                             : null,
                         'score' => $item['score'][$answer_key] ?? null,

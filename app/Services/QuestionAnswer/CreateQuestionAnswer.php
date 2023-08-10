@@ -18,6 +18,7 @@ class CreateQuestionAnswer extends BaseImplement implements BaseInterface
         $answers = app('CreateAnswer')->execute([
             'uuid' => $dto['asmnt_question_answer_uuid'],
             'asmnt_question_id' => $question['data']['id'],
+            // 'asmnt_question_id' => 1,
             'alphabet' => $dto['alphabet'],
             'answer' => $dto['answer'],
             'is_correct' => $dto['is_correct'],

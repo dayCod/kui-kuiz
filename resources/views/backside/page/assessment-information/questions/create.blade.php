@@ -8,7 +8,7 @@
             <div class="card-body">
                 <div class="d-flex align-items-center justify-content-between">
                     <h4 class="card-title">Create Questions</h4>
-                    <a href="{{ route('assessment-information.manage-assessment.questions.index', ['assessment_uuid' => 'df6fdea1-10c3-474c-ae62-e63def80d0b']) }}" class="btn btn-secondary">
+                    <a href="{{ route('assessment-information.manage-assessment.questions.index', ['assessment_uuid' => $assessment_uuid]) }}" class="btn btn-secondary">
                         <i class="fa fa-arrow-left"></i>
                         {{ __('Back') }}
                     </a>

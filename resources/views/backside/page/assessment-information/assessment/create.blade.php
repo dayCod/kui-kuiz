@@ -32,7 +32,7 @@
                                     <select class="form-control" name="asmnt_group_id" id="" required>
                                         <option value="" selected hidden>Select The Assessment Group</option>
                                         @foreach($asmnt_groups as $asmnt_group)
-                                        <option value="{{ $asmnt_group->id }}" @selected(old('asmnt_group_id') == $certificate->id)>{{ $asmnt_group->name }}</option>
+                                        <option value="{{ $asmnt_group->id }}" @selected(old('asmnt_group_id') == $asmnt_group->id)>{{ $asmnt_group->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -45,7 +45,7 @@
                                     <select class="form-control" name="asmnt_setting_id" id="" required>
                                         <option value="" selected hidden>Select The Assessment Setting</option>
                                         @foreach($asmnt_settings as $asmnt_setting)
-                                        <option value="{{ $asmnt_setting->id }}" @selected(old('asmnt_setting_id') == $certificate->id)>{{ ucfirst($asmnt_setting->asmnt_type).' - '.ucfirst($asmnt_setting->check_type) }}</option>
+                                        <option value="{{ $asmnt_setting->id }}" @selected(old('asmnt_setting_id') == $asmnt_setting->id)>{{ ucfirst($asmnt_setting->asmnt_type).' - '.ucfirst($asmnt_setting->check_type) }}</option>
                                         @endforeach
                                     </select>
                                 </div>
