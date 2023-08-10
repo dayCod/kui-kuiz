@@ -11,6 +11,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\User\UserStoreRequest;
 use App\Http\Requests\User\UserUpdateRequest;
+use App\Models\AssessmentTest;
+use App\Models\UserAssessmentTest;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class ParticipantController extends Controller
 {
@@ -115,6 +118,35 @@ class ParticipantController extends Controller
         $process = app('DeleteUser')->execute(['user_uuid' => $uuid]);
 
         return response()->json(['success' => $process['message']], 200);
+    }
+
+    /**
+     * generate assessment certificate with related users.
+     *
+     * @param  string  $uuid
+     * @return \Illuminate\Http\Response
+     */
+    public function generateAssessmentCertificate($uuid)
+    {
+        $asmnt_test = AssessmentTest::where('uuid', $uuid)->first();
+        $user_assessment_test = UserAssessmentTest::where('assessment_test_id', $asmnt_test->id)->first();
+
+        $data = [
+            'background' => $asmnt_test->assessment->asmntGroup->certificateSetting->certi_background_img,
+            'asmnt_serial_number' => $asmnt_test->assessment->asmnt_serial_number,
+            'asmnt_name' => $asmnt_test->assessment->asmnt_name,
+            'user_name' => $user_assessment_test->user->name,
+            'final_result' => $asmnt_test->total_is_correct ?? $asmnt_test->total_score,
+            'created_at' => \Carbon\Carbon::parse($asmnt_test->created_at)->format('D, d F Y'),
+            'signature_img' => $asmnt_test->assessment->asmntGroup->certificateSetting->signature_img,
+            'signatured_by' => $asmnt_test->assessment->asmntGroup->certificateSetting->signatured_by,
+        ];
+
+        // dd($asmnt_test, $data);
+
+        return Pdf::loadView('pdf.certificate', $data)
+            ->setPaper('a4', $asmnt_test->assessment->asmntGroup->certificateSetting->page_orientation)
+            ->stream('certificate.pdf');
     }
 
     /**

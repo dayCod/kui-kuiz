@@ -52,7 +52,7 @@
                                 </td>
                                 {{-- <td class="text-center align-middle">934 Score / 2 Uncorrect (98 A)</td> --}}
                                 <td class="text-center align-middle">
-                                    <a href="" class="btn btn-success btn-sm text-white">
+                                    <a href="{{ route('user-information.participant.generate-certificate', ['uuid' => $assessment_test->uuid]) }}" class="btn btn-success btn-sm text-white">
                                         <i class="far fa-file-pdf"></i>
                                         {{ __('Certificate Download') }}
                                     </a>
