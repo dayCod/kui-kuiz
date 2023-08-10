@@ -14,14 +14,16 @@ class AssessmentResultMail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    protected $data;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(array $data)
     {
-        //
+        $this->data = $data;
     }
 
     /**
@@ -46,7 +48,11 @@ class AssessmentResultMail extends Mailable
     {
         return new Content(
             markdown: 'mailable.assessment-result',
-            with: [],
+            with: [
+                'asmnt_name' => $this->data['asmnt_name'],
+                'asmnt_serial_number' => $this->data['asmnt_serial_number'],
+                'final_result' => $this->data['final_result'],
+            ],
         );
     }
 

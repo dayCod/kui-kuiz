@@ -190,7 +190,11 @@ class AssessmentTestController extends Controller
                     : collect($assessment_test['question_answer_data'])->pluck('answer_score')->sum(),
         ]);
 
-        Mail::to(auth()->user()->email)->send(new AssessmentResultMail());
+        Mail::to(auth()->user()->email)->send(new AssessmentResultMail([
+            'asmnt_name' => $process['data']['assessment']['asmnt_name'],
+            'asmnt_serial_number' => $process['data']['assessment']['asmnt_serial_number'],
+            'final_result' => $process['data']['total_is_correct'] ?? $process['data']['total_score'],
+        ]));
 
         cache()->forget('assessment-test:'.auth()->id());
 
