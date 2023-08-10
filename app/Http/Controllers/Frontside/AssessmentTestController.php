@@ -92,6 +92,7 @@ class AssessmentTestController extends Controller
 
         $assessment_collection = [
             'assessment_test_id' => $user_assessment_test->id,
+            'asmnt_time_test' => ($user_assessment_test->assessment->asmnt_time_test * 60),
             'user_participant_id' => auth()->id(),
             'question_answer_data' => array(),
         ];
@@ -136,7 +137,6 @@ class AssessmentTestController extends Controller
             ->assessment->asmntQuestion()->paginate(1)->toArray();
 
         $assessment_test = cache()->get('assessment-test:'.auth()->id());
-
         // dd($user_assessment_test, $assessment_test);
 
         return view('frontside.pages.assessment-test-page', compact('user_assessment_test', 'assessment_test'));
