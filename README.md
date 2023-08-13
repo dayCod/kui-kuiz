@@ -1,7 +1,7 @@
 # Laravel 9 Assessment Test
 A Simple Laravel 9 Assessment Application Template For Your Development Needs.
 
-## Installation
+## How to Install This Project
 
 Clone the project.
 ```bash
