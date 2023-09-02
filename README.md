@@ -45,7 +45,7 @@ Password: password
 | Database         | MySQL  |   
 | Laravel Version  | 9      |
 
-## Contributors
+## Credits
 - [Wirandra Alaya](https://github.com/dayCod)
 - [See All Contributors](https://github.com/dayCod/kui-kuiz/contributors)
 
