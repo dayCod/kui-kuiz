@@ -25,8 +25,10 @@ class RoleBladeDirective extends ServiceProvider
      */
     public function boot()
     {
-        Blade::if('role', function ($role) {
-            return Auth::user()->role == $role;
+        Blade::if('role', function (string $roles) {
+            $roles_data = str_contains($roles, '|') ? explode('|', $roles) : array($roles);
+
+            return in_array(Auth::user()->role, $roles_data);
         });
     }
 }

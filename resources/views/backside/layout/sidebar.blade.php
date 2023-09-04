@@ -9,6 +9,7 @@
                             class="fas fa-home"></i><span class="hide-menu">Dashboard</span></a>
                 </li>
 
+                @role('admin')
                 <li class="list-divider"></li>
 
                 <li class="nav-small-cap"><span class="hide-menu">User Informations</span></li>
@@ -30,7 +31,9 @@
                         class="hide-menu">Visitors
                     </span></a>
                 </li>
+                @endrole
 
+                @role('admin|supervisor')
                 <li class="list-divider"></li>
 
                 <li class="nav-small-cap"><span class="hide-menu">Assessment Information</span></li>
@@ -47,8 +50,9 @@
                             class="hide-menu">Manage Assessment
                         </span></a>
                 </li>
+                @endrole
 
-
+                @role('admin')
                 <li class="list-divider"></li>
 
                 <li class="nav-small-cap"><span class="hide-menu">Setting Information</span></li>
@@ -63,9 +67,10 @@
                     aria-expanded="false"><i class="fas fa-cog"></i><span
                         class="hide-menu">Certificate Config</span></a></li>
 
-                        <li class="sidebar-item {{ request()->routeIs('setting-information.application-setting.*') ? 'selected' : '' }}"> <a class="sidebar-link" href="{{ route('setting-information.application-setting.index') }}"
-                    aria-expanded="false"><i class="fas fa-cog"></i><span
-                        class="hide-menu">Application Config</span></a></li>
+                <li class="sidebar-item {{ request()->routeIs('setting-information.application-setting.*') ? 'selected' : '' }}"> <a class="sidebar-link" href="{{ route('setting-information.application-setting.index') }}"
+            aria-expanded="false"><i class="fas fa-cog"></i><span
+                class="hide-menu">Application Config</span></a></li>
+                @endrole
             </ul>
         </nav>
         <!-- End Sidebar navigation -->

@@ -5,6 +5,7 @@
     <!-- Start First Cards -->
     <!-- *************************************************************** -->
     <div class="row">
+        @role('admin')
         <div class="col-sm-6 col-lg-4">
             <div class="card border-end">
                 <div class="card-body">
@@ -39,6 +40,8 @@
                 </div>
             </div>
         </div>
+        @endrole
+        @role('admin|supervisor')
         <div class="col-sm-6 col-lg-4">
             <div class="card border-end ">
                 <div class="card-body">
@@ -57,6 +60,7 @@
                 </div>
             </div>
         </div>
+        @endrole
     </div>
     <!-- *************************************************************** -->
     <!-- End First Cards -->

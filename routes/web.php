@@ -40,7 +40,7 @@ Route::group(['prefix' => 'assessment-test', 'as' => 'assessment-test.', 'contro
     | Middleware Auth Participant
     |--------------------------------------------------------------------------
     */
-    Route::middleware(['auth.participant'])->group(function () {
+    Route::middleware(['auth.participant', 'middleware' => 'role:participant'])->group(function () {
         Route::get('/', 'assessmentTestPage')->name('assessment-test-page');
         Route::post('/append-question-answer', 'appendQuestionAnswer')->name('append-qna');
         Route::post('/submit-question-answer', 'submitQuestionAnswer')->name('submit-qna');
