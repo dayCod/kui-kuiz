@@ -28,6 +28,7 @@ return new class extends Migration
             $table->timestamp('time_close')->nullable();
             $table->integer('asmnt_time_test')->unsigned();
             $table->timestamps();
+            $table->index(['id', 'uuid']);
         });
     }
 

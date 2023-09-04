@@ -23,6 +23,7 @@ return new class extends Migration
             $table->text('certi_background_img')->nullable()->comment('File');
             $table->text('signature_img')->nullable()->comment('File');
             $table->timestamps();
+            $table->index(['id', 'uuid']);
         });
     }
 

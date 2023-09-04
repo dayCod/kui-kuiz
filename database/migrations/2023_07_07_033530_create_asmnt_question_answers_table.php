@@ -24,6 +24,7 @@ return new class extends Migration
             $table->boolean('is_correct')->nullable();
             $table->bigInteger('score')->nullable();
             $table->timestamps();
+            $table->index(['id', 'uuid']);
         });
     }
 

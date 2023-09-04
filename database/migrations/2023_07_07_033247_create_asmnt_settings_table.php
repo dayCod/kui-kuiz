@@ -19,6 +19,7 @@ return new class extends Migration
             $table->enum('asmnt_type', ['score', 'corrections'])->comment('Assessment Type');
             $table->enum('check_type', ['manual', 'auto'])->comment('Assessment Checking Type');
             $table->timestamps();
+            $table->index(['id', 'uuid']);
         });
     }
 

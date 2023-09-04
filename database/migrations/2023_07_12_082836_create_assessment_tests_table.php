@@ -22,6 +22,7 @@ return new class extends Migration
             $table->integer('total_is_correct')->unsigned()->nullable();
             $table->integer('total_score')->unsigned()->nullable();
             $table->timestamps();
+            $table->index(['id', 'uuid']);
         });
     }
 

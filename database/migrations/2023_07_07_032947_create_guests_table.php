@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('device')->nullable();
             $table->string('location')->nullable();
             $table->timestamps();
+            $table->index(['id', 'uuid']);
         });
     }
 

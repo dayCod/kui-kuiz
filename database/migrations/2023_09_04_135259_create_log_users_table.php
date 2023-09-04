@@ -13,15 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('asmnt_groups', function (Blueprint $table) {
+        Schema::create('log_users', function (Blueprint $table) {
             $table->id();
-            $table->uuid();
-            $table->foreignId('certificate_setting_id')->constrained('asmnt_certificate_settings')
+            $table->foreignId('user_id')->constrained('users')
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
-            $table->string('name')->comment('Group Name');
-            $table->timestamps();
-            $table->index(['id', 'uuid']);
+            $table->string('access_feature')->nullable();
+            $table->timestamp('access_time')->nullable();
+            $table->index(['id', 'user_id']);
         });
     }
 
@@ -32,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('asmnt_groups');
+        Schema::dropIfExists('log_users');
     }
 };

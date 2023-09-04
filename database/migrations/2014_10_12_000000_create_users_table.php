@@ -26,6 +26,7 @@ return new class extends Migration
             $table->text('profile_picture')->nullable()->comment('File');
             $table->timestamps();
             $table->softDeletes();
+            $table->index(['id', 'uuid']);
         });
     }
 

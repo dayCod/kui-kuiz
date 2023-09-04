@@ -21,6 +21,7 @@ return new class extends Migration
                 ->cascadeOnDelete();
             $table->text('question');
             $table->timestamps();
+            $table->index(['id', 'uuid']);
         });
     }
 

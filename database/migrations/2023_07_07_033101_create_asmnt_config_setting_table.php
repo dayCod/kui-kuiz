@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('app_version')->nullable();
             $table->string('app_locale')->nullable();
             $table->timestamps();
+            $table->index(['id', 'uuid']);
         });
     }
 
