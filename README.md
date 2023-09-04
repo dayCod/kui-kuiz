@@ -1,7 +1,7 @@
 # Laravel 9 Assessment Test
 A Simple Laravel 9 Assessment Application Template For Your Development Needs.
 
-## Installation
+## How to Install This Project
 
 Clone the project.
 ```bash
@@ -45,7 +45,7 @@ Password: password
 | Database         | MySQL  |   
 | Laravel Version  | 9      |
 
-## Contributors
+## Credits
 - [Wirandra Alaya](https://github.com/dayCod)
 - [See All Contributors](https://github.com/dayCod/kui-kuiz/contributors)
 
