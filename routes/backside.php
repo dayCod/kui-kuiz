@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 */
 
-Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
+Route::group(['prefix' => 'backside', 'middleware' => ['auth']], function () {
 
     /*
     |--------------------------------------------------------------------------
@@ -41,7 +41,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
         | Supervisor
         |--------------------------------------------------------------------------
         */
-        Route::group(['prefix' => 'supervisor', 'as' => 'supervisor.', 'controller' => SupervisorController::class], function () {
+        Route::group(['prefix' => 'supervisor', 'as' => 'supervisor.', 'controller' => SupervisorController::class, 'middleware' => 'role:admin'], function () {
             Route::get('/', 'index')->name('index');
             Route::get('/create', 'create')->name('create');
             Route::post('/create', 'store')->name('store');
@@ -60,7 +60,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
         | Participants
         |--------------------------------------------------------------------------
         */
-        Route::group(['prefix' => 'participant', 'as' => 'participant.', 'controller' => ParticipantController::class], function () {
+        Route::group(['prefix' => 'participant', 'as' => 'participant.', 'controller' => ParticipantController::class, 'middleware' => 'role:admin'], function () {
             Route::get('/', 'index')->name('index');
             Route::get('/create', 'create')->name('create');
             Route::post('/create', 'store')->name('store');
@@ -81,7 +81,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
         | Visitor
         |--------------------------------------------------------------------------
         */
-        Route::group(['prefix' => 'visitor', 'as' => 'visitor.', 'controller' => VisitorController::class], function () {
+        Route::group(['prefix' => 'visitor', 'as' => 'visitor.', 'controller' => VisitorController::class, 'middleware' => 'role:admin'], function () {
             Route::get('/', 'index')->name('index');
             Route::get('/create', 'create')->name('create');
             Route::post('/create', 'store')->name('store');
@@ -99,7 +99,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     | Assessment Information
     |--------------------------------------------------------------------------
     */
-    Route::group(['prefix' => 'assessment-information', 'as' => 'assessment-information.'], function () {
+    Route::group(['prefix' => 'assessment-information', 'as' => 'assessment-information.', 'middleware' => 'role:admin|supervisor'], function () {
 
         /*
         |--------------------------------------------------------------------------
@@ -153,7 +153,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     | Setting Information
     |--------------------------------------------------------------------------
     */
-    Route::group(['prefix' => 'setting-information', 'as' => 'setting-information.'], function () {
+    Route::group(['prefix' => 'setting-information', 'as' => 'setting-information.', 'middleware' => 'role:admin'], function () {
 
         /*
         |--------------------------------------------------------------------------
