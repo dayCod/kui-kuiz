@@ -15,4 +15,11 @@ class LogUserDetail extends Model
      * @var array
      */
     protected $guarded = ['id'];
+
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
 }
