@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Setting\Certificate\CertificateStoreRequest;
 use App\Http\Requests\Setting\Certificate\CertificateUpdateRequest;
 use App\Models\AsmntCertificateSetting;
+use App\Traits\UserLogging;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -14,6 +15,8 @@ use Illuminate\Support\Str;
 
 class CertificateSettingController extends Controller
 {
+    use UserLogging;
+
     /**
      * display the certificate setting page.
      *
@@ -53,6 +56,8 @@ class CertificateSettingController extends Controller
             'certi_background_img' => $request->file('certi_background_img'),
             'signature_img' => $request->file('signature_img'),
         ]);
+
+        $this->createLog(auth()->id(), 'Was Create Certificate', true);
 
         return redirect()->route('setting-information.certificate-setting.index')->with('success', $process['message']);
     }

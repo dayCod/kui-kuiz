@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backside\AssessmentInformation;
 use App\Http\Controllers\Controller;
 use App\Models\AsmntQuestion;
 use App\Models\Assessment;
+use App\Traits\UserLogging;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -14,6 +15,8 @@ use Illuminate\Support\Str;
 
 class AssessmentQuestionController extends Controller
 {
+    use UserLogging;
+
     /**
      * display the assessment question for assessment question page.
      *
@@ -68,6 +71,8 @@ class AssessmentQuestionController extends Controller
                 'is_correct' => $request->is_correct,
                 'score' => $request->score,
             ]);
+
+            $this->createLog(auth()->id(), 'Was Create the Question and Answer', true);
 
             DB::commit();
 
@@ -134,6 +139,8 @@ class AssessmentQuestionController extends Controller
                 'score' => $request->score,
             ]);
 
+            $this->createLog(auth()->id(), 'Was Update the Question and Answer', true);
+
             DB::commit();
 
         } catch (\Exception $err) { DB::rollBack(); }
@@ -153,6 +160,8 @@ class AssessmentQuestionController extends Controller
         $process = app('DeleteQuestion')->execute([
             'asmnt_question_uuid' => $question_uuid,
         ]);
+
+        $this->createLog(auth()->id(), 'Was Delete the Question and Answer', true);
 
         return response()->json(['success' => $process['message']], 200);
     }

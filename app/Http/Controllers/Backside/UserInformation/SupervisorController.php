@@ -11,9 +11,12 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\User\UserStoreRequest;
 use App\Http\Requests\User\UserUpdateRequest;
 use App\Models\User;
+use App\Traits\UserLogging;
 
 class SupervisorController extends Controller
 {
+    use UserLogging;
+
     /**
      * Display a listing of the resource.
      *
@@ -52,6 +55,8 @@ class SupervisorController extends Controller
             'role' => 'supervisor',
             'profile_picture' => $request->file('profile_picture'),
         ]);
+
+        $this->createLog(auth()->id(), 'Was Created the Supervisor', true);
 
         return redirect()->route('user-information.supervisor.index')->with('success', $process['message']);
     }
@@ -101,6 +106,8 @@ class SupervisorController extends Controller
             'profile_picture' => $request->file('profile_picture'),
         ]);
 
+        $this->createLog(auth()->id(), 'Was Update the Supervisor', true);
+
         return redirect()->route('user-information.supervisor.index')->with('success', $process['message']);
     }
 
@@ -113,6 +120,8 @@ class SupervisorController extends Controller
     public function destroy($uuid)
     {
         $process = app('DeleteUser')->execute(['user_uuid' => $uuid]);
+
+        $this->createLog(auth()->id(), 'Was Delete the Supervisor', true);
 
         return response()->json(['success' => $process['message']], 200);
     }
@@ -141,6 +150,8 @@ class SupervisorController extends Controller
     {
         $process = app('RestoreUser')->execute(['user_uuid' => $uuid]);
 
+        $this->createLog(auth()->id(), 'Was Restore the Supervisor', true);
+
         return redirect()->back()->with('success', $process['message']);
     }
 
@@ -153,6 +164,8 @@ class SupervisorController extends Controller
     public function forceDelete($uuid)
     {
         $process = app('ForceDelete')->execute(['user_uuid' => $uuid]);
+
+        $this->createLog(auth()->id(), 'Was Permanent Delete the Supervisor', true);
 
         return response()->json(['success' => $process['message']], 200);
     }

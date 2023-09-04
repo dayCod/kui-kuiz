@@ -4,12 +4,15 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Traits\UserLogging;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
+    use UserLogging;
+
     /**
      * login page for admin and supervisor.
      *
@@ -36,6 +39,8 @@ class LoginController extends Controller
 
         if ($process['success']) {
             $request->session()->regenerate();
+
+            $this->createLog(auth()->id(), 'Was Login', true);
 
             return redirect()->route('dashboard.index')->with('success', $process['message']);
         } else {

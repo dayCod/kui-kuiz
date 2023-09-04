@@ -4,11 +4,14 @@ namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Traits\UserLogging;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 
 class LogoutController extends Controller
 {
+    use UserLogging;
+
     /**
      * logout process for destroy the authenticated users session.
      *
@@ -22,6 +25,9 @@ class LogoutController extends Controller
         ]);
 
         if ($process['success']) {
+
+            $this->createLog(auth()->id(), 'Was Logout', true);
+
             $request->session()->invalidate();
 
             $request->session()->regenerateToken();

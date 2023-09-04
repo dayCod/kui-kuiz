@@ -8,6 +8,7 @@ use App\Http\Requests\Assessment\AssessmentUpdateRequest;
 use App\Models\AsmntGroup;
 use App\Models\AsmntSetting;
 use App\Models\Assessment;
+use App\Traits\UserLogging;
 use Carbon\Carbon;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
@@ -17,6 +18,8 @@ use Illuminate\Support\Str;
 
 class AssessmentController extends Controller
 {
+    use UserLogging;
+
     /**
      * display the assessment resource for assessment page.
      *
@@ -61,6 +64,8 @@ class AssessmentController extends Controller
             'asmnt_time_test' => $request->asmnt_time_test,
         ]);
 
+        $this->createLog(auth()->id(), 'Was Create the Assessment', true);
+
         return redirect()->route('assessment-information.manage-assessment.index')->with('success', $process['message']);
     }
 
@@ -98,6 +103,8 @@ class AssessmentController extends Controller
             'asmnt_time_test' => $request->asmnt_time_test,
         ]);
 
+        $this->createLog(auth()->id(), 'Was Update the Assessment', true);
+
         return redirect()->route('assessment-information.manage-assessment.index')->with('success', $process['message']);
     }
 
@@ -110,6 +117,8 @@ class AssessmentController extends Controller
     public function destroy($uuid): JsonResponse
     {
         $process = app('DeleteAssessment')->execute(['assessment_uuid' => $uuid]);
+
+        $this->createLog(auth()->id(), 'Was Delete The Assessment', true);
 
         return response()->json(['success' => $process['message']], 200);
     }

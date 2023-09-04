@@ -13,10 +13,13 @@ use App\Http\Requests\User\UserStoreRequest;
 use App\Http\Requests\User\UserUpdateRequest;
 use App\Models\AssessmentTest;
 use App\Models\UserAssessmentTest;
+use App\Traits\UserLogging;
 use Barryvdh\DomPDF\Facade\Pdf;
 
 class ParticipantController extends Controller
 {
+    use UserLogging;
+
     /**
      * Display a listing of the resource.
      *
@@ -55,6 +58,8 @@ class ParticipantController extends Controller
             'role' => 'participant',
             'profile_picture' => $request->file('profile_picture'),
         ]);
+
+        $this->createLog(auth()->id(), 'Was Create the Participant', true);
 
         return redirect()->route('user-information.participant.index')->with('success', $process['message']);
     }
@@ -104,6 +109,8 @@ class ParticipantController extends Controller
             'profile_picture' => $request->file('profile_picture'),
         ]);
 
+        $this->createLog(auth()->id(), 'Was Update the Participant', true);
+
         return redirect()->route('user-information.participant.index')->with('success', $process['message']);
     }
 
@@ -116,6 +123,8 @@ class ParticipantController extends Controller
     public function destroy($uuid)
     {
         $process = app('DeleteUser')->execute(['user_uuid' => $uuid]);
+
+        $this->createLog(auth()->id(), 'Was Delete the Participant', true);
 
         return response()->json(['success' => $process['message']], 200);
     }
@@ -141,8 +150,6 @@ class ParticipantController extends Controller
             'signature_img' => $asmnt_test->assessment->asmntGroup->certificateSetting->signature_img,
             'signatured_by' => $asmnt_test->assessment->asmntGroup->certificateSetting->signatured_by,
         ];
-
-        // dd($asmnt_test, $data);
 
         return Pdf::loadView('pdf.certificate', $data)
             ->setPaper('a4', $asmnt_test->assessment->asmntGroup->certificateSetting->page_orientation)
@@ -187,6 +194,8 @@ class ParticipantController extends Controller
     {
         $process = app('RestoreUser')->execute(['user_uuid' => $uuid]);
 
+        $this->createLog(auth()->id(), 'Was Restore the Participant', true);
+
         return redirect()->back()->with('success', $process['message']);
     }
 
@@ -199,6 +208,8 @@ class ParticipantController extends Controller
     public function forceDelete($uuid)
     {
         $process = app('ForceDelete')->execute(['user_uuid' => $uuid]);
+
+        $this->createLog(auth()->id(), 'Was Deleted Permanently the Participant', true);
 
         return response()->json(['success' => $process['message']], 200);
     }

@@ -7,6 +7,7 @@ use App\Http\Requests\AsmntGroup\AsmntGroupStoreRequest;
 use App\Http\Requests\AsmntGroup\AsmntGroupUpdateRequest;
 use App\Models\AsmntCertificateSetting;
 use App\Models\AsmntGroup;
+use App\Traits\UserLogging;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -15,6 +16,8 @@ use Illuminate\Support\Str;
 
 class AssessmentGroupController extends Controller
 {
+    use UserLogging;
+
     /**
      * display the assessment group resource for assessment group page.
      *
@@ -52,6 +55,8 @@ class AssessmentGroupController extends Controller
             'certificate_setting_id' => $request->certificate_setting_id,
             'name' => $request->name,
         ]);
+
+        $this->createLog(auth()->id(), 'Was Create the Assessment Group', true);
 
         return redirect()->route('assessment-information.assessment-group.index')->with('success', $process['message']);
     }
@@ -103,6 +108,8 @@ class AssessmentGroupController extends Controller
             'name' => $request->name,
         ]);
 
+        $this->createLog(auth()->id(), 'Was Update the Assessment Group', true);
+
         return redirect()->route('assessment-information.assessment-group.index')->with('success', $process['message']);
     }
 
@@ -115,6 +122,8 @@ class AssessmentGroupController extends Controller
     public function destroy($uuid): JsonResponse
     {
         $process = app('DeleteAsmntGroup')->execute(['asmnt_group_uuid' => $uuid]);
+
+        $this->createLog(auth()->id(), 'Was Delete the Assessment Group', true);
 
         return response()->json(['success' => $process['message']], 200);
     }

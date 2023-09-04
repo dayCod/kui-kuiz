@@ -5,12 +5,15 @@ namespace Database\Seeders;
 use App\Models\AsmntSetting;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\User;
+use App\Traits\UserLogging;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 class SampleDataSeeder extends Seeder
 {
+    use UserLogging;
+
     /*
     |--------------------------------------------------------------------------
     | Run Seeders
@@ -60,6 +63,8 @@ class SampleDataSeeder extends Seeder
                 'remember_token' => Str::random(10),
                 'role' => 'admin',
             ]);
+
+            $this->registLog($insert['id']);
 
             return $insert;
         } else { return true; }
