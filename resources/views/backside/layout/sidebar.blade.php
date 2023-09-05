@@ -12,6 +12,16 @@
                 @role('admin')
                 <li class="list-divider"></li>
 
+                <li class="nav-small-cap"><span class="hide-menu">System Informations</span></li>
+
+                <li class="sidebar-item {{ request()->routeIs('system.log.*') ? 'selected' : '' }}"> <a class="sidebar-link" href="{{ route('system.log.index') }}"
+                        aria-expanded="false"><i class="fas fa-desktop"></i><span
+                            class="hide-menu">Monitor Log
+                        </span></a>
+                </li>
+
+                <li class="list-divider"></li>
+
                 <li class="nav-small-cap"><span class="hide-menu">User Informations</span></li>
 
                 <li class="sidebar-item {{ request()->routeIs('user-information.supervisor.*') ? 'selected' : '' }}"> <a class="sidebar-link" href="{{ route('user-information.supervisor.index') }}"

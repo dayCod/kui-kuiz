@@ -6,9 +6,12 @@ use App\Base\BaseImplement;
 use App\Base\BaseInterface;
 use App\Functions\Images;
 use App\Models\User;
+use App\Traits\UserLogging;
 
 class CreateUser extends BaseImplement implements BaseInterface
 {
+    use UserLogging;
+
     public function process($dto)
     {
         $user = User::create([
@@ -21,6 +24,8 @@ class CreateUser extends BaseImplement implements BaseInterface
                 ? (new Images('profile', 'profile-img', 600, 600))->storeToStorage($dto['profile_picture'])
                 : null,
         ]);
+
+        $this->registLog($user['id']);
 
         $this->results['response_code'] = 200;
         $this->results['success'] = true;

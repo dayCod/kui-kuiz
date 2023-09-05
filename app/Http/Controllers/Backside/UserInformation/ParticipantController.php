@@ -15,6 +15,7 @@ use App\Models\AssessmentTest;
 use App\Models\UserAssessmentTest;
 use App\Traits\UserLogging;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\DB;
 
 class ParticipantController extends Controller
 {
@@ -50,18 +51,27 @@ class ParticipantController extends Controller
      */
     public function store(UserStoreRequest $request)
     {
-        $process = app('CreateUser')->execute([
-            'uuid' => Str::uuid(),
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'role' => 'participant',
-            'profile_picture' => $request->file('profile_picture'),
-        ]);
+        DB::beginTransaction();
 
-        $this->createLog(auth()->id(), 'Was Create the Participant', true);
+        try {
+            $process = app('CreateUser')->execute([
+                'uuid' => Str::uuid(),
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'role' => 'participant',
+                'profile_picture' => $request->file('profile_picture'),
+            ]);
 
-        return redirect()->route('user-information.participant.index')->with('success', $process['message']);
+            $this->createLog(auth()->id(), 'Was Create the Participant', true);
+
+            DB::commit();
+
+            return redirect()->route('user-information.participant.index')->with('success', $process['message']);
+        } catch (\Exception $ex) {
+            DB::rollBack();
+            dd($ex->getMessage());
+        }
     }
 
     /**

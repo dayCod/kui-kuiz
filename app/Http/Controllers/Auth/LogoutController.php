@@ -20,13 +20,14 @@ class LogoutController extends Controller
      */
     public function logout(Request $request): RedirectResponse
     {
+        $this->createLog(auth()->id(), 'Was Logout', true);
+
         $process = app('Logout')->execute([
             'user_id' => Auth::id(),
         ]);
 
         if ($process['success']) {
 
-            $this->createLog(auth()->id(), 'Was Logout', true);
 
             $request->session()->invalidate();
 

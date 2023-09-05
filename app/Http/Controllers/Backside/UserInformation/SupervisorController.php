@@ -12,6 +12,7 @@ use App\Http\Requests\User\UserStoreRequest;
 use App\Http\Requests\User\UserUpdateRequest;
 use App\Models\User;
 use App\Traits\UserLogging;
+use Illuminate\Support\Facades\DB;
 
 class SupervisorController extends Controller
 {
@@ -47,18 +48,27 @@ class SupervisorController extends Controller
      */
     public function store(UserStoreRequest $request)
     {
-        $process = app('CreateUser')->execute([
-            'uuid' => Str::uuid(),
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'role' => 'supervisor',
-            'profile_picture' => $request->file('profile_picture'),
-        ]);
+        DB::beginTransaction();
 
-        $this->createLog(auth()->id(), 'Was Created the Supervisor', true);
+        try {
+            $process = app('CreateUser')->execute([
+                'uuid' => Str::uuid(),
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'role' => 'supervisor',
+                'profile_picture' => $request->file('profile_picture'),
+            ]);
 
-        return redirect()->route('user-information.supervisor.index')->with('success', $process['message']);
+            $this->createLog(auth()->id(), 'Was Created the Supervisor', true);
+
+            DB::commit();
+
+            return redirect()->route('user-information.supervisor.index')->with('success', $process['message']);
+        } catch (\Exception $ex) {
+            DB::rollBack();
+            dd($ex->getMessage());
+        }
     }
 
     /**

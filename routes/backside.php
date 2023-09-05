@@ -7,6 +7,7 @@ use App\Http\Controllers\Backside\Home\DashboardController;
 use App\Http\Controllers\Backside\SettingInformation\ApplicationSettingController;
 use App\Http\Controllers\Backside\SettingInformation\AssessmentSettingController;
 use App\Http\Controllers\Backside\SettingInformation\CertificateSettingController;
+use App\Http\Controllers\Backside\System\LogController;
 use App\Http\Controllers\Backside\UserInformation\ParticipantController;
 use App\Http\Controllers\Backside\UserInformation\SupervisorController;
 use App\Http\Controllers\Backside\UserInformation\VisitorController;
@@ -27,6 +28,25 @@ Route::group(['prefix' => 'backside', 'middleware' => ['auth']], function () {
     */
     Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
         Route::get('/', [DashboardController::class, 'index'])->name('index');
+    });
+
+    /*
+    |--------------------------------------------------------------------------
+    | System Information
+    |--------------------------------------------------------------------------
+    */
+    Route::group(['prefix' => 'system', 'as' => 'system.', 'middleware' => ['role:admin']], function () {
+
+        /*
+        |--------------------------------------------------------------------------
+        | Log Information
+        |--------------------------------------------------------------------------
+        */
+        Route::group(['prefix' => 'log', 'as' => 'log.'], function () {
+            Route::get('/', [LogController::class, 'updatedLogInformationView'])->name('index');
+            Route::get('/{log_id}/detail', [LogController::class, 'detailRelatedLogInformationView'])->name('detail');
+        });
+
     });
 
     /*
